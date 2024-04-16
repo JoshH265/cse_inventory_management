@@ -1,0 +1,345 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Account</title>
+    <link rel="stylesheet" href="{% static 'stylesheet.css' %}">
+    <style>
+        .box {
+            border-radius: 15px;
+            background-color: rgb(226, 226, 226);
+            margin-top: 40px;
+            margin-left: min(15%, 400px);
+            margin-right: min(15%, 400px);
+            /* max-width: 100%;
+            min-width: 80%; */
+            
+        }
+
+        h2 {
+            padding-top: 15px;
+            padding-left: 30px;
+            letter-spacing: 0.25px;
+            font-size: 35px;
+        }
+
+        .subbox {
+            border-radius: 15px;
+            background-color: white;
+            padding: 5px;
+            margin: 20px;
+            margin-bottom: 0;
+            overflow-x: auto;
+        }
+
+        .usertable td {
+            padding: 15px;
+        }
+
+        .usertable {
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 25px;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        
+        .box input {
+            border-radius: 15px;
+            background-color: rgb(226, 226, 226);
+            height: 30px;
+        }
+
+        .reservationbox {
+            background-color: #488494;
+            border-radius: 15px;
+            margin-top: 40px;
+            margin-left: 65px;
+            margin-right: 65px;
+            margin-left: min(15%, 400px);
+            margin-right: min(15%, 400px);
+            overflow-x: auto;
+        }
+
+        .rounded {
+            background-color: white;
+            border-radius: 25px;
+            margin: 10px;
+            padding: 5px;
+            padding-right: 100px;
+            margin-left: 0px;
+            margin-left: min(0%, 50px);
+        }
+
+        .listbox {
+            background-color: white;
+            border-radius: 15px;
+            padding: 5px;
+            margin: 20px;
+            margin-top: 0;
+            margin-bottom: 0;
+            height: 200px;
+            overflow: auto;
+        }
+
+        .list {
+            table-layout: fixed;
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+
+        .list th {
+            background-color: rgb(226, 226, 226);
+            padding: 10px;
+            border-radius: 25px;
+        }
+
+        .list td {
+            border-radius: 25px;
+            padding: 10px;
+            border-collapse: separate;
+            background-color: rgb(226, 226, 226);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="">Sign Out</a></li>
+            <li class="vertical">|</li>
+            <li><a href="">User Name</a></li>
+            <!-- ^ change so that it reads the name of the user -->
+            <li class="title"><a href="">The Peepo's Nest</a></li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Username</h2>
+        <div class="subbox">
+            <table class="usertable">
+                <tr>
+                    <td><label for="fname">First Name:</label></td>
+                    <td><input type="text" id="fname" name="fname" readonly></td>
+                    <td><label for="lname">Last Name:</label></td>
+                    <td><input type="text" id="lname" name="lname" readonly></td>
+                </tr>
+                <tr>
+                    <td><label for="acctype">Account Type:</label></td>
+                    <td><input type="text" id="acctype" name="acctype" readonly></td>
+                    <td><label for="email">Email:</label></td>
+                    <td><input type="email" id="email" name="email" readonly></td>
+                </tr>
+            </table>
+            <hr style="width:50%;text-align:left;margin-left:35px;background-color: rgb(226, 226, 226);">
+            <a href=""><p style="padding-left:35px;font-weight:200">Change Password</p></a>
+        </div>
+        <br>
+    </div>
+
+    <div class="reservationbox">
+        <table class="crtitle">
+            <tr>
+                <td><h2 style="color: white;padding-top: 0;padding-bottom: 10px;">Current Reservations        |</h2></td>
+                <td>
+                    <p class="rounded">Devices Borrowed: </p>
+                    <p class="rounded">Devices Overdue: </p>
+                </td>
+            </tr>
+        </table>
+        <div class="listbox">
+            <table class="list">
+                <tr>
+                    <th>Device Name</th>
+                    <th>Device Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Quantity</th>
+                </tr>
+            </table>
+            <hr style="background-color: rgb(226, 226, 226);">
+            <table class="list">
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>fifth</td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>fifth</td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>fifth</td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>fifth</td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>fifth</td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>fifth</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+    </div>
+
+    <div class="reservationbox">
+        <table class="crtitle">
+            <tr>
+                <h2 style="color: white;margin-bottom: 10px;margin-top: 10px;">Reservation History</h2>
+            </tr>
+            <tr>
+                <td>
+                    <form action="/action_page.php" style="margin-left: 25px;padding-right:0px;color:white">
+                        <input type="text" placeholder="Search for equipment" name="search" style="color:black;border-radius: 25px;padding: 6px;padding-right: 150px;">
+                    </form>
+                </td>
+                <td>
+                    <form action="/action_page.php" style="color:white">
+                        <select name="sortby" id="sortby" style="border-radius:25px;color:black;padding:6px;text-align: center;text-align-last: center;-moz-text-align-last: center;margin-left: min(20%, 150px);">
+                            <option value="sort">Sort By ▽</option>
+                            <option value="datenew">Date Reserved (New)</option>
+                            <option value="dateold">Date Reserved (Old)</option>
+                            <option value="type">Device Type</option>
+                        </select>
+                    </form>
+                </td>
+                <td>
+                    
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div class="listbox">
+            <table class="list">
+                <tr>
+                    <th>Device Name</th>
+                    <th>Device Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Rebook</th>
+                </tr>
+            </table>
+            <hr style="background-color: rgb(226, 226, 226);">
+            <table class="list">
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>
+                        <form action="/action_page.php">
+                            <input type="checkbox" id="rebook1" name="rebook1" value="rebookline1">
+                            <a href="" style="text-decoration:underline;cursor:pointer;"><label for="rebookline1">Confirm</label></a>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>
+                        <form action="/action_page.php">
+                            <input type="checkbox" id="rebook2" name="rebook2" value="rebookline2">
+                            <a href="" style="text-decoration:underline;cursor:pointer;"><label for="rebookline2">Confirm</label></a>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>
+                        <form action="/action_page.php">
+                            <input type="checkbox" id="rebook2" name="rebook2" value="rebookline2">
+                            <a href="" style="text-decoration:underline;cursor:pointer;"><label for="rebookline2">Confirm</label></a>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>
+                        <form action="/action_page.php">
+                            <input type="checkbox" id="rebook2" name="rebook2" value="rebookline2">
+                            <a href="" style="text-decoration:underline;cursor:pointer;"><label for="rebookline2">Confirm</label></a>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>
+                        <form action="/action_page.php">
+                            <input type="checkbox" id="rebook2" name="rebook2" value="rebookline2">
+                            <a href="" style="text-decoration:underline;cursor:pointer;"><label for="rebookline2">Confirm</label></a>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>first</td>
+                    <td>second</td>
+                    <td>third</td>
+                    <td>fourth</td>
+                    <td>
+                        <form action="/action_page.php">
+                            <input type="checkbox" id="rebook2" name="rebook2" value="rebookline2">
+                            <a href="" style="text-decoration:underline;cursor:pointer;"><label for="rebookline2">Confirm</label></a>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+    </div>
+
+    <div class="unibanner" style="background-color: rgb(226, 226, 226); margin-top: 50px;">
+        <img src="https://static.yuna.potential.ly/public/open/5e273a2a85dc09000100c61c/westminster-logo.png">
+    </div>
+</body>
+</html>
+
+
+<!--
+    for loop for lists 
+    font family
+    font sizing
+    colours
+    user name -> actual name of user
+    sign out leads to login page
+-->
