@@ -1,5 +1,5 @@
 from django.db import models
-from authentication_app.models import User
+from django.conf import settings
 from equipment_management.models import Equipment
 
 class Report(models.Model):
@@ -8,4 +8,4 @@ class Report(models.Model):
     creationDate = models.DateField()
     comments = models.TextField()
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

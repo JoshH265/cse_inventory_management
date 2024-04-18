@@ -7,10 +7,12 @@ class UserCreation(UserCreationForm):
     username = forms.CharField(max_length=30, required=True)
     first_name = forms.CharField(max_length=30, required=True)
     last_name = forms.CharField(max_length=150, required=True)
+    roleType = forms.CharField(max_length=50, required=False)  # Set required to True if needed
+    accountStatus = forms.CharField(max_length=50, required=False)  # Set required to True if needed
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'roleType', 'accountStatus']
     
     def __init__(self, *args, **kwargs):
         super(UserCreation, self).__init__(*args, **kwargs)

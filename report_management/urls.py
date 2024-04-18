@@ -7,4 +7,3 @@ urlpatterns = [
     path('report_management', views.report_manager, name="report_management"),
     
 ]
-
