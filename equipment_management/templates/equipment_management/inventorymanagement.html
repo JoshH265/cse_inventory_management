@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Inventory Management</title>
+        <link rel="stylesheet" href="{% static 'navbarFooter.css' %}">
+    </head>
+    <body>
+        <div class="top-bar">
+            <ul class="home">
+                <li class="home"><a href="">Web Application</a></li>
+            </ul>
+            <ul class="user-info">
+                <li><a href="">User Name</a></li>
+                <li><a href="">Sign Out</a></li>
+            </ul>
+        </div>
+        <div class="admin-nav">
+            <ul class="adminNav-links">
+                <li>Admin Panel</li>
+                <li><a href="">Report Generation</a></li>
+                <li><a href="">User Management</a></li>
+                <li><a href="">Reservation Management</a></li>
+                <li><a href="inventorymanagement.html">Inventory Management</a></li>
+            </ul>
+        </div>
+        <div class="alertPanel">
+            <table class="alertOuterPanel">
+                <tr>
+                    <td><h2>Alert</h2></td>
+                </tr>
+            </table>
+        </div>
+        <div class="equipList">
+            <table class="equipOuterPanel">
+                <tr>
+                    <td><h2>List of Equipment</h2></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Sort By</td>
+                    <td>Filter By</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
