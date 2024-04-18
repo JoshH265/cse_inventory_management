@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "reservation_management",
 ]
 
+AUTH_USER_MODEL = 'authentication_app.CustomUser'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
