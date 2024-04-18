@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Account</title>
+    <link rel="stylesheet" href="{% static 'nav_footer.css' %}">
+    <link rel="stylesheet" href="{% static 'login_style.css' %}">
+
+    
+</head>
+<body>
+    <div class="navbar">
+        <ul>
+            <li><a href="">Sign Out</a></li>
+            <li class="vertical">|</li>
+            <li><a href="">User Name</a></li>
+            <!-- ^ change so that it reads the name of the user -->
+            <li class="title"><a href="">The Peepo's Nest</a></li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Username</h2>
+        <div class="subbox">
+            <!-- <table class="usertable">
+                <tr>
+                    <td><label for="fname">First Name:</label></td>
+                    <td><input type="text" id="fname" name="fname" readonly></td>
+                    <td><label for="lname">Last Name:</label></td>
+                    <td><input type="text" id="lname" name="lname" readonly></td>
+                </tr>
+ 
+            </table> -->
+
+            <form method="POST" autocomplete="off">
+                {% csrf_token %}
+                {{signup_form.as_p}}
+                <input type="submit" value="SignUp" class="button">
+            </form>
+            <hr style="width:50%;text-align:left;margin-left:35px;background-color: rgb(226, 226, 226);">
+            <a href=""><p style="padding-left:35px;font-weight:200">Forgot Password</p></a>
+            <p>Already have an account?</p>
+            <a href="{% url 'login' %}"><p>Sign in</p></a>
+        </div>
+        <br>
+    </div>    
+    {% include 'authentication_app/footer.html' %}
+</body>
+</html>
+
+
+<!--
+    for loop for lists 
+    font family
+    font sizing
+    colours
+    user name -> actual name of user
+    sign out leads to login page
+-->
