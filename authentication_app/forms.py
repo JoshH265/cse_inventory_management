@@ -1,5 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from authentication_app.models import CustomUser
+# from django.contrib.auth.models import User
 from django import forms
 
 
@@ -11,7 +12,7 @@ class UserCreation(UserCreationForm):
     accountStatus = forms.CharField(max_length=50, required=False)  # Set required to True if needed
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'roleType', 'accountStatus']
     
     def __init__(self, *args, **kwargs):
