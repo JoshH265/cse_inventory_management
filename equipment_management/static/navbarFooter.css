@@ -37,6 +37,7 @@ body {
 
 .user-info a:hover, .admin-nav li a:hover {
     padding: .5em;
+    margin: -.5em;
     color:black;
     background-color: white;
     border-radius: 40px;
@@ -45,7 +46,7 @@ body {
 .admin-nav {
     background-color: #346473; /* Slightly darker blue background for nav */
     color: white;
-    padding: 10px 40px; /* Increased side padding */
+    padding: 1em 1em; 
     font-size: 20px; /* Increased font size */
 }
 .admin-nav ul  {
