@@ -1,0 +1,69 @@
+.equipList{
+    background-color: #448093;
+    margin: 2em 2em;
+    border-radius: 25px;
+    padding: 2em;
+}
+.equipList h2 {
+    font-size: 40px;
+    margin: 0;
+    padding-bottom: .5em;
+    color:white;
+}
+.equipOuterBar{
+    padding-bottom: 1em;
+}
+.custom-select {
+    border-radius: 25px;
+    color: black;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    text-align-last: center;
+    -moz-text-align-last: center;
+    background-color: white;
+    appearance: none;
+    -webkit-appearance: none; 
+    margin-right: 1em;
+}
+#search{
+    margin: 0;
+    padding-right: 10em;
+}
+#search-bar{
+    color:white;
+    color:black;
+    border-radius: 25px;
+    padding: 10px;
+    padding-right: 10em;
+    width: 25em;
+}
+.equipInnerPanel{
+    background-color: white;
+    border-radius: 25px;
+}
+.equipInnerPanel table{
+    width: 100%;
+    padding: .2em .2em;
+}
+.equipInnerPanel table:first-child tr td{
+    border-radius: 25px;
+    color: black;
+    padding: .5em;
+    font-size: 20px;
+    text-align: center;
+    background-color: #D6D6D6;
+    width: auto;
+}
+.equipInnerPanel hr {
+    height: .2em;
+    background-color: black;
+    width: 99%;
+}
+.equipInnerPanel table:nth-child(n+1) tr td{
+    border-radius: 25px;
+    color: black;
+    padding: .5em;
+    font-size: 20px;
+    text-align: center;
+}

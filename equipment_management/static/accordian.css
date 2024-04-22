@@ -1,0 +1,41 @@
+table.accordian tr:nth-of-type(4n+2) {
+    background-color: #D6D6D6
+}
+table.accordian tr:nth-of-type(4n+1) {
+    background-color: #D6D6D6
+}table.accordian tr:nth-of-type(4n+3) {
+    background-color: #F1F0F0;
+}
+table.accordian tr:nth-of-type(4n) {
+    background-color: #D6D6D6
+}
+.accordian-content {
+    display: none;
+    padding: 10px;
+}
+.accordian-content.open {
+    display: table-row; /* Display open content rows */
+    padding: 10px;
+}
+.accordian-item {
+    display: none; /* Hide accordian-item rows by default */
+}
+
+.accordion tr td {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%;
+    text-align: left;
+    outline: none;
+}
+  
+/* .accordion-content {
+    display: none;
+    padding: 10px;
+} */
+/* .accordion-content.open {
+    display:block;
+    padding: 10px;
+} */
