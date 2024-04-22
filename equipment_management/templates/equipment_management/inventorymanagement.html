@@ -7,6 +7,18 @@
         <link rel="stylesheet" href="{% static 'navbarFooter.css' %}">
     </head>
     <body>
+        <div class="navbar">
+            <ul>
+                <li class="title"><a href="">The Peepo's Nest</a></li>
+                <!-- <li><a href="">Sign Out</a></li> -->
+                <li><a href="">User Name</a></li>
+                <div class="separator"></div>
+                <li><a href="">Sign Out</a></li>
+                <!-- <li><a href="">User Name</a></li> -->
+                <!-- ^ change so that it reads the name of the user -->
+                <!-- <li class="title"><a href="">The Peepo's Nest</a></li> -->
+            </ul>
+        </div>
         <div class="top-bar">
             <ul class="home">
                 <li class="home"><a href="">Web Application</a></li>
@@ -25,12 +37,19 @@
                 <li><a href="inventorymanagement.html">Inventory Management</a></li>
             </ul>
         </div>
-        <div class="alertPanel">
-            <table class="alertOuterPanel">
-                <tr>
-                    <td><h2>Alert</h2></td>
-                </tr>
-            </table>
+        <div class="alertOuterPanel">
+            <h2>Alert</h2>
+            <div class="alertInnerPanel">
+                <table>
+                    <tr>
+                        <td><p>There is currently x equipment being borrowed</p></td>
+                    </tr>
+                    <tr></tr>
+                    <tr>
+                        <td><p>Check the Reservation Management page for more details</p></td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <div class="equipList">
             <table class="equipOuterPanel">
@@ -43,6 +62,72 @@
                     <td>Filter By</td>
                 </tr>
             </table>
+            <h2>List of Equipment</h2>
+            <div class="equipOuterBar">
+                <table>
+                    <tr>
+                        <td>
+                            <form action="" id="search">
+                                <input type="text" placeholder="Search for Equipment" name="search" id="search-bar">
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="post"> 
+                                <select id="sortBy" name="sortBy" class="custom-select">
+                                    <option value="sort">Sort By &#9660</option>
+                                    <option value="devType">Device Type</option>
+                                    <option value="availability">Availability</option>
+                                    <option value="location">Location</option>
+                                    <option value="recentlyAdded">Recently Added</option>
+                                    <option value="quantity">Quantity</option>
+                                </select>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="post">
+                                <select id="filterBy" name="filterBy" class="custom-select">
+                                    <option value="filter">Filter By &#9660</option>
+                                    <option value="inStock">In Stock</option>
+                                    <option value="outStock">Out of Stock</option>
+                                    <option value="devType">Device Type</option>
+                                </select>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="equipInnerPanel">
+                <table>
+                    <tr>
+                        <td>Device Name</td>
+                        <td>Device Type</td>
+                        <td>Status</td>
+                        <td>Location</td>
+                        <td>Quantity</td>
+                        <td>Edit</td>
+                        <td>+</td>
+                    </tr>
+                </table>
+                <hr>
+                <table class="accordian">
+                    <div class="accordian-pair">
+                        <tr class="accordian-item">
+                            <td>Device Name</td>
+                            <td>Device Type</td>
+                            <td>Status</td>
+                            <td>Location</td>
+                            <td>Quantity</td>
+                            <td>Edit</td>
+                            <td colspan="3"></td>
+                        </tr>
+                        <tr class="accordian-content">
+                            <td colspan="7">
+
+                            </td>
+                        </tr>
+                    </div>
+                </table>
+            </div>
         </div>
     </body>
 </html>
