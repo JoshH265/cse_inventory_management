@@ -5,32 +5,32 @@ body {
 }
 .navbar {
     margin: 0;
-    padding: 0;
     background-color: #448093;
-    font-size: 20px; /* Increased font size */
-}
-.top-bar {
-    background-color: #448093; /* lighter blue background */
-    color: white;
-    padding: 10px 20px; /* Increased padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 20px; /* Increased font size */
 }
 .navbar .title {
-    float: left;
     font-size: 28px; /* Increased font size for app title */
     font-weight: bold;
 }
+.user-info a{
+    margin-right: 1em;
+}
+.user-info li:nth-child(1){
+    padding-left: 1em;
+    border-left: .2em solid white;
+}
 .navbar ul {
     list-style-type: none;
-    /* margin: 0; */
+    margin: 0;
     padding: 0;
     overflow: hidden;
 }
 .navbar li {
     float: right;
+    display: flex;
 }
 .navbar li a {
     display: block;
@@ -39,29 +39,14 @@ body {
     padding: 1em 1em;
     text-decoration: none;
 }
-.navbar .separator{
-    border-left: 1em solid green;
-    height: 3em;
-}
-.user-info {
-    display: flex;
-    align-items: center;
-    font-weight: normal;
-}
-.navbar a:nth-child(n+1) {
-    margin-right: 10px; /* Ensure consistent spacing around the username and sign out link */
-    padding: 0 10px; /* Add padding around the text for space around the border */
-}
-
-.top-bar a, .admin-nav a {
-    text-decoration: none;
-    color: white;
-}
-.navbar a:hover {
+.user-info a:hover {
     background-color: #346473;
     transition: all 0.3s ease-in-out;
+    border-radius: 40px;
+    border-right: transparent;
 }
 /* Admin nav css */
+
 .admin-nav {
     background-color: #346473; /* Slightly darker blue background for nav */
     color: white;
@@ -73,6 +58,7 @@ body {
     padding: 0;
     margin: 0;
     display: flex;
+    justify-content: space-between;
 }
 .admin-nav ul li {
     padding: 0 15px;
@@ -87,6 +73,7 @@ body {
     display: block;
     text-align: center;
 }
+/* .user-info li a:hover */
 .admin-nav li a:hover {
     padding: .5em;
     margin: -.5em;
@@ -94,4 +81,14 @@ body {
     background-color: white;
     border-radius: 40px;
     align-content: center;
+    transition: all 0.3s ease-in-out;
+}
+/* footer css */
+.unibanner {
+    background-color: rgb(226, 226, 226); 
+    margin-top: 3em; 
+    width:100%;
+}
+.unibanner img{
+    padding-left: 1em;
 }
