@@ -9,7 +9,8 @@
         <link rel="stylesheet" href="{% static 'blueBoxTable.css' %}">
         <link rel="stylesheet" href="{% static 'accordian.css' %}">
         <link rel="stylesheet" href="{% static 'popUp.css' %}">
-        <link rel="script" href="{% static 'popUpScript.css' %}">
+        <script src="{% static 'accordianFunction.js' %}"></script>
+        <script src="{% static 'popUpScript.js' %}"></script>
     </head>
     <body>
         <div class="navbar">
@@ -94,47 +95,44 @@
             </div>
             <div class="InnerPanel">
                 <!-- headers of the table/lists -->
-                <table>
+                <table class="accordion">
                     <tr>
                         <th>Device Name</th>
                         <th>Device Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Location</th>
                         <th>Quantity</th>
                     </tr>
-                </table>
-                <hr>
-                <table class="accordian">
-                    <tr class="accordian-item">
-                        <td>
-                            <button>name</button>
-                            <button>type</button>
-                            <button>dd/mm/yyyy</button>
-                            <button>dd/mm/yyyy</button>
-                            <button>x</button>
-                        </td>
+                    <!-- Repeat this block for each piece of equipment -->
+                    {% for equipment in equipments %}
+                    <tr class="accordion-item">
+                        <td><div class="cell-content">{{ equipment.equipmentName }}</div></td>
+                        <td><div class="cell-content">{{ equipment.equipmentType }}</div></td>
+                        <td><div class="cell-content">{{ equipment.equipmentStatus }}</div></td>
+                        <td><div class="cell-content">{{ equipment.location }}</div></td>
+                        <td><div class="cell-content">{{ equipment.quantity }}</div></td>
                     </tr>
-                    <tr class="accordian-content">
-                        <td>
+                    <tr class="accordian-content" style="display: none;">
+                        <td colspan="5">
                             <form action="/action_page.php" autocomplete="off">
                                 <div class="rowOne">
                                     <div>
                                         <b><p>Device Name :</p></b>
-                                        <p class="contentRecord"></p>
-                                    </div>
-                                    <div>
-                                        <b><p>Location :</p></b>
-                                        <p class="contentRecord"></p>
+                                        <p class="contentRecord">{{ equipment.equipmentName }}</p>
                                     </div>
                                     <div>
                                         <b><p>Status :</p></b>
-                                        <p class="contentRecord"></p>
+                                        <p class="contentRecord">{{ equipment.equipmentStatus }}</p>
+                                    </div>
+                                    <div>
+                                        <b><p>Location :</p></b>
+                                        <p class="contentRecord">{{ equipment.location }}</p>
                                     </div>
                                 </div>
                                 <div class="rowTwo">
                                     <div>
                                         <b><p class="contentLabel">Device Type :</p></b>
-                                        <p class="contentRecord">name</p>
+                                        <p class="contentRecord">{{ equipment.equipmentType }}</p>
                                     </div>
                                     <div>
                                         <b><p>Quantity: </p></b>
@@ -160,15 +158,8 @@
                             </form>
                         </td>
                     </tr>
-                    <tr class="accordian-item">
-                        <td>
-                            <button>Device name</button>
-                            <button>type</button>
-                            <button>dd/mm/yyyy</button>
-                            <button>dd/mm/yyyy</button>
-                            <button>x</button>
-                        </td>
-                    </tr>
+                    {% endfor %}
+
                 </table>
                         <!-- /* this is the bit that slides out of the accordion */ -->
                             <!-- <table class="accordian"> 
