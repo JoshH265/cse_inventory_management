@@ -1,26 +1,29 @@
-table.accordian tr:nth-of-type(4n+2) {
-    background-color: #D6D6D6
-}
-table.accordian tr:nth-of-type(4n+1) {
-    background-color: #D6D6D6
-}table.accordian tr:nth-of-type(4n+3) {
-    background-color: #F1F0F0;
-}
-table.accordian tr:nth-of-type(4n) {
-    background-color: #D6D6D6
-}
-.accordian-content {
-    display: none;
-    padding: 10px;
-}
-.accordian-content.open {
-    display: table-row; /* Display open content rows */
-    padding: 10px;
-}
-.accordian-item {
-    display: none; /* Hide accordian-item rows by default */
+/* .accordian:nth-child(odd) .accordian-item:nth-child(odd) button {
+    background-color: #D6D6D6;
 }
 
+.accordian:nth-child(odd) .accordian-item:nth-child(even) button {
+    background-color: #F1F0F0;
+}
+
+.accordian:nth-child(even) .accordian-item:nth-child(odd) button {
+    background-color: #F1F0F0;
+}
+
+.accordian:nth-child(even) .accordian-item:nth-child(even) button {
+    background-color: #D6D6D6;
+} */
+.accordian > tbody > tr:nth-child(odd) .accordian-item button {
+    background-color: #F1F0F0;
+}
+
+.accordian > tbody > tr:nth-child(even) .accordian-item button {
+    background-color: #D6D6D6;
+}
+
+.accordian-content {
+    background-color: #D6D6D6;
+}
 .accordion tr td {
     background-color: transparent;
     border: none;
@@ -30,12 +33,69 @@ table.accordian tr:nth-of-type(4n) {
     text-align: left;
     outline: none;
 }
-  
-/* .accordion-content {
-    display: none;
-    padding: 10px;
-} */
-/* .accordion-content.open {
-    display:block;
-    padding: 10px;
-} */
+.accordian-item td {
+    display: flex;
+    justify-content: space-between;
+}
+.accordian-item button {
+    border-radius: 25px;
+    border-style: none;
+    padding: .5em;
+    flex: 1;
+    font-size: large; 
+}
+.accordian-content td {
+    width: 100%;
+}
+form > div {
+    display: flex;
+    justify-content: space-between; /* Adjusts the children's spacing */
+    align-items: center; /* Aligns children vertically in the center */
+    flex-wrap: wrap;
+    margin: 0 1em;
+}
+form > div .contentRecord{
+    background-color: #F1F0F0;
+    border-radius: 25px;
+    padding: 1em;
+    margin: 0;
+}
+.rowOne > div, .rowTwo > div, .rowThree > div, .rowFour > div{
+    display: flex;
+    align-items: center;  
+}
+.rowOne p, .rowTwo p, .rowThree p, .rowFour p {
+    padding: 0 1em;
+}
+.rowOne p:nth-child(even), .rowTwo p:nth-child(even), .rowThree p:nth-child(even){
+    margin: 0;
+    background-color: white;
+    border-radius: 40px;
+}
+.rowTwo > div p.contentRecord, .rowThree > div p.contentRecord {
+    background-color: white;
+    border-radius: 40px;
+    padding: 10px; /* Adjust padding as needed */
+    margin: 0; /* Remove default margin */
+}
+.rowTwo > div input, .rowThree > div input {
+    border-radius: 40px;
+    padding: 10px; /* Adjust padding as needed */
+    margin: 0; /* Remove default margin */
+    text-align: center; /* Center the text within the input */
+    width: 80%; /* Adjust width as needed */
+}
+.rowFour input, .rowFour button, #extraBtn{
+    border-radius: 40px;
+    border-style: none;
+    text-decoration: underline;
+    padding: 1em;
+    font-size: large;
+}
+.rowFour input, .rowFour button{
+    background-color: #F1F0F0;
+}
+#extraBtn{
+    background-color: #488494;
+    color: white;
+}
