@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # Define the path to your Excel file
-        file_path = Path('path/to/your/media/folder/equipment.xlsx')
+        file_path = Path('media/equipment.xlsx')
         if not file_path.exists():
             raise CommandError(f'File {file_path} does not exist')
 
