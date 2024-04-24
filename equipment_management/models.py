@@ -1,16 +1,26 @@
 from django.db import models
 
 class Equipment(models.Model):
+
+    Status_Choices = [
+    ('On_loan', 'On Loan'),
+    ('Repairing', 'Repairing'),
+    ('Available', 'Available'),
+    ('Unavailable', 'Unavailable')
+    ]
+    
+    Location_choices = [
+        ('blue_cabinet', 'XRLab Blue Cabinet'),
+        ('blue_cabinet_large', 'XRLab Blue Cabinet Large'),
+        ('medium_wooden_cabinet', 'XRLab Medium Wooden Cabinet'),
+        ('other', 'Other'),
+    ]
     equipmentName = models.CharField(max_length=100)
-    equipmentCondition = models.CharField(max_length=100)
+    equipmentStatus = models.CharField(max_length=100, choices=Status_Choices, default='Available')
     equipmentType = models.CharField(max_length=100)
     quantity = models.IntegerField()
     auditDate = models.DateField()
-    location = models.CharField(max_length=100)
-    siteLocation = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, choices=Location_choices)
     accessLevel = models.CharField(max_length=100)
     serialNo = models.CharField(max_length=100)
-    CPU = models.CharField(max_length=100)
-    RAM = models.IntegerField()
-    GPU = models.CharField(max_length=100)
-    comments = models.TextField()
+    comments = models.TextField(max_length=250)

@@ -7,4 +7,4 @@ def home(request):
 
 # Create your views here.
 def report_manager(request):
-    return render(request, 'report_management/report_manager.html')
+    return render(request, 'report_management/reportmanagement.html')
