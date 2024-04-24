@@ -104,15 +104,6 @@
     width: 100%;
     padding: .2em .2em;
 }
-.InnerPanel table:first-child tr th{
-    border-radius: 25px;
-    color: black;
-    padding: .5em;
-    font-size: 20px;
-    text-align: center;
-    background-color: #D6D6D6;
-    width: auto;
-}
 .InnerPanel hr {
     height: .2em;
     background-color: black;

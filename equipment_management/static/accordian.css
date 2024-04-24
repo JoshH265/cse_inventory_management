@@ -1,50 +1,44 @@
-/* .accordian:nth-child(odd) .accordian-item:nth-child(odd) button {
-    background-color: #D6D6D6;
+.accordian-item:nth-of-type(odd) button {
+    background-color: #F1F0F0; /* Set background color for buttons in odd rows */
 }
-
-.accordian:nth-child(odd) .accordian-item:nth-child(even) button {
-    background-color: #F1F0F0;
+.accordian-item:nth-of-type(even) button {
+    background-color:#D6D6D6 ; /* Set background color for buttons in even rows */
 }
-
-.accordian:nth-child(even) .accordian-item:nth-child(odd) button {
-    background-color: #F1F0F0;
-}
-
-.accordian:nth-child(even) .accordian-item:nth-child(even) button {
-    background-color: #D6D6D6;
-} */
-.accordian > tbody > tr:nth-child(odd) .accordian-item button {
-    background-color: #F1F0F0;
-}
-
-.accordian > tbody > tr:nth-child(even) .accordian-item button {
-    background-color: #D6D6D6;
-}
-
 .accordian-content {
+    background-color: #D6D6D6;
+    display: none;
+}
+
+/* without makes the first th and td the width of the accordian panel before it colspans*/
+.accordian tr th,
+.accordian tr td {
+    width: auto;
+}
+.accordian tr:first-child th{
+    border-radius: 25px;
+    color: black;
+    padding: .5em;
+    font-size: 20px;
+    text-align: center;
     background-color: #D6D6D6;
 }
 .accordion tr td {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 10px;
-    width: 100%;
+    /* width: auto; */
     text-align: left;
     outline: none;
 }
-.accordian-item td {
-    display: flex;
-    justify-content: space-between;
+.accordian-item td, .accordian-content td {
+    width: 100%;
 }
 .accordian-item button {
     border-radius: 25px;
     border-style: none;
     padding: .5em;
-    flex: 1;
     font-size: large; 
-}
-.accordian-content td {
+    cursor: pointer;
     width: 100%;
 }
 form > div {

@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{% static 'blueBoxTable.css' %}">
         <link rel="stylesheet" href="{% static 'accordian.css' %}">
         <link rel="stylesheet" href="{% static 'popUp.css' %}">
-        <link rel="script" href="{% static 'popUpScript.css' %}">
+        <script src="{% static 'accordianFunction.js' %}"></script>
     </head>
     <body>
         <div class="navbar">
@@ -38,45 +38,6 @@
                 <p>Check the Reservation Management page for more details</p></td>
             </div>
         </div>
-        <div class="plainMainPanel">
-            <h2>Username</h2>
-            <div class="plainInnerPanel">
-                <div class="userDetails">
-                    <div>
-                        <h3>First Name:</h3>
-                        <p></p>
-                    </div>
-                    <div>
-                        <h3>Last Name:</h3>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="userDetails">
-                    <div>
-                        <h3>Account Type:</h3>
-                        <p>dfhgdfhf</p>
-                    </div>
-                    <div>
-                        <h3>Email:</h3>
-                        <p></p>
-                    </div>
-                </div>
-                    <hr>
-                    <button id="myBtn"><p>Change Password</p></button>
-                </div>
-                <br>
-            </div>
-            <!-- Change Password Pop Up -->
-            <!-- <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Contact your IT Department</p>
-                    <p>0208 123 4567</p>
-                <p>ITDepartmentEmail@example.com</p>
-                </div>
-            </div> -->
-        </div>
-        
         <div class="mainPanel">
             <div class="OuterBar">
                 <div class="boxHeader">
@@ -93,8 +54,7 @@
                 </div>      
             </div>
             <div class="InnerPanel">
-                <!-- headers of the table/lists -->
-                <table>
+                <table class="accordian">
                     <tr>
                         <th>Device Name</th>
                         <th>Device Type</th>
@@ -102,20 +62,15 @@
                         <th>End Date</th>
                         <th>Quantity</th>
                     </tr>
-                </table>
-                <hr>
-                <table class="accordian">
                     <tr class="accordian-item">
-                        <td>
-                            <button>name</button>
-                            <button>type</button>
-                            <button>dd/mm/yyyy</button>
-                            <button>dd/mm/yyyy</button>
-                            <button>x</button>
-                        </td>
+                        <td><button onclick="toggleAccordion(this)">name</button></td>
+                        <td><button onclick="toggleAccordion(this)">type</button></td>
+                        <td><button onclick="toggleAccordion(this)">dd/mm/yyyy</button></td>
+                        <td><button onclick="toggleAccordion(this)">dd/mm/yyyy</button></td>
+                        <td><button onclick="toggleAccordion(this)">x</button></td>
                     </tr>
                     <tr class="accordian-content">
-                        <td>
+                        <td colspan="5">
                             <form action="/action_page.php" autocomplete="off">
                                 <div class="rowOne">
                                     <div>
@@ -160,73 +115,10 @@
                             </form>
                         </td>
                     </tr>
-                    <tr class="accordian-item">
-                        <td>
-                            <button>Device name</button>
-                            <button>type</button>
-                            <button>dd/mm/yyyy</button>
-                            <button>dd/mm/yyyy</button>
-                            <button>x</button>
-                        </td>
-                    </tr>
                 </table>
-                        <!-- /* this is the bit that slides out of the accordion */ -->
-                            <!-- <table class="accordian"> 
-                                <button>
-                                    <tr class="accordian-item">
-                                        <td>name</td>
-                                        <td>type</td>
-                                        <td>dd/mm/yyyy</td>
-                                        <td>dd/mm/yyyy</td>
-                                        <td>x</td>
-                                    </tr>
-                                </button>
-                                <tr class="accordian-content">
-                                    <form action="/action_page.php" autocomplete="off" class="accordian-content">
-                                        <div>
-                                            <td>Device Name: </td>
-                                            <td>Location: </td>
-                                            <td>Status: </td>
-                                        </div>
-                                        <div>
-                                            <td>Borrow Date: </td>
-                                            <td style="background-color: rgb(255, 255, 255);"><input type="date" class="startdate" name="startdate" required></td>
-                                            <td>to</td>
-                                            <td style="background-color: rgb(255, 255, 255);"><input type="date" class="enddate" name="enddate" required></td>
-                                            <td style="background-color: #488494;"><button id="extraInfo" style="text-decoration: underline;color:white;">Extra Info</button></td>
-                                        </div>
-                                        <div>
-                                            <td style="background-color: rgb(226, 226, 226);"></td>
-                                            <td>Quantity: </td>
-                                            <td contenteditable="true" style="background-color: rgb(255, 255, 255);"><input type="number" id="quantity" name="quantity" size="14" min="1" required></td>
-                                        </div>
-                                        <div>
-                                            <td style="background-color: rgb(226, 226, 226);"></td>
-                                            <td style="background-color: rgb(226, 226, 226);"></td>
-                                            <td><input type="submit" value="Save"></td>
-                                            <td><button type="reset" id="cancelchanges" style="text-decoration:underline;">Cancel Changes</button></td>
-                                            <td><button id="cancelreservation" style="text-decoration:underline;">Cancel Reservation</button></td>
-                                        </div>
-                                    </form>
-                                </tr>
-                                
-                                <button class="accordion">
-                                    <tr class="accordian-item">
-                                        <td>name</td>
-                                        <td>type</td>
-                                        <td>dd/mm/yyyy</td>
-                                        <td>dd/mm/yyyy</td>
-                                        <td>x</td>
-                                    </tr>
-                                </button>
-                            </table> -->
-                        </div>
-                        <!-- /*putting the panel before the accordion lets the transition look better imo */ -->
-                    </div>
-                    <!-- /*pop up for 'extra info' */ -->
-                <!-- <div id="extra" class="modal">
-                    /*Modal content*/
-                    <div class="modal-content">
+                <div id="extra" class="modal">
+                    <!-- /*Modal content*/ -->
+                    <!-- <div class="modal-content">
                         <span class="close">&times;</span>
                         <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
                         <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
@@ -240,8 +132,8 @@
                         Example:
                         <br>
                         Example: </p>
-                    </div>
-                </div> -->
+                    </div> -->
+                </div>
             </div>
             <br>
         </div>
