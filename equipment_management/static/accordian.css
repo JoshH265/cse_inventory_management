@@ -1,8 +1,11 @@
-.accordian-item:nth-of-type(odd) button {
-    background-color: #F1F0F0; /* Set background color for buttons in odd rows */
+.accordian .accordian-item:nth-child(odd) button {
+    background-color: #F1F0F0;
 }
-.accordian-item:nth-of-type(even) button {
-    background-color:#D6D6D6 ; /* Set background color for buttons in even rows */
+.accordian .accordian-item:nth-child(even) button{
+    background-color: #D6D6D6;
+}
+.accordian-item{
+    border-bottom: 2px solid black;
 }
 .accordian-content {
     background-color: #D6D6D6;
@@ -14,14 +17,14 @@
 .accordian tr td {
     width: auto;
 }
-.accordian tr:first-child th{
+/* .accordian tr:first-child th{
     border-radius: 25px;
     color: black;
     padding: .5em;
     font-size: 20px;
     text-align: center;
     background-color: #D6D6D6;
-}
+} */
 .accordion tr td {
     background-color: transparent;
     border: none;
@@ -30,17 +33,17 @@
     text-align: left;
     outline: none;
 }
-.accordian-item td, .accordian-content td {
+/* .accordian-item td, .accordian-content td {
     width: 100%;
-}
-.accordian-item button {
+} */
+/* .accordian-item button {
     border-radius: 25px;
     border-style: none;
     padding: .5em;
     font-size: large; 
     cursor: pointer;
     width: 100%;
-}
+} */
 form > div {
     display: flex;
     justify-content: space-between; /* Adjusts the children's spacing */
@@ -52,11 +55,11 @@ form > div .contentRecord{
     background-color: #F1F0F0;
     border-radius: 25px;
     padding: 1em;
-    margin: 0;
+    margin: 1em;
 }
 .rowOne > div, .rowTwo > div, .rowThree > div, .rowFour > div{
     display: flex;
-    align-items: center;  
+    align-items: center;
 }
 .rowOne p, .rowTwo p, .rowThree p, .rowFour p {
     padding: 0 1em;
@@ -69,7 +72,7 @@ form > div .contentRecord{
 .rowTwo > div p.contentRecord, .rowThree > div p.contentRecord {
     background-color: white;
     border-radius: 40px;
-    padding: 10px; /* Adjust padding as needed */
+    padding: 15px; /* Adjust padding as needed */
     margin: 0; /* Remove default margin */
 }
 .rowTwo > div input, .rowThree > div input {
@@ -92,4 +95,8 @@ form > div .contentRecord{
 #extraBtn{
     background-color: #488494;
     color: white;
+}
+
+.rowOne{
+    margin: 1em;
 }

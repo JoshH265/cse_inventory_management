@@ -1,16 +1,25 @@
-function toggleAccordion(button) {
-    var contentRow = button.parentNode.parentNode.nextElementSibling; // Get the next row (content) of the clicked button
-    contentRow.style.display = contentRow.style.display === 'none' ? 'table-row' : 'none'; // Toggle the display property
-}
-// function toggleAccordion(button) {
-//     var contentRow = button.parentNode.parentNode.nextElementSibling; // Get the next row (content) of the clicked button
-//     var itemRow = button.parentNode.parentNode; // Get the current row (accordion item) of the clicked button
+document.addEventListener('DOMContentLoaded', function() {
+    var accItem = document.querySelectorAll('.accordion-item');
 
-//     if (contentRow.style.display === 'none') {
-//         contentRow.style.display = 'table-row'; // Show the content row
-//         itemRow.style.display = 'none'; // Hide the item row
-//     } else {
-//         contentRow.style.display = 'none'; // Hide the content row
-//         itemRow.style.display = 'table-row'; // Show the item row
-//     }
-// }
+    accItem.forEach(function(item) {
+        item.addEventListener('click', function() {
+            // Get the next element in the DOM after the current accordion item
+            var content = this.nextElementSibling;
+
+            // Get the number of columns from the first row of the table
+            var columnCount = this.closest('table').querySelector('tr:first-child').children.length;
+
+            // Toggle the 'accordion-content' visibility and the 'accordion-item' itself
+            if (content.style.display !== "table-row") {
+                // Set the colspan attribute to match the number of columns
+                content.querySelector('td').setAttribute('colspan', columnCount);
+                
+                content.style.display = "table-row"; // Show the accordion content
+                this.style.display = "none"; // Hide the accordion item
+            } else {
+                content.style.display = "none"; // Hide the accordion content
+                this.style.display = "table-row"; // Show the accordion item
+            }
+        });
+    });
+});

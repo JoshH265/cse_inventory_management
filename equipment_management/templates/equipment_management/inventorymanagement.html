@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="{% static 'accordian.css' %}">
         <link rel="stylesheet" href="{% static 'popUp.css' %}">
         <script src="{% static 'accordianFunction.js' %}"></script>
+        <script src="{% static 'popUpScript.js' %}"></script>
     </head>
     <body>
         <div class="navbar">
@@ -38,6 +39,45 @@
                 <p>Check the Reservation Management page for more details</p></td>
             </div>
         </div>
+        <div class="plainMainPanel">
+            <h2>Username</h2>
+            <div class="plainInnerPanel">
+                <div class="userDetails">
+                    <div>
+                        <h3>First Name:</h3>
+                        <p></p>
+                    </div>
+                    <div>
+                        <h3>Last Name:</h3>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="userDetails">
+                    <div>
+                        <h3>Account Type:</h3>
+                        <p>dfhgdfhf</p>
+                    </div>
+                    <div>
+                        <h3>Email:</h3>
+                        <p></p>
+                    </div>
+                </div>
+                    <hr>
+                    <button id="myBtn"><p>Change Password</p></button>
+                </div>
+                <br>
+            </div>
+            <!-- Change Password Pop Up -->
+            <!-- <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Contact your IT Department</p>
+                    <p>0208 123 4567</p>
+                <p>ITDepartmentEmail@example.com</p>
+                </div>
+            </div> -->
+        </div>
+        
         <div class="mainPanel">
             <div class="OuterBar">
                 <div class="boxHeader">
@@ -54,42 +94,45 @@
                 </div>      
             </div>
             <div class="InnerPanel">
-                <table class="accordian">
+                <!-- headers of the table/lists -->
+                <table class="accordion">
                     <tr>
                         <th>Device Name</th>
                         <th>Device Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
+                        <th>Status</th>
+                        <th>Location</th>
                         <th>Quantity</th>
                     </tr>
-                    <tr class="accordian-item">
-                        <td><button onclick="toggleAccordion(this)">name</button></td>
-                        <td><button onclick="toggleAccordion(this)">type</button></td>
-                        <td><button onclick="toggleAccordion(this)">dd/mm/yyyy</button></td>
-                        <td><button onclick="toggleAccordion(this)">dd/mm/yyyy</button></td>
-                        <td><button onclick="toggleAccordion(this)">x</button></td>
+                    <!-- Repeat this block for each piece of equipment -->
+                    {% for equipment in equipments %}
+                    <tr class="accordion-item">
+                        <td><div class="cell-content">{{ equipment.equipmentName }}</div></td>
+                        <td><div class="cell-content">{{ equipment.equipmentType }}</div></td>
+                        <td><div class="cell-content">{{ equipment.equipmentStatus }}</div></td>
+                        <td><div class="cell-content">{{ equipment.location }}</div></td>
+                        <td><div class="cell-content">{{ equipment.quantity }}</div></td>
                     </tr>
-                    <tr class="accordian-content">
+                    <tr class="accordian-content" style="display: none;">
                         <td colspan="5">
                             <form action="/action_page.php" autocomplete="off">
                                 <div class="rowOne">
                                     <div>
                                         <b><p>Device Name :</p></b>
-                                        <p class="contentRecord"></p>
-                                    </div>
-                                    <div>
-                                        <b><p>Location :</p></b>
-                                        <p class="contentRecord"></p>
+                                        <p class="contentRecord">{{ equipment.equipmentName }}</p>
                                     </div>
                                     <div>
                                         <b><p>Status :</p></b>
-                                        <p class="contentRecord"></p>
+                                        <p class="contentRecord">{{ equipment.equipmentStatus }}</p>
+                                    </div>
+                                    <div>
+                                        <b><p>Location :</p></b>
+                                        <p class="contentRecord">{{ equipment.location }}</p>
                                     </div>
                                 </div>
                                 <div class="rowTwo">
                                     <div>
                                         <b><p class="contentLabel">Device Type :</p></b>
-                                        <p class="contentRecord">name</p>
+                                        <p class="contentRecord">{{ equipment.equipmentType }}</p>
                                     </div>
                                     <div>
                                         <b><p>Quantity: </p></b>
@@ -115,10 +158,66 @@
                             </form>
                         </td>
                     </tr>
+                    {% endfor %}
+
                 </table>
-                <div id="extra" class="modal">
-                    <!-- /*Modal content*/ -->
-                    <!-- <div class="modal-content">
+                        <!-- /* this is the bit that slides out of the accordion */ -->
+                            <!-- <table class="accordian"> 
+                                <button>
+                                    <tr class="accordian-item">
+                                        <td>name</td>
+                                        <td>type</td>
+                                        <td>dd/mm/yyyy</td>
+                                        <td>dd/mm/yyyy</td>
+                                        <td>x</td>
+                                    </tr>
+                                </button>
+                                <tr class="accordian-content">
+                                    <form action="/action_page.php" autocomplete="off" class="accordian-content">
+                                        <div>
+                                            <td>Device Name: </td>
+                                            <td>Location: </td>
+                                            <td>Status: </td>
+                                        </div>
+                                        <div>
+                                            <td>Borrow Date: </td>
+                                            <td style="background-color: rgb(255, 255, 255);"><input type="date" class="startdate" name="startdate" required></td>
+                                            <td>to</td>
+                                            <td style="background-color: rgb(255, 255, 255);"><input type="date" class="enddate" name="enddate" required></td>
+                                            <td style="background-color: #488494;"><button id="extraInfo" style="text-decoration: underline;color:white;">Extra Info</button></td>
+                                        </div>
+                                        <div>
+                                            <td style="background-color: rgb(226, 226, 226);"></td>
+                                            <td>Quantity: </td>
+                                            <td contenteditable="true" style="background-color: rgb(255, 255, 255);"><input type="number" id="quantity" name="quantity" size="14" min="1" required></td>
+                                        </div>
+                                        <div>
+                                            <td style="background-color: rgb(226, 226, 226);"></td>
+                                            <td style="background-color: rgb(226, 226, 226);"></td>
+                                            <td><input type="submit" value="Save"></td>
+                                            <td><button type="reset" id="cancelchanges" style="text-decoration:underline;">Cancel Changes</button></td>
+                                            <td><button id="cancelreservation" style="text-decoration:underline;">Cancel Reservation</button></td>
+                                        </div>
+                                    </form>
+                                </tr>
+                                
+                                <button class="accordion">
+                                    <tr class="accordian-item">
+                                        <td>name</td>
+                                        <td>type</td>
+                                        <td>dd/mm/yyyy</td>
+                                        <td>dd/mm/yyyy</td>
+                                        <td>x</td>
+                                    </tr>
+                                </button>
+                            </table> -->
+                        </div>
+                        <!-- /*putting the panel before the accordion lets the transition look better imo */ -->
+                    </div>
+                    <!-- /*pop up for 'extra info' */ -->
+                <!-- <div id="extra" class="modal">
+                    /*Modal content*/
+                    <div class="modal-content">
                         <span class="close">&times;</span>
                         <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
                         <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
@@ -132,8 +231,8 @@
                         Example:
                         <br>
                         Example: </p>
-                    </div> -->
-                </div>
+                    </div>
+                </div> -->
             </div>
             <br>
         </div>
