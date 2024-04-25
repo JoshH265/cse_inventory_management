@@ -53,10 +53,9 @@
     align-items: center;
     top:0;
     display: none;
-    
 }
-.modal-content{
-    width:auto;
+.modal-content, .helpInfo{
+    width:800px;
     height: auto;
     background-color: white;
     position:relative;
@@ -83,6 +82,25 @@
     font-size: large;
     margin-top: 1em;
     cursor: pointer;
+}
+.helpInfo{
+    text-align: center;
+}
+.helpInfo h3{
+    margin-bottom: 2em;
+}
+.helpInfo h3 span{
+    font-size: 30px;
+    background-color: #346473;
+    color: white;
+    border-radius: 40px;
+    padding: 0.5em 1em;
+} 
+.helpInfo h4 span {
+    background-color: #448093;
+    color: white;
+    border-radius: 40px;
+    padding: 0.5em 1em;
 }
 .close {
     color: #448093;

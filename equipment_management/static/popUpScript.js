@@ -17,16 +17,17 @@
 //     });
 // });
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     document.getElementsByClassName('extraBtn').addEventListener('click', function(event) {
-//         event.preventDefault(); // Prevent default form submission behavior
-//         document.querySelector('.bg-modal').style.display = 'flex';
-//     });
-
-//     document.querySelector('.close').addEventListener('click', function() {
-//         document.querySelector('.bg-modal').style.display = 'none';
-//     });
-// });
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('helpBtn').addEventListener('click', function() {
+        document.querySelector('.bg-modal .helpInfo').parentElement.style.display = 'flex';
+    });
+    
+    document.querySelectorAll('.bg-modal .close').forEach(function(closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            this.closest('.bg-modal').style.display = 'none';
+        });
+    });
+});
 
 //works
 
