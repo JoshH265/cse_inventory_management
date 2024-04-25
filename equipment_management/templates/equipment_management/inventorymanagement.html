@@ -39,181 +39,6 @@
                 <p>Check the Reservation Management page for more details</p></td>
             </div>
         </div>
-        <div class="plainMainPanel">
-            <h2>Username</h2>
-            <div class="plainInnerPanel">
-                <div class="userDetails">
-                    <div>
-                        <h3>First Name:</h3>
-                        <p></p>
-                    </div>
-                    <div>
-                        <h3>Last Name:</h3>
-                        <p></p>
-                    </div>
-                </div>
-                <div class="userDetails">
-                    <div>
-                        <h3>Account Type:</h3>
-                        <p>dfhgdfhf</p>
-                    </div>
-                    <div>
-                        <h3>Email:</h3>
-                        <p></p>
-                    </div>
-                </div>
-                    <hr>
-                    <button id="myBtn"><p>Change Password</p></button>
-                </div>
-                <br>
-            </div>
-            <!-- Change Password Pop Up -->
-            <!-- <div id="myModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Contact your IT Department</p>
-                    <p>0208 123 4567</p>
-                <p>ITDepartmentEmail@example.com</p>
-                </div>
-            </div> -->
-        </div>
-        
-        <div class="mainPanel">
-            <div class="OuterBar">
-                <div class="boxHeader">
-                    <div>
-                        <h2>Current Reservations</h2>
-                    </div>
-                    <div class="deviceTotal">
-                        <p class="rounded">Devices Borrowed: </p>
-                        <p class="rounded">Devices Overdue: </p>
-                    </div>
-                    <div>
-                        <button id="myRBtn"><b><p class="circleBtn">?</p></b></button>
-                    </div>
-                </div>      
-            </div>
-            <div class="InnerPanel">
-                <!-- headers of the table/lists -->
-                <table class="accordion">
-                    <tr>
-                        <th>Device Name</th>
-                        <th>Device Type</th>
-                        <th>Status</th>
-                        <th>Location</th>
-                        <th>Quantity</th>
-                    </tr>
-                    <!-- Repeat this block for each piece of equipment -->
-                    {% for equipment in equipments %}
-                    <tr class="accordion-item">
-                        <td><div class="cell-content">{{ equipment.equipmentName }}</div></td>
-                        <td><div class="cell-content">{{ equipment.equipmentType }}</div></td>
-                        <td><div class="cell-content">{{ equipment.equipmentStatus }}</div></td>
-                        <td><div class="cell-content">{{ equipment.location }}</div></td>
-                        <td><div class="cell-content">{{ equipment.quantity }}</div></td>
-                    </tr>
-                    <tr class="accordian-content" style="display: none;">
-                        <td colspan="5">
-                            <form action="/action_page.php" autocomplete="off">
-                                <div class="rowOne">
-                                    <div>
-                                        <b><p>Device Name :</p></b>
-                                        <p class="contentRecord">{{ equipment.equipmentName }}</p>
-                                    </div>
-                                    <div>
-                                        <b><p>Status :</p></b>
-                                        <p class="contentRecord">{{ equipment.equipmentStatus }}</p>
-                                    </div>
-                                    <div>
-                                        <b><p>Location :</p></b>
-                                        <p class="contentRecord">{{ equipment.location }}</p>
-                                    </div>
-                                </div>
-                                <div class="rowTwo">
-                                    <div>
-                                        <b><p class="contentLabel">Device Type :</p></b>
-                                        <p class="contentRecord">{{ equipment.equipmentType }}</p>
-                                    </div>
-                                    <div>
-                                        <b><p>Quantity: </p></b>
-                                        <p contenteditable="true" class="contentRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" required></p>
-                                    </div>
-                                </div>
-                                <div class="rowThree">
-                                    <div>
-                                        <b><p>Borrow Date: </p></b>
-                                        <p class="contentRecord"><input type="date" class="startdate" name="startdate" required></p>
-                                        <b><p>to</p></b>
-                                        <p class="contentRecord"><input type="date" class="enddate" name="enddate" required></p>
-                                    </div>
-                                    <div>
-                                        <p><button id="extraBtn">Extra Info</button></p>
-                                    </div>
-                                </div>
-                                <div class="rowFour">
-                                    <input type="submit" value="Save">
-                                    <button type="reset" id="cancelchanges">Cancel Changes</button>
-                                    <button id="cancelreservation">Cancel Reservation</button>
-                                </div>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-
-                </table>
-                        <!-- /* this is the bit that slides out of the accordion */ -->
-                            <!-- <table class="accordian"> 
-                                <button>
-                                    <tr class="accordian-item">
-                                        <td>name</td>
-                                        <td>type</td>
-                                        <td>dd/mm/yyyy</td>
-                                        <td>dd/mm/yyyy</td>
-                                        <td>x</td>
-                                    </tr>
-                                </button>
-                                <tr class="accordian-content">
-                                    <form action="/action_page.php" autocomplete="off" class="accordian-content">
-                                        <div>
-                                            <td>Device Name: </td>
-                                            <td>Location: </td>
-                                            <td>Status: </td>
-                                        </div>
-                                        <div>
-                                            <td>Borrow Date: </td>
-                                            <td style="background-color: rgb(255, 255, 255);"><input type="date" class="startdate" name="startdate" required></td>
-                                            <td>to</td>
-                                            <td style="background-color: rgb(255, 255, 255);"><input type="date" class="enddate" name="enddate" required></td>
-                                            <td style="background-color: #488494;"><button id="extraInfo" style="text-decoration: underline;color:white;">Extra Info</button></td>
-                                        </div>
-                                        <div>
-                                            <td style="background-color: rgb(226, 226, 226);"></td>
-                                            <td>Quantity: </td>
-                                            <td contenteditable="true" style="background-color: rgb(255, 255, 255);"><input type="number" id="quantity" name="quantity" size="14" min="1" required></td>
-                                        </div>
-                                        <div>
-                                            <td style="background-color: rgb(226, 226, 226);"></td>
-                                            <td style="background-color: rgb(226, 226, 226);"></td>
-                                            <td><input type="submit" value="Save"></td>
-                                            <td><button type="reset" id="cancelchanges" style="text-decoration:underline;">Cancel Changes</button></td>
-                                            <td><button id="cancelreservation" style="text-decoration:underline;">Cancel Reservation</button></td>
-                                        </div>
-                                    </form>
-                                </tr>
-                                
-                                <button class="accordion">
-                                    <tr class="accordian-item">
-                                        <td>name</td>
-                                        <td>type</td>
-                                        <td>dd/mm/yyyy</td>
-                                        <td>dd/mm/yyyy</td>
-                                        <td>x</td>
-                                    </tr>
-                                </button>
-                            </table> -->
-                        </div>
-                        <!-- /*putting the panel before the accordion lets the transition look better imo */ -->
-                    </div>
                     <!-- /*pop up for 'extra info' */ -->
                 <!-- <div id="extra" class="modal">
                     /*Modal content*/
@@ -233,9 +58,6 @@
                         Example: </p>
                     </div>
                 </div> -->
-            </div>
-            <br>
-        </div>
         <div class="mainPanel">
             <div class="OuterBar">
                 <div class="boxHeader">
@@ -268,81 +90,109 @@
                 </div>
             </div>
             <div class="InnerPanel">
-                <table class="accordian">
+                <!-- headers of the table/lists -->
+                <table class="accordion">
                     <tr>
                         <th>Device Name</th>
                         <th>Device Type</th>
                         <th>Status</th>
                         <th>Location</th>
                         <th>Quantity</th>
-                        <th>Edit</th>
                     </tr>
-                </table>
-                <hr>
-                <table class="accordian">
-                    <tr class="accordian-item">
-                        <td>
-                            <button>Device Name</button>
-                            <button>Device Type</button>
-                            <button>Status</button>
-                            <button>Location</button>
-                            <button>Quantity</button>
-                            <button>Edit</button>
+                    <!-- Repeat this block for each piece of equipment -->
+                    {% for equipment in equipments %}
+                    <tr class="accordion-item">
+                        <td><div class="cell-content">{{ equipment.equipmentName }}</div></td>
+                        <td><div class="cell-content">{{ equipment.equipmentType }}</div></td>
+                        <td><div class="cell-content">{{ equipment.equipmentStatus }}</div></td>
+                        <td><div class="cell-content">{{ equipment.location }}</div></td>
+                        <td><div class="cell-content">{{ equipment.quantity }}</div></td>
+                    </tr>
+                    <tr class="accordian-content" style="display: none;">
+                        <td colspan="5">
+                            <form action="" autocomplete="off">
+                                <div class="rowOne">
+                                    <div>
+                                        <b><p>Device Name :</p></b>
+                                        <p class="contentRecord">{{ equipment.equipmentName }}</p>
+                                    </div>
+                                    <div>
+                                        <b><p>Status :</p></b>
+                                        <p class="contentRecord">{{ equipment.equipmentStatus }}</p>
+                                    </div>
+                                    <div>
+                                        <b><p>Location :</p></b>
+                                        <p class="contentRecord">{{ equipment.location }}</p>
+                                    </div>
+                                </div>
+                                <div class="rowTwo">
+                                    <div>
+                                        <b><p class="contentLabel">Device Type :</p></b>
+                                        <p class="contentRecord">{{ equipment.equipmentType }}</p>
+                                    </div>
+                                    <div>
+                                        <b><p>Quantity: </p></b>
+                                        <!-- <input type="number" id="quantity" name="quantity" size="14" min="1" required contenteditable="true" class="contentRecord"> -->
+                                    </div>
+                                    <div>
+                                        <p><button class="extraBtn">Extra Info</button></p>
+                                    </div>
+                                </div>
+                                <div class="rowFour">
+                                    <input type="submit" value="Save">
+                                    <button id="removeItem">Remove</button>
+                                    <button type="reset" class="cancelchanges">Cancel Changes</button>
+                                </div>
+                            </form>
                         </td>
                     </tr>
-                    <tr class="accordian-content">
-                        <td colspan="7">
-
-                        </td>
-                    </tr>
-                    <tr class="accordian-item">
-                        <td>
-                            <button>Device Name</button>
-                            <button>Device Type</button>
-                            <button>Status</button>
-                            <button>Location</button>
-                            <button>Quantity</button>
-                            <button>Edit</button>
-                        </td>
-                    </tr>
-                    <tr class="accordian-content">
-                        <td colspan="7">
-
-                        </td>
-                    </tr>
-                    <tr class="accordian-item">
-                        <td>
-                            <button>Device Name</button>
-                            <button>Device Type</button>
-                            <button>Status</button>
-                            <button>Location</button>
-                            <button>Quantity</button>
-                            <button>Edit</button>
-                        </td>
-                    </tr>
-                    <tr class="accordian-content">
-                        <td colspan="7">
-
-                        </td>
-                    </tr>
-                    <tr class="accordian-item">
-                        <td>
-                            <button>Device Name</button>
-                            <button>Device Type</button>
-                            <button>Status</button>
-                            <button>Location</button>
-                            <button>Quantity</button>
-                            <button>Edit</button>
-                        </td>
-                    </tr>
-                    <tr class="accordian-content">
-                        <td colspan="7">
-
-                        </td>
-                    </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>
+        <div class="bg-modal">
+            <div class="modal-content">
+                <div id="closeBtn" class="close">&times;</div>
+                <form>
+                    <label for="locationAccess">Location Access : </label>
+                    <input type="text" id="locationAccess"><br>
+                    <label for="audit">Audit : </label>
+                    <input type="text" id="audit"><br>
+                    <label for="userType">User Access :</label>
+                    <input type="text" id="userType"><br>
+                    <label for="serialNum">Device Serial No. : </label>
+                    <input type="text" id="serialNum"><br>
+                    <label for="cpu">CPU : </label>
+                    <input type="text" id="cpu"><br>
+                    <label for="gpu">GPU : </label>
+                    <input type="text" id="gpu"><br>
+                    <label for="ram">RAM : </label>
+                    <input type="text" id="ram"><br>
+                    <label for="comments">Comments : </label>
+                    <input type="text" id="comments" value="asdfghjklasdfghjksdfghjkl;asdfghjklsdxfcghgvbjnmfb"><br>
+                    <input type="button" value="Save">
+                    <input type="reset" value="Reset">
+                </form>
+            </div>
+        </div>
+        <div class="bg-modal">
+            <div id="helpInfo" class="modal">
+                <div id="closeBtn" class="close">&times;</div>
+                <div>
+                    <h3>List of Equipment</h3h3>
+                    <h4>How do I add a new equipment item?</h4>
+                    <p>Click on the + button next to 'Filter By', fill out the relevant details and then click the add button</p>
+                    <h4>How do I edit an existing item of equipment?</h4>
+                    <p> Firstly, click anywhere on the row of the equipment you want to edit, 
+                        this will expand to show more of the items details. Here you can change information
+                        in the relevant fields.<b> Don't forget to check the fields in 'Extra Info'.</b>
+                        Once the 'Save' button  is clicked the item will be added to the system</p>
+                    <h4>How do I remove an existing item of equipment from the system?</h4>
+                    <p> Firstly, click anywhere on the row of the equipment you want to remove, 
+                        this will expand to show more of the items details. Here you will see a 'Remove' button that will
+                        ,once clicked, remove the item from the system</p>
+                </div>
+            </div>
         </div>
         <!-- footer -->
         <div class="unibanner">

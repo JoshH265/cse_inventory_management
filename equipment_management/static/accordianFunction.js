@@ -1,25 +1,33 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var accItem = document.querySelectorAll('.accordion-item');
-
-    accItem.forEach(function(item) {
+    // Handle clicking on accordion items to show the accordion content
+    document.querySelectorAll('.accordion-item').forEach(function(item) {
         item.addEventListener('click', function() {
-            // Get the next element in the DOM after the current accordion item
+            // Close all other open accordions
+            document.querySelectorAll('.accordion-item').forEach(function(otherItem) {
+                if (otherItem !== item) {
+                    var otherContent = otherItem.nextElementSibling;
+                    otherContent.style.display = "none";
+                }
+            });
+
+            // Get the next element, which is the accordion content
             var content = this.nextElementSibling;
+            // Show or hide the accordion content
+            content.style.display = content.style.display === "none" ? "table-row" : "none";
+        });
+    });
 
-            // Get the number of columns from the first row of the table
-            var columnCount = this.closest('table').querySelector('tr:first-child').children.length;
-
-            // Toggle the 'accordion-content' visibility and the 'accordion-item' itself
-            if (content.style.display !== "table-row") {
-                // Set the colspan attribute to match the number of columns
-                content.querySelector('td').setAttribute('colspan', columnCount);
-                
-                content.style.display = "table-row"; // Show the accordion content
-                this.style.display = "none"; // Hide the accordion item
-            } else {
-                content.style.display = "none"; // Hide the accordion content
-                this.style.display = "table-row"; // Show the accordion item
-            }
+    // Handle clicking on 'Cancel Changes' buttons to close the accordion content
+    document.querySelectorAll('.cancelchanges').forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the form from resetting
+            // Find the closest accordion content to this button
+            var content = this.closest('.accordian-content'); // Ensure the class name matches your HTML
+            // Hide the accordion content
+            content.style.display = 'none';
+            // Show the corresponding accordion item
+            var item = content.previousElementSibling;
+            item.style.display = 'table-row';
         });
     });
 });

@@ -44,6 +44,7 @@
     flex-direction: row;
     justify-content: space-between; /* Align items to the left and right edges */
     align-items:center;
+    flex-wrap: wrap;
 }
 .OuterBar button{
     background-color: transparent;
@@ -85,7 +86,6 @@
 }
 #search{
     margin: 0;
-    padding-right: 10em;
     margin-right: auto;
 }
 #search-bar{
@@ -103,6 +103,7 @@
 .InnerPanel table{
     width: 100%;
     padding: .2em .2em;
+    overflow: hidden;
 }
 .InnerPanel table:first-child tr th{
     border-radius: 25px;
