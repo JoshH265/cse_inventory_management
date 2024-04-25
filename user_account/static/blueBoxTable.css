@@ -1,11 +1,30 @@
+@media only screen and (min-width: 1000px) {
+    .mainPanel {
+        width: 50%
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .mainPanel {
+        max-width: 75%;
+    }
+}
+
 .mainPanel{
     background-color: #448093;
     margin: 2em 2em;
     border-radius: 25px;
     padding: 2em;
+    padding-bottom: 0.8em;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: auto;
+}
+.InnerPanel button {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.05) 0 0);
 }
 .OuterBar{
-    padding-bottom: 1em;
+    /* padding-bottom: 1em; */
     width: 100%;
 }
 .OuterBar h2 {
@@ -60,15 +79,14 @@
     text-align: center;
     font-size: medium;
     font-family: "Merriweather", serif;
-    background-color: #488494;
-    padding: 1em 1.2em;
-    width: fit-content;
     color: white;
     border: 2px solid rgb(255, 255, 255);
     border-radius: 50%;  
     cursor: help; 
-    margin: 0; /* Reset margin to remove any default spacing */
-    align-self: center;
+    margin: auto;
+    height: 25px;
+    width: 25px;
+    line-height: 25px;
 }
 .custom-select {
     border-radius: 25px;
@@ -99,29 +117,81 @@
 .InnerPanel{
     background-color: white;
     border-radius: 25px;
+    padding: 5px;
+    margin-top: 0;
+    height: 300px;
+    overflow: auto;
+    overflow-x: auto;
 }
 .InnerPanel table{
     width: 100%;
     padding: .2em .2em;
 }
+.InnerPanel button {
+    margin-right: 5px;
+    margin-left: 5px;
+}
 .InnerPanel table:first-child tr th{
     border-radius: 25px;
     color: black;
     padding: .5em;
-    font-size: 20px;
+    font-size: 16px;
     text-align: center;
     background-color: #D6D6D6;
     width: auto;
 }
 .InnerPanel hr {
-    height: .2em;
+    height: 1px;
     background-color: black;
     width: 99%;
 }
-.InnerPanel table:nth-child(n+1) tr td{
+.accordion table:nth-child(n+1) tr td{
     border-radius: 25px;
     color: black;
     padding-bottom: .5em;
     font-size: 20px;
     text-align: center;
+}
+.rowOne .contentRecord, .rowTwo .contentRecord {
+    font-size: 15px;
+    line-height: 8px;
+    width: 55px;
+    text-align: center;
+    padding: 10px 25px;
+}
+#quantityRecord, #quantity {
+    padding: 5px 2.5px;
+}
+#quantityRecord  {
+    width: 140px;
+}
+.rowTwo div:nth-child(2) {
+    position: relative;
+    right: 160px;
+}
+#datepicker {
+    padding: 0.2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+#extraBtn, #extraBtnRH, .rowFour button, #save {
+    padding: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: medium;
+    margin-bottom: 0.5em;
+}
+.accordion-item button {
+    font-size: medium;
+}
+button {
+    background-color: rgba(255, 255, 255, 0);
+    background-blend-mode: lighten;
+    transition: 0.5s;
+}
+button:hover, #save:hover {
+    background-blend-mode: darken;
+}
+.accordion-content {
+    display: none;
 }

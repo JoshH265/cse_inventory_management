@@ -1,35 +1,33 @@
-.accordian > tbody > tr:nth-child(odd) .accordian-item button {
+.accordion .accordion-item:nth-child(odd) button {
     background-color: #F1F0F0;
 }
 
-.accordian > tbody > tr:nth-child(even) .accordian-item button {
+.accordion .accordion-item:nth-child(even) button{
     background-color: #D6D6D6;
 }
 
-.accordian-content {
+.accordion-content {
     background-color: #D6D6D6;
 }
 .accordion tr td {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 10px;
-    width: 100%;
     text-align: left;
     outline: none;
 }
-.accordian-item td {
+.accordion-item td {
     display: flex;
     justify-content: space-between;
 }
-.accordian-item button {
+.accordion-item button {
     border-radius: 25px;
     border-style: none;
     padding: .5em;
     flex: 1;
     font-size: large; 
 }
-.accordian-content td {
+.accordion-content td {
     width: 100%;
 }
 form > div {
@@ -70,7 +68,7 @@ form > div .contentRecord{
     text-align: center; /* Center the text within the input */
     width: 80%; /* Adjust width as needed */
 }
-.rowFour input, .rowFour button, #extraBtn{
+.rowFour input, .rowFour button, #extraBtn, #extraBtnRH{
     border-radius: 40px;
     border-style: none;
     text-decoration: underline;
@@ -80,7 +78,10 @@ form > div .contentRecord{
 .rowFour input, .rowFour button{
     background-color: #F1F0F0;
 }
-#extraBtn{
+#extraBtn, #extraBtnRH{
     background-color: #488494;
     color: white;
+}
+#datepicker {
+    width: fit-content;
 }
