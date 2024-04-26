@@ -11,11 +11,17 @@
     background-color: #D6D6D6;
     display: none;
 }
+.accordian {
+    /* max-height: calc(5 * (50px + 1em)); 
+    overflow-y: auto; */
+    /* overflow: hidden; */
+}
 
 /* without makes the first th and td the width of the accordian panel before it colspans*/
 .accordian tr th,
 .accordian tr td {
     width: auto;
+    overflow: hidden;
 }
 /* .accordian tr:first-child th{
     border-radius: 25px;
@@ -82,7 +88,7 @@ form > div .contentRecord{
     text-align: center; /* Center the text within the input */
     width: 80%; /* Adjust width as needed */
 }
-.rowFour input, .rowFour button, #extraBtn{
+.rowFour input, .rowFour button, .extraBtn{
     border-radius: 40px;
     border-style: none;
     text-decoration: underline;
@@ -92,11 +98,10 @@ form > div .contentRecord{
 .rowFour input, .rowFour button{
     background-color: #F1F0F0;
 }
-#extraBtn{
+.extraBtn {
     background-color: #488494;
     color: white;
 }
-
 .rowOne{
     margin: 1em;
 }
