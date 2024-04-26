@@ -12,7 +12,9 @@
     display: none;
 }
 .accordian {
-    overflow: hidden;
+    /* max-height: calc(5 * (50px + 1em)); 
+    overflow-y: auto; */
+    /* overflow: hidden; */
 }
 
 /* without makes the first th and td the width of the accordian panel before it colspans*/
@@ -100,7 +102,6 @@ form > div .contentRecord{
     background-color: #488494;
     color: white;
 }
-
 .rowOne{
     margin: 1em;
 }
