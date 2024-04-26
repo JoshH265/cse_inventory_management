@@ -54,16 +54,17 @@
     top:0;
     display: none;
 }
-.modal-content, .helpInfo{
+.helpInfo, .create-record, .modal-content{
     width:800px;
-    height: auto;
+    height:max-content;
     background-color: white;
     position:relative;
-    padding: 3em;
+    padding: 1em;
     font-size: 20px;
     border-radius: 40px;
 }
-.modal-content input:not([type="button"]), .modal-content input:not([type="reset"]){
+.modal-content input:not([type="button"]), .modal-content input:not([type="reset"]),
+.create-record input:not([type="button"]), .create-record input:not([type="reset"]){
     background-color: #F1F0F0;
     border-style: none;
     border-radius: 40px;
@@ -72,7 +73,8 @@
     font-size: 20px;
 }
 
-.modal-content input[type="button"], .modal-content input[type="reset"]{
+.modal-content input[type="button"], .modal-content input[type="reset"],
+.create-record input[type="button"], .create-record input[type="reset"]{
     background-color: #488494;
     color: white;
     border-radius: 40px;

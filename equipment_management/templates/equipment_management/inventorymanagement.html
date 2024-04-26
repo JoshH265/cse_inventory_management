@@ -151,6 +151,25 @@
             </div>
         </div>
         <div class="bg-modal">
+            <div class="helpInfo">
+                <div id="closeBtn" class="close">&times;</div>
+                <div>
+                    <h3><span>List of Equipment</span></h3>
+                    <h4><span>How do I add a new equipment item?</span></h4>
+                    <p>Click on the + button next to 'Filter By', fill out the relevant details and then click the add button</p>
+                    <h4><span>How do I edit an existing item of equipment?</span></h4>
+                    <p> Firstly, click anywhere on the row of the equipment you want to edit, 
+                        this will expand to show more of the items details. Here you can change information
+                        in the relevant fields.<b> Don't forget to check the fields in 'Extra Info'.</b>
+                        Once the 'Save' button  is clicked the item will be added to the system</p>
+                    <h4><span>How do I remove an existing item of equipment from the system?</span></h4>
+                    <p> Firstly, click anywhere on the row of the equipment you want to remove, 
+                        this will expand to show more of the items details. Here you will see a 'Remove' button that will
+                        ,once clicked, remove the item from the system</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-modal">
             <div class="modal-content">
                 <div id="closeBtn" class="close">&times;</div>
                 <form>
@@ -176,22 +195,34 @@
             </div>
         </div>
         <div class="bg-modal">
-            <div class="helpInfo">
+            <div class="create-record">
                 <div id="closeBtn" class="close">&times;</div>
-                <div>
-                    <h3><span>List of Equipment</span></h3>
-                    <h4><span>How do I add a new equipment item?</span></h4>
-                    <p>Click on the + button next to 'Filter By', fill out the relevant details and then click the add button</p>
-                    <h4><span>How do I edit an existing item of equipment?</span></h4>
-                    <p> Firstly, click anywhere on the row of the equipment you want to edit, 
-                        this will expand to show more of the items details. Here you can change information
-                        in the relevant fields.<b> Don't forget to check the fields in 'Extra Info'.</b>
-                        Once the 'Save' button  is clicked the item will be added to the system</p>
-                    <h4><span>How do I remove an existing item of equipment from the system?</span></h4>
-                    <p> Firstly, click anywhere on the row of the equipment you want to remove, 
-                        this will expand to show more of the items details. Here you will see a 'Remove' button that will
-                        ,once clicked, remove the item from the system</p>
-                </div>
+                <form>
+                    <label for="devName">Device Name : </label>
+                    <input type="text" id="devName"><br>
+                    <label for="devType">Device Type : </label>
+                    <input type="text" id="devType"><br>
+                    <label for="buildingLocation">Location : </label>
+                    <input type="text" id="buildingLocation"><br>
+                    <label for="locationAccess">Location Access : </label>
+                    <input type="text" id="locationAccess"><br>
+                    <label for="audit">Audit : </label>
+                    <input type="text" id="audit"><br>
+                    <label for="userType">User Access :</label>
+                    <input type="text" id="userType"><br>
+                    <label for="serialNum">Device Serial No. : </label>
+                    <input type="text" id="serialNum"><br>
+                    <label for="cpu">CPU : </label>
+                    <input type="text" id="cpu"><br>
+                    <label for="gpu">GPU : </label>
+                    <input type="text" id="gpu"><br>
+                    <label for="ram">RAM : </label>
+                    <input type="text" id="ram"><br>
+                    <label for="comments">Comments : </label>
+                    <input type="text" id="comments" value="asdfghjklasdfghjksdfghjkl;asdfghjklsdxfcghgvbjnmfb"><br>
+                    <input type="button" value="Save">
+                    <input type="reset" value="Reset">
+                </form>
             </div>
         </div>
         <!-- footer -->
