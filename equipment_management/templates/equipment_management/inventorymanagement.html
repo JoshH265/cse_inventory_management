@@ -25,10 +25,10 @@
         <div class="admin-nav">
             <ul class="adminNav-links">
                 <li>Admin Panel</li>
-                <li><a href="">Report Generation</a></li>
-                <li><a href="">User Management</a></li>
-                <li><a href="">Reservation Management</a></li>
-                <li><a href="inventorymanagement.html">Inventory Management</a></li>
+                <li><a href="report_management">Report Generation</a></li>
+                <li><a href="user_management">User Management</a></li>
+                <li><a href="reservation_management">Reservation Management</a></li>
+                <li><a href="inventorymanagement">Inventory Management</a></li>
             </ul>
         </div>
         <div class="plainMainPanel">
@@ -180,20 +180,22 @@
             <div class="create-record">
                 <div id="closeBtn" class="close">&times;</div>
                 <form>
-                    <label for="devName">Device Name : </label>
-                    <input type="text" id="devName"><br>
-                    <label for="devType">Device Type : </label>
-                    <input type="text" id="devType"><br>
-                    <label for="buildingLocation">Location : </label>
-                    <input type="text" id="buildingLocation"><br>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <label for="equipmentName">Device Name : </label>
+                    <input type="text" id="equipmentName"><br>
+                    <label for="equipmentType">Device Type : </label>
+                    <input type="text" id="equipmentType"><br>
+                    <label for="location">Location : </label>
+                    <input type="text" id="location"><br>
                     <label for="locationAccess">Location Access : </label>
                     <input type="text" id="locationAccess"><br>
-                    <label for="audit">Audit : </label>
-                    <input type="text" id="audit"><br>
+                    <label for="auditDate">Audit : </label>
+                    <input type="text" id="auditDate"><br>
                     <label for="userType">User Access :</label>
                     <input type="text" id="userType"><br>
-                    <label for="serialNum">Device Serial No. : </label>
-                    <input type="text" id="serialNum"><br>
+                    <label for="serialNo">Device Serial No. : </label>
+                    <input type="text" id="serialNo"><br>
                     <label for="cpu">CPU : </label>
                     <input type="text" id="cpu"><br>
                     <label for="gpu">GPU : </label>
@@ -201,8 +203,8 @@
                     <label for="ram">RAM : </label>
                     <input type="text" id="ram"><br>
                     <label for="comments">Comments : </label>
-                    <input type="text" id="comments" value="asdfghjklasdfghjksdfghjkl;asdfghjklsdxfcghgvbjnmfb"><br>
-                    <input type="button" value="Save">
+                    <input type="text" id="comments"><br>
+                    <button type="submit" value="addItem">Save</button>
                     <input type="reset" value="Reset">
                 </form>
             </div>

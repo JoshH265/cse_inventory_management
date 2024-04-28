@@ -7,6 +7,7 @@
     justify-content: center;
     align-items: center;
     top:0;
+    left:0;
     display: none;
 }
 .helpInfo, .create-record, .modal-content{
@@ -19,7 +20,7 @@
     border-radius: 40px;
 }
 .modal-content input:not([type="button"]), .modal-content input:not([type="reset"]),
-.create-record input:not([type="button"]), .create-record input:not([type="reset"]){
+.create-record input:not([value="addItem"]), .create-record input:not([type="reset"]){
     background-color: #F1F0F0;
     border-style: none;
     border-radius: 40px;
@@ -29,7 +30,7 @@
 }
 
 .modal-content input[type="button"], .modal-content input[type="reset"],
-.create-record input[type="button"], .create-record input[type="reset"]{
+.create-record button, .create-record input[type="reset"]{
     background-color: #488494;
     color: white;
     border-radius: 40px;

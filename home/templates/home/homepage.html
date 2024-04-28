@@ -39,25 +39,6 @@
                 <p>Check the Reservation Management page for more details</p></td>
             </div>
         </div>
-                    <!-- /*pop up for 'extra info' */ -->
-                <!-- <div id="extra" class="modal">
-                    /*Modal content*/
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
-                        <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
-                        <br>
-                        User Access: 
-                        <br>
-                        Device Serial No.: 
-                        <br>
-                        Example:
-                        <br>
-                        Example:
-                        <br>
-                        Example: </p>
-                    </div>
-                </div> -->
         <div class="mainPanel">
             <div class="OuterBar">
                 <div class="boxHeader">
@@ -110,7 +91,10 @@
                     </tr>
                     <tr class="accordian-content" style="display: none;">
                         <td colspan="5">
-                            <form action="" autocomplete="off">
+                            <form method="post" autocomplete="off">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <input type="hidden" name="action" value="update">
                                 <div class="rowOne">
                                     <div>
                                         <b><p>Device Name :</p></b>
@@ -143,6 +127,30 @@
                                     <button id="removeItem">Remove</button>
                                     <button type="reset" class="cancelchanges">Cancel Changes</button>
                                 </div>
+                                <div class="bg-modal">
+                                    <div class="modal-content">
+                                        <div id="closeBtn" class="close">&times;</div>
+                                            <input type="hidden" name="action" value="create">
+                                            <label for="locationAccess">Location Access : </label>
+                                            <input type="text" id="locationAccess"><br>
+                                            <label for="auditDate">Audit : </label>
+                                            <input type="text" id="auditDate" value="{{ equipment.auditDate }}"><br>
+                                            <label for="userType">User Access :</label>
+                                            <input type="text" id="userType"><br>
+                                            <label for="serialNo">Device Serial No. : </label>
+                                            <input type="text" id="serialNo" value="{{ equipment.serialNo }}"><br>
+                                            <label for="cpu">CPU : </label>
+                                            <input type="text" id="cpu"><br>
+                                            <label for="gpu">GPU : </label>
+                                            <input type="text" id="gpu"><br>
+                                            <label for="ram">RAM : </label>
+                                            <input type="text" id="ram"><br>
+                                            <label for="comments">Comments : </label>
+                                            <input type="text" id="comments" value="{{ equipment.comments }}"><br>
+                                            <input type="button" value="Save">
+                                            <input type="reset" value="Reset">
+                                    </div>
+                                </div>
                             </form>
                         </td>
                     </tr>
@@ -163,31 +171,6 @@
                     <p>Once all relevant fields are filled in, click confirm and await for your reservation to be approved. 
                         <b>You can check your user profile to see the status of your reservation</b></p>
                 </div>
-            </div>
-        </div>
-        <div class="bg-modal">
-            <div class="modal-content">
-                <div id="closeBtn" class="close">&times;</div>
-                <form>
-                    <label for="locationAccess">Location Access : </label>
-                    <input type="text" id="locationAccess"><br>
-                    <label for="audit">Audit : </label>
-                    <input type="text" id="audit"><br>
-                    <label for="userType">User Access :</label>
-                    <input type="text" id="userType"><br>
-                    <label for="serialNum">Device Serial No. : </label>
-                    <input type="text" id="serialNum"><br>
-                    <label for="cpu">CPU : </label>
-                    <input type="text" id="cpu"><br>
-                    <label for="gpu">GPU : </label>
-                    <input type="text" id="gpu"><br>
-                    <label for="ram">RAM : </label>
-                    <input type="text" id="ram"><br>
-                    <label for="comments">Comments : </label>
-                    <input type="text" id="comments" value="asdfghjklasdfghjksdfghjkl;asdfghjklsdxfcghgvbjnmfb"><br>
-                    <input type="button" value="Save">
-                    <input type="reset" value="Reset">
-                </form>
             </div>
         </div>
         <div class="bg-modal">

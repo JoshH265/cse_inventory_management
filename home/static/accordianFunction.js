@@ -2,24 +2,33 @@ document.addEventListener('DOMContentLoaded', function() {
     var accordionItems = document.querySelectorAll('.accordion-item');
     var accordionContents = document.querySelectorAll('.accordian-content');
 
-    console.log("Number of accordion items:", accordionItems.length);
-
     // Handle clicking on accordion items to show the accordion content
+
+
     accordionItems.forEach(function(item) {
         item.addEventListener('click', function() {
-            // Close all other open accordions
-            accordionContents.forEach(function(content) {
-                if (content !== item.nextElementSibling) {
-                    content.style.display = 'none';
-                }
-            });
-
-            // Get the next element, which is the accordion content
+            // Toggle only the clicked accordion item and its content
             var content = this.nextElementSibling;
-            // Show or hide the accordion content
-            content.style.display = content.style.display === 'none' ? 'table-row' : 'none';
+
+            // If the clicked content is already displayed, hide it and show the item
+            if (content.style.display === 'table-row') {
+                content.style.display = 'none';
+                this.style.display = 'table-row';  // Make sure the item row is shown
+            } else {
+                // Otherwise, hide all other content rows and display the clicked content
+                accordionContents.forEach(function(otherContent) {
+                    otherContent.style.display = 'none';
+                    // Also, ensure other accordion items are visible
+                    if (otherContent.previousElementSibling) {
+                        otherContent.previousElementSibling.style.display = 'table-row';
+                    }
+                });
+                content.style.display = 'table-row';
+                this.style.display = 'none';  // Hide the clicked item row
+            }
         });
     });
+    
     // Handle clicking on 'Cancel Changes' buttons to close the accordion content
     var cancelButtons = document.querySelectorAll('.cancelchanges');
     cancelButtons.forEach(function(button) {

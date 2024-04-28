@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Event listener for "Extra Info" buttons
-    document.querySelectorAll('.extraBtn').forEach(function(button) {
-        button.addEventListener('click', function(event) {
+document.addEventListener('DOMContentLoaded', function() {  
+    document.querySelectorAll('.extraBtn').forEach(function(extraBtn) {
+        extraBtn.addEventListener('click', function(event) {
             event.preventDefault(); // Prevent default form submission behavior
-            document.querySelector('.bg-modal .modal-content').parentElement.style.display = 'flex';
+            var modalContent = this.closest('.accordian-content').querySelector('.bg-modal .modal-content');
+            modalContent.parentElement.style.display = 'flex';
         });
     });
 

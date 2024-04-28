@@ -31,7 +31,7 @@ form > div {
     justify-content: space-between;
     align-items: center; 
     flex-wrap: wrap;
-    margin: 0 1em;
+    margin: 0;
 }
 form > div .contentRecord{
     background-color: #F1F0F0;
