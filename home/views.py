@@ -5,5 +5,5 @@ from equipment_management.models import Equipment
 
 # Create your views here.
 def homepage(request):
-    return render(request, 'index.html')
+    return render(request, 'homepage.html')
 
