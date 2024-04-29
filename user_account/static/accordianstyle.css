@@ -24,8 +24,8 @@ tr.accordion-content {
 }
 .accordion-item td {
     display: flex;
-    justify-content: space-between;
-} */
+    align-items: center;
+} 
 
 form > div {
     display: flex;
@@ -43,23 +43,14 @@ form > div .contentRecord{
 .rowOne{
     margin: 1em;
 }
-/* .rowOne > div, .rowTwo > div, .rowThree > div, .rowFour > div{
-    display: flex; */
-    /* align-items: center;  
-} */
-
-/* .rowOne > div,
-.rowTwo > div,
-.rowThree > div,
-.rowFour > div {
-    
-} */
+.rowOne > div, .rowTwo > div, .rowThree > div, .rowFour > div{
+    display: flex;
+    align-items: center;  
+}
 
 .rowOne, .rowTwo, .rowThree, .rowFour {
-    margin: 1em; /* Adjust margin as needed */
-    display: grid; /* Use grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust column width as needed */
-    grid-gap: 1em; /* Adjust gap between columns */
+    display: flex;
+    justify-content: space-between;
 }
 
 .rowOne p, .rowTwo p, .rowThree p, .rowFour p {
@@ -99,7 +90,7 @@ form > div .contentRecord{
 .rowFour input, .rowFour button{
     background-color: #F1F0F0;
 }
-.rowThree button .extraBtn, .rowThree button .extraBtnRH{
+.rowThree button , .rowThree button{
     background-color: #488494;
     color: white;
 }
