@@ -21,6 +21,6 @@ class Equipment(models.Model):
     quantity = models.IntegerField()
     auditDate = models.DateField()
     location = models.CharField(max_length=100, choices=Location_choices)
-    accessLevel = models.CharField(max_length=100)
+    accessLevel = models.CharField(max_length=100, null=True, blank=True)
     serialNo = models.CharField(max_length=100)
-    comments = models.TextField(max_length=250)
+    comments = models.TextField(max_length=250, null=True, blank=True)
