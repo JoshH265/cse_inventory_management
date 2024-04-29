@@ -245,7 +245,7 @@
                                     <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" value="{{ reservation.expectedReturnDate }}" required></p>
                                 </div>
                                 <div>
-                                    <p><button id="extraBtn">Extra Info</button></p>
+                                    <p><button class="extraBtn">Extra Info</button></p>
                                 </div>
                             </div>
                             <div class="rowFour">
@@ -303,7 +303,7 @@
         <br>
         <div class="InnerPanel">
             <!-- headers of the table/lists -->
-            <table>
+            <table class="accordian">
                 <tr>
                     <th>Device Name</th>
                     <th>Device Type</th>
@@ -311,34 +311,29 @@
                     <th>End Date</th>
                     <th>Quantity</th>
                 </tr>
-            </table>
-            <hr>
-            <table class="accordion">
+                <!-- foor loop -->
                 <tr class="accordion-item">
-                    <td>
-                        <button>name</button>
-                        <button>type</button>
-                        <button>dd/mm/yyyy</button>
-                        <button>dd/mm/yyyy</button>
-                        <button>x</button>
-                    </td>
+                    <td><div class="cell-content">{{ equipment.equipmentName }}</div></td>
+                    <td><div class="cell-content">{{ equipment.equipmentType }}</div></td>
+                    <td><div class="cell-content">{{ equipment.equipmentStatus }}</div></td>
+                    <td><div class="cell-content">{{ equipment.location }}</div></td>
+                    <td><div class="cell-content">{{ equipment.quantity }}</div></td>
                 </tr>
                 <tr class="accordion-content">
-                    <td>
-                        <div class="collapse" id="collapserow">
-                            <form action="/action_page.php" autocomplete="off">
+                    <td colspan="5">
+                        <form action="" autocomplete="off">
                                 <div class="rowOne">
                                     <div>
                                         <b><p>Device Name :</p></b>
-                                        <p class="contentRecord">Name</p>
+                                        <p class="contentRecord">{{ equipment.equipmentName }}</p>
                                     </div>
                                     <div>
                                         <b><p>Location :</p></b>
-                                        <p class="contentRecord">Location</p>
+                                        <p class="contentRecord">{{ equipment.location }}</p>
                                     </div>
                                     <div>
                                         <b><p>Status :</p></b>
-                                        <p class="contentRecord">Status</p>
+                                        <p class="contentRecord">{{ equipment.equipmentStatus }}</p>
                                     </div>
                                 </div>
                                 <div class="rowTwo">
@@ -359,7 +354,25 @@
                                         <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" required></p>
                                     </div>
                                     <div>
-                                        <p><button id="extraBtnRH">Extra Info</button></p>
+                                        <p><button class="extraBtnRH">Extra Info</button></p>
+                                    </div>
+                                </div>
+                                <div id="extra2" class="modal">
+                                    <!-- Modal content -->
+                                    <div class="modal-content">
+                                        <span class="close">&times;</span>
+                                        <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
+                                        <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
+                                        <br>
+                                        User Access: 
+                                        <br>
+                                        Device Serial No.: 
+                                        <br>
+                                        Example:
+                                        <br>
+                                        Example:
+                                        <br>
+                                        Example: </p>
                                     </div>
                                 </div>
                                 <div class="rowFour">
@@ -371,25 +384,6 @@
                     </td>
                 </tr>
             </table>
-            <!-- pop up for 'extra info' -->
-            <div id="extra2" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
-                    <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
-                    <br>
-                    User Access: 
-                    <br>
-                    Device Serial No.: 
-                    <br>
-                    Example:
-                    <br>
-                    Example:
-                    <br>
-                    Example: </p>
-                </div>
-            </div>
         </div>
         <br>
     </div>
