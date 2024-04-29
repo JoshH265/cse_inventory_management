@@ -1,0 +1,84 @@
+/* this is what makes the pop up 'slide in' */
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
+}
+
+/* .modal-content p {
+    text-align: center;
+    font-weight: 500px;
+    font-size: large;
+    font-family: "Merriweather", serif;
+    background-color: #488494;
+    padding: 10px 30px;
+    border-radius: 25px;
+    width: fit-content;
+    margin: 15px auto;
+    color: white;
+} */
+
+/* the pop up has an x in the corner that closes it */
+
+/* The Close Button */
+.close {
+    color: #448093;
+    float: right;
+    position: relative;
+    left: 110px;
+    bottom: 10px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.bg-modal{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position:fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:0;
+}
+.modal-content{
+    width: 500px;
+    height: 700px;
+    background-color: white;
+}
+.content-pair {
+    color:black;
+    padding: 0 1em;
+    font-size: large;
+}
+.content-pair p{
+    display: inline-block;
+    margin: .5em 0;
+}
+.content-pair p:nth-child(2){
+    border-radius: 40px;
+    background-color: #F1F0F0;
+    padding: .7em;
+}
+
+.modal-content input[type="button"], .modal-content input[type="reset"]{
+    background-color: #488494;
+    color: white;
+    border-radius: 40px;
+    border-style: none;
+    text-decoration: underline;
+    padding: 1em;
+    font-size: large;
+}
