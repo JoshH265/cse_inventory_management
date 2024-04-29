@@ -32,10 +32,7 @@
             </ul>
             <ul class="user-info">
                 <li>
-                    <form id="logout-form" action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                    </form>
-                    <a href=''>Sign Out</a>
+                    <a href="{% url 'logout' %}">Sign Out</a>
                 </li>
                 <li><a href="">{{ user.username }}</a></li>
             </ul>
@@ -45,7 +42,7 @@
                 <li>Admin Panel</li>
                 <li  class="active">Report Generation</li>
                 <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
-                <li><a href="{% url 'inventorymanagement' %}">Reservation Management</a></li>
+                <li><a href="{% url 'adminReservation' %}">Reservation Management</a></li>
                 <li><a href="{% url 'inventorymanagement' %}">Inventory Management</a></li>
             </ul>
         </div>
