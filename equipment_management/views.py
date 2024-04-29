@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import EquipmentItem
 from .models import Equipment
+from .forms import EquipmentItem, UpdateEquipmentItem
+
 
 def equipPage(request):
     equipments = Equipment.objects.all()  # Fetch all equipment items from the database
@@ -11,7 +12,7 @@ def createEquipment(request):
     if request.method == "POST":
         form = EquipmentItem(request.POST)
         if form.is_valid():
-            new_equipment = form.save(commit=False)
+            new_equipment = form.save()
             # You can add any additional logic or modify fields before saving
             new_equipment.save()
             return redirect("inventorymanagement")
@@ -22,29 +23,17 @@ def createEquipment(request):
         form = EquipmentItem()
     return render(request, 'equipment_management/inventorymanagement.html', {"form": form})
 
-# def createEquipment(request):
-#     if request.method == "POST":
-#         form = EquipmentItem(request.POST)
-#         if form.is_valid():
-#             action = request.POST.get('action')
-#             if action == 'create':
-#                 form.save()
-#                 return redirect("inventorymanagement")
-#         else:
-#             form = EquipmentItem()
-#     return render(request, 'equipment_management/inventorymanagement.html', {"form": form})
 
-def Update_Equipment(request, equipment_id):
-    
+def updateEquipment(request):
     if request.method == "POST":
-        form = EquipmentItem(request.POST)
+        id = request.POST.get('id')
+        equipmentItem = Equipment.objects.get(id=id)
+        form = UpdateEquipmentItem(request.POST, instance=equipmentItem) 
         if form.is_valid():
-            action = request.POST.get('action')
-            if action == 'update':
-                equipment_id = request.POST.get('equipment_id')
-                equipment = Equipment.objects.get(pk=equipment_id)
-            form = form.save()
-            return redirect("inventorymanagement")
+            equipmentItem.save()
         else:
-            form = EquipmentItem(instance=equipment)
-            return render(request, 'equipment_management/inventorymanagement.html', {"form": form})
+            print(form.errors)
+    else:
+        form = EquipmentItem(instance=equipmentItem)
+    context = {"equipmentItem":equipmentItem, "form": form}
+    return render(request, 'equipment_management/inventorymanagement.html',context )

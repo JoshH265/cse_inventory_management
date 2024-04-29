@@ -90,7 +90,7 @@
                     </tr>
                     <tr class="accordian-content" style="display: none;">
                         <td colspan="5">
-                            <form method="post" autocomplete="off">
+                            <form method="post" action="{% url 'update_equipment' %}" autocomplete="off">
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <input type="hidden" name="action" value="update">
@@ -100,12 +100,22 @@
                                         <input type="text" class="contentRecord" id="equipmentName" value="{{ equipment.equipmentName }}">
                                     </div>
                                     <div>
-                                        <b><p>Status :</p></b>
-                                        <input type="text" class="contentRecord" id="equipmentStatus" value="{{ equipment.equipmentStatus }}">
+                                        <label for="id_equipmentStatus"><b>Equipment Status:</b></label>
+                                        <select name="equipmentStatus" id="id_equipmentStatus" value="{{ equipment.equipmentStatus }}">
+                                            <option value="On_loan">On Loan</option>
+                                            <option value="Repairing">Repairing</option>
+                                            <option value="Available">Available</option>
+                                            <option value="Unavailable">Unavailable</option>
+                                        </select><br>
                                     </div>
                                     <div>
-                                        <b><p>Location :</p></b>
-                                        <input type="text" class="contentRecord" id="location" value="{{ equipment.location }}">
+                                        <label for="id_location"><b>Location:</b></label>
+                                        <select name="location" id="id_location" value="{{ equipment.location }}">
+                                            <option value="blue_cabinet">XRLab Blue Cabinet</option>
+                                            <option value="blue_cabinet_large">XRLab Blue Cabinet Large</option>
+                                            <option value="medium_wooden_cabinet">XRLab Medium Wooden Cabinet</option>
+                                            <option value="other">Other</option>
+                                        </select><br>
                                     </div>
                                 </div>
                                 <div class="rowTwo">
@@ -129,7 +139,7 @@
                                 <div class="bg-modal">
                                     <div class="modal-content">
                                         <div id="closeBtn" class="close">&times;</div>
-                                            <input type="hidden" name="action" value="create">
+                                            <input type="hidden" name="id" value="{{ equipment.id }}">
                                             <label for="locationAccess">Location Access : </label>
                                             <input type="text" id="locationAccess"><br>
                                             <label for="auditDate">Audit : </label>
@@ -146,7 +156,7 @@
                                             <input type="text" id="ram"><br>
                                             <label for="comments">Comments : </label>
                                             <input type="text" id="comments" value="{{ equipment.comments }}"><br>
-                                            <input type="button" value="Save">
+                                            <button type="submit" value="updateItem">Save</button>
                                             <input type="reset" value="Reset">
                                     </div>
                                 </div>
