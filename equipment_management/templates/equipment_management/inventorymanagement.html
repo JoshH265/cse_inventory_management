@@ -19,16 +19,16 @@
             </ul>
             <ul class="user-info">
                 <li><a href="">Sign Out</a></li>
-                <li><a href="">User Name</a></li>
+                <li><a href="{% url 'logout' %}">User Name</a></li>
             </ul>
         </div>
         <div class="admin-nav">
             <ul class="adminNav-links">
                 <li>Admin Panel</li>
-                <li><a href="report_management">Report Generation</a></li>
-                <li><a href="user_management">User Management</a></li>
-                <li><a href="reservation_management">Reservation Management</a></li>
-                <li><a href="inventorymanagement">Inventory Management</a></li>
+                <li><a href="{% url 'reportmanagement' %}">Report Generation</a></li>
+                <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
+                <li><a href="{% url 'inventorymanagement' %}">Reservation Management</a></li>
+                <li><a href="">Inventory Management</a></li>
             </ul>
         </div>
         <div class="plainMainPanel">
