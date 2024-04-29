@@ -1,8 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
-from django.http import HttpResponse
-from django.template import loader
-
-def useraccount(request):
-  template = loader.get_template('test.html')
-  return HttpResponse(template.render())
+def user_account(request):
+    return render(request, 'user_account/userprofile.html')

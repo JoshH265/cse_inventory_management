@@ -1,0 +1,115 @@
+/* this is what makes the pop up 'slide in' */
+/* 
+        /* Add Animation */
+        /* @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0} 
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }  */
+
+        /* .modal-content p {
+            text-align: center;
+            font-weight: 500px;
+            font-size: large;
+            font-family: "Merriweather", serif;
+            background-color: #488494;
+            padding: 10px 30px;
+            border-radius: 25px;
+            width: fit-content;
+            margin: 15px auto;
+            color: white;
+        } */
+
+        /* the pop up has an x in the corner that closes it */
+
+        /* The Close Button */
+        /* .close {
+            color: #448093;
+            float: right;
+            position: relative;
+            left: 110px;
+            bottom: 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        } */
+
+.bg-modal{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    position:fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:0;
+    display: none;
+}
+.helpInfo, .create-record, .modal-content{
+    width:800px;
+    height:max-content;
+    background-color: white;
+    position:relative;
+    padding: 1em;
+    font-size: 20px;
+    border-radius: 40px;
+}
+.modal-content input:not([type="button"]), .modal-content input:not([type="reset"]),
+.create-record input:not([type="button"]), .create-record input:not([type="reset"]){
+    background-color: #F1F0F0;
+    border-style: none;
+    border-radius: 40px;
+    padding: .8em;
+    margin-bottom: 1em;
+    font-size: 20px;
+}
+
+.modal-content input[type="button"], .modal-content input[type="reset"],
+.create-record input[type="button"], .create-record input[type="reset"]{
+    background-color: #488494;
+    color: white;
+    border-radius: 40px;
+    border-style: none;
+    text-decoration: underline;
+    padding: 1em;
+    font-size: large;
+    margin-top: 1em;
+    cursor: pointer;
+}
+.helpInfo{
+    text-align: center;
+}
+.helpInfo h3{
+    margin-bottom: 2em;
+}
+.helpInfo h3 span{
+    font-size: 30px;
+    background-color: #346473;
+    color: white;
+    border-radius: 40px;
+    padding: 0.5em 1em;
+} 
+.helpInfo h4 span {
+    background-color: #448093;
+    color: white;
+    border-radius: 40px;
+    padding: 0.5em 1em;
+}
+.close {
+    color: #448093;
+    position: absolute;
+    font-size: 28px;
+    font-weight: bold;
+    top: 0;
+    right: 22px;
+    cursor: pointer;
+}

@@ -1,0 +1,528 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Account</title>
+    <!-- <link rel="stylesheet" href="{% static 'stylesheet.css' %}"> -->
+    <link rel="stylesheet" href="{% static 'accordian.css' %}">
+    <link rel="stylesheet" href="{% static 'blueBoxTable.css' %}">
+    <link rel="stylesheet" href="{% static 'greyBoxTable.css' %}">
+    <link rel="stylesheet" href="{% static 'navbarFooter.css' %}">
+    <script src="{% static 'accordianFunction.js' %}"></script>
+    <script src="{% static 'popUpScript.js' %}"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+
+        /* this is the pop up if u dont have to touch the javascript please try not to LOL */
+
+        /* The Modal (background) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            padding-top: min(45%, 400px); 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%;
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        /* this is the content inside the pop up box */
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 16px 128px;
+            border: 1px solid #888;
+            width: 40%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            border-color: rgb(226, 226, 226);
+            border-width: 5px;
+            border-style: solid;
+            border-radius: 25px;
+        }
+
+        /* this is what makes the pop up 'slide in' */
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0} 
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        .modal-content p {
+            text-align: center;
+            font-weight: 500px;
+            font-size: large;
+            font-family: "Merriweather", serif;
+            background-color: #488494;
+            padding: 10px 30px;
+            border-radius: 25px;
+            width: fit-content;
+            margin: 15px auto;
+            color: white;
+        }
+
+        /* the pop up has an x in the corner that closes it */
+
+        /* The Close Button */
+        .close {
+            color: #448093;
+            float: right;
+            position: relative;
+            left: 110px;
+            bottom: 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Nav Bar -->
+    <div class="navbar">
+        <ul>
+            <li class="title"><a href="">The Peepo's Nest</a></li>
+        </ul>
+        <ul class="user-info">
+            <li><a href="">Sign Out</a></li>
+            <li><a href="">User Name</a></li>
+            
+        </ul>
+    </div>
+    <!-- Admin nav in case you want to add it in -->
+    <!-- <div class="admin-nav">
+        <ul class="adminNav-links">
+            <li>Admin Panel</li>
+            <li><a href="">Report Generation</a></li>
+            <li><a href="">User Management</a></li>
+            <li><a href="">Reservation Management</a></li>
+            <li><a href="inventorymanagement.html">Inventory Management</a></li>
+        </ul>
+    </div> -->
+    
+    <!-- Rabsa's Code -->
+    <!-- <div class="navbar">
+        <ul>
+            <li><a href="">Sign Out</a></li>
+            <li class="vertical">|</li>
+            <li><a href="">User Name</a></li>
+            // ^ change so that it reads the name of the user
+            <li class="title"><a href="">The Peepo's Nest</a></li>
+        </ul>
+    </div> -->
+
+    <!-- Username box: Details of user -->
+    <div class="plainMainPanel">
+        <h2>Username</h2>
+        <div class="plainInnerPanel">
+            <div class="userDetails">
+                <div>
+                    <h3>First Name:</h3>
+                    <p></p>
+                </div>
+                <div>
+                    <h3>Last Name:</h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="userDetails">
+                <div>
+                    <h3>Account Type:</h3>
+                    <p></p>
+                </div>
+                <div>
+                    <h3>Email:</h3>
+                    <p></p>
+                </div>
+            </div>
+                <hr>
+                <button id="myBtn"><p>Change Password</p></button>
+            </div>
+            <br>
+        </div>
+    </div>
+    <!-- Change Password Pop Up -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Contact your IT Department</p>
+            <p>0208 123 4567</p>
+            <p>ITDepartmentEmail@example.com</p>
+        </div>
+    </div>
+
+    <!-- Reservation Box: Show reservations that have been made, whether or not approved-->
+
+    <div class="mainPanel">
+        <div class="OuterBar">
+            <div class="boxHeader">
+                <div>
+                    <h2>Current Reservations</h2>
+                </div>
+                <div class="deviceTotal">
+                    <p class="rounded">Devices Borrowed: </p>
+                    <p class="rounded">Devices Overdue: </p>
+                </div>
+                <div>
+                    <button id="myRBtn"><b><p class="circleBtn">?</p></b></button>
+                </div>
+            </div>      
+        </div>
+        <div class="InnerPanel">
+            <!-- headers of the table/lists -->
+            <table>
+                <tr>
+                    <th>Device Name</th>
+                    <th>Device Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Quantity</th>
+                </tr>
+            </table>
+            <hr>
+            <table class="accordion">
+                <tr class="accordion-item">
+                    <td>
+                        <button>name</button>
+                        <button>type</button>
+                        <button>dd/mm/yyyy</button>
+                        <button>dd/mm/yyyy</button>
+                        <button>x</button>
+                    </td>
+                </tr>
+                <tr class="accordion-content">
+                    <td>
+                        <form action="/action_page.php" autocomplete="off">
+                            <div class="rowOne">
+                                <div>
+                                    <b><p>Device Name :</p></b>
+                                    <p class="contentRecord">Name</p>
+                                </div>
+                                <div>
+                                    <b><p>Location :</p></b>
+                                    <p class="contentRecord">Location</p>
+                                </div>
+                                <div>
+                                    <b><p>Status :</p></b>
+                                    <p class="contentRecord">Status</p>
+                                </div>
+                            </div>
+                            <div class="rowTwo">
+                                <div>
+                                    <b><p class="contentLabel">Device Type :</p></b>
+                                    <p class="contentRecord">Type</p>
+                                </div>
+                                <div>
+                                    <b><p>Quantity: </p></b>
+                                    <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" required></p>
+                                </div>
+                            </div>
+                            <div class="rowThree">
+                                <div>
+                                    <b><p>Borrow Date: </p></b>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" required></p>
+                                    <b><p>to</p></b>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" required></p>
+                                </div>
+                                <div>
+                                    <p><button id="extraBtn">Extra Info</button></p>
+                                </div>
+                            </div>
+                            <div class="rowFour">
+                                <input type="submit" id="save" value="Save">
+                                <button type="reset" id="cancelchanges" onclick="toggleAcc()">Cancel Changes</button>
+                                <button id="cancelreservation">Cancel Reservation</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+            <!-- pop up for 'extra info' -->
+            <div id="extra" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
+                    <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
+                    <br>
+                    User Access: 
+                    <br>
+                    Device Serial No.: 
+                    <br>
+                    Example:
+                    <br>
+                    Example:
+                    <br>
+                    Example: </p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <!-- Reservation History: Shows reservations that have been made before, whether or not cancelled -->
+    <div class="mainPanel">
+        <div class="OuterBar">
+            <div class="boxHeader">
+                <div style="display:inline">
+                    <div>
+                        <h2>Reservation History</h2>
+                    </div>
+                    <br>
+                    <div class="searchBar">
+                        <form action="/action_page.php" style="color:white">
+                            <input type="search" placeholder="Search for equipment" name="search" style="color:black;border-radius: 25px;padding: 6px;padding-right: 150px;">
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <button id="btnHelpRH"><p class="circleBtn">?</p></button>
+                </div>
+            </div>      
+        </div>
+        <br>
+        <div class="InnerPanel">
+            <!-- headers of the table/lists -->
+            <table>
+                <tr>
+                    <th>Device Name</th>
+                    <th>Device Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Quantity</th>
+                </tr>
+            </table>
+            <hr>
+            <table class="accordion">
+                <tr class="accordion-item">
+                    <td>
+                        <button>name</button>
+                        <button>type</button>
+                        <button>dd/mm/yyyy</button>
+                        <button>dd/mm/yyyy</button>
+                        <button>x</button>
+                    </td>
+                </tr>
+                <tr class="accordion-content">
+                    <td>
+                        <div class="collapse" id="collapserow">
+                            <form action="/action_page.php" autocomplete="off">
+                                <div class="rowOne">
+                                    <div>
+                                        <b><p>Device Name :</p></b>
+                                        <p class="contentRecord">Name</p>
+                                    </div>
+                                    <div>
+                                        <b><p>Location :</p></b>
+                                        <p class="contentRecord">Location</p>
+                                    </div>
+                                    <div>
+                                        <b><p>Status :</p></b>
+                                        <p class="contentRecord">Status</p>
+                                    </div>
+                                </div>
+                                <div class="rowTwo">
+                                    <div>
+                                        <b><p class="contentLabel">Device Type :</p></b>
+                                        <p class="contentRecord">Type</p>
+                                    </div>
+                                    <div>
+                                        <b><p>Quantity: </p></b>
+                                        <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" required></p>
+                                    </div>
+                                </div>
+                                <div class="rowThree">
+                                    <div>
+                                        <b><p>Borrow Date: </p></b>
+                                        <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" required></p>
+                                        <b><p>to</p></b>
+                                        <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" required></p>
+                                    </div>
+                                    <div>
+                                        <p><button id="extraBtnRH">Extra Info</button></p>
+                                    </div>
+                                </div>
+                                <div class="rowFour">
+                                    <input type="submit" id="save" value="Rebook">
+                                    <button type="reset" id="cancelchanges" onclick="toggleAcc()">Cancel Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- pop up for 'extra info' -->
+            <div id="extra2" class="modal">
+                <!-- Modal content -->
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
+                    <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
+                    <br>
+                    User Access: 
+                    <br>
+                    Device Serial No.: 
+                    <br>
+                    Example:
+                    <br>
+                    Example:
+                    <br>
+                    Example: </p>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+    <!-- pop up for faq current reservations -->
+    <div id="myHelp" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Current Reservations</p>
+            <p>How do I check the details of reservations I currently have? <br> <!-- screenshot --> Click the device you have reserved.</p>
+            <p>How do I change details of my reservations? <br> Make your adjustments and click 'Save'. <br> <!-- screenshots --> A panel will pop up to confirm your choices, click 'Yes'. If you change your mind, click 'No'. <br> <!-- screenshots -->  If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
+        </div>
+    </div>
+    <!-- pop up for faq reservation history -->
+    <div id="helpRH" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Reservation History</p>
+            <p>How do I check the details of previous reservations? <br> <!-- screenshot --> Click the device you have reserved.</p>
+            <p>How do I rebook my previous reservations? <br> Make your adjustments and click 'Rebook'. <br> <!-- screenshots --> A panel will pop up to confirm your choices, click 'Yes'. If you change your mind, click 'No'. <br> <!-- screenshots -->  If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="unibanner" style="background-color: rgb(226, 226, 226); margin-top: 50px; width:100%;">
+        <img src="https://static.yuna.potential.ly/public/open/5e273a2a85dc09000100c61c/westminster-logo.png">
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+
+        //change password
+
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+       
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        //extra info
+        var extra = document.getElementById("extra");
+        var btn1 = document.getElementById("extraBtn");
+        var span1 = document.getElementsByClassName("close")[1];
+
+        btn1.onclick = function() {
+            extra.style.display = "block";
+        }
+
+        span1.onclick = function() {
+            extra.style.display = "none";
+        }
+
+        //extra info
+        var extra = document.getElementById("extra2");
+        var btn2 = document.getElementById("extraBtnRH");
+        var span2 = document.getElementsByClassName("close")[2];
+
+        btn2.onclick = function() {
+            extra.style.display = "block";
+        }
+
+        span2.onclick = function() {
+            extra.style.display = "none";
+        }
+
+        //help current reservation
+        var help = document.getElementById("myHelp");
+        var btn3 = document.getElementById("myRBtn");
+        var span3 = document.getElementsByClassName("close")[3];
+
+        btn3.onclick = function() {
+            help.style.display = "block";
+        }
+
+        span3.onclick = function() {
+            help.style.display = "none";
+        }
+
+        //reservation history help
+        var helprh = document.getElementById("helpRH");
+        var btn4 = document.getElementById("btnHelpRH");
+        var span4 = document.getElementsByClassName("close")[4];
+
+        btn4.onclick = function() {
+            helprh.style.display = "block";
+        }
+
+        span4.onclick = function() {
+            helprh.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            } else if (event.target == help) {
+                help.style.display = "none";
+            } else if (event.target == extra) {
+                extra.style.display = "none";
+            } else if (event.target == helprh) {
+                helprh.style.display = "none";
+            }
+        }
+
+        //this is making sure that the dates in the forms in the panels don't clash.
+        //for example if i pick 22/04/2024 for my start date, i can't pick a date before that
+        //start and end date
+        $(".startdate").on("change", function(){
+            $(".enddate").attr("min", $(this).val());
+        });
+    </script>
+</body>
+</html>
+
+
+<!--
+    user name -> actual name of user
+    sign out leads to login page
+-->

@@ -1,55 +1,35 @@
-.accordian .accordian-item:nth-child(odd) button {
+.accordion .accordion-item:nth-child(odd) button {
     background-color: #F1F0F0;
 }
-.accordian .accordian-item:nth-child(even) button{
+
+.accordion .accordion-item:nth-child(even) button{
     background-color: #D6D6D6;
-}
-.accordian-item{
-    border-bottom: 2px solid black;
-}
-.accordian-content {
-    background-color: #D6D6D6;
-    display: none;
-}
-.accordian {
-    /* max-height: calc(5 * (50px + 1em)); 
-    overflow-y: auto; */
-    /* overflow: hidden; */
 }
 
-/* without makes the first th and td the width of the accordian panel before it colspans*/
-.accordian tr th,
-.accordian tr td {
-    width: auto;
-    overflow: hidden;
-}
-/* .accordian tr:first-child th{
-    border-radius: 25px;
-    color: black;
-    padding: .5em;
-    font-size: 20px;
-    text-align: center;
+.accordion-content {
     background-color: #D6D6D6;
-} */
+}
 .accordion tr td {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    /* width: auto; */
     text-align: left;
     outline: none;
 }
-/* .accordian-item td, .accordian-content td {
-    width: 100%;
-} */
-/* .accordian-item button {
+.accordion-item td {
+    display: flex;
+    justify-content: space-between;
+}
+.accordion-item button {
     border-radius: 25px;
     border-style: none;
     padding: .5em;
+    flex: 1;
     font-size: large; 
-    cursor: pointer;
+}
+.accordion-content td {
     width: 100%;
-} */
+}
 form > div {
     display: flex;
     justify-content: space-between; /* Adjusts the children's spacing */
@@ -61,11 +41,11 @@ form > div .contentRecord{
     background-color: #F1F0F0;
     border-radius: 25px;
     padding: 1em;
-    margin: 1em;
+    margin: 0;
 }
 .rowOne > div, .rowTwo > div, .rowThree > div, .rowFour > div{
     display: flex;
-    align-items: center;
+    align-items: center;  
 }
 .rowOne p, .rowTwo p, .rowThree p, .rowFour p {
     padding: 0 1em;
@@ -78,7 +58,7 @@ form > div .contentRecord{
 .rowTwo > div p.contentRecord, .rowThree > div p.contentRecord {
     background-color: white;
     border-radius: 40px;
-    padding: 15px; /* Adjust padding as needed */
+    padding: 10px; /* Adjust padding as needed */
     margin: 0; /* Remove default margin */
 }
 .rowTwo > div input, .rowThree > div input {
@@ -88,7 +68,7 @@ form > div .contentRecord{
     text-align: center; /* Center the text within the input */
     width: 80%; /* Adjust width as needed */
 }
-.rowFour input, .rowFour button, .extraBtn{
+.rowFour input, .rowFour button, #extraBtn, #extraBtnRH{
     border-radius: 40px;
     border-style: none;
     text-decoration: underline;
@@ -98,10 +78,10 @@ form > div .contentRecord{
 .rowFour input, .rowFour button{
     background-color: #F1F0F0;
 }
-.extraBtn {
+#extraBtn, #extraBtnRH{
     background-color: #488494;
     color: white;
 }
-.rowOne{
-    margin: 1em;
+#datepicker {
+    width: fit-content;
 }
