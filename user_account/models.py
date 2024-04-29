@@ -1,14 +1,12 @@
 from django.db import models
 from django.conf import settings
-from reservation_management.models import Reservation
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
-    # Additional fields like address, phone number, etc., can be added here.
+class ReservationList(models.Model):
 
-    def current_reservations(self):
-        return Reservation.objects.filter(user=self.user, isCancelled=False)
-
-    def reservation_history(self):
-        return Reservation.objects.filter(user=self.user)
+    bookingDate = models.DateField()
+    checkoutDate = models.DateField()
+    expectedReturnDate = models.DateField()
+    approvalStatus = models.CharField(max_length=100)
+    isCancelled = models.BooleanField(default=False)
+    equipment_id = models.BigIntegerField()
+    user_id = models.BigIntegerField()
