@@ -11,7 +11,7 @@
     display: none;
 }
 .helpInfo, .create-record, .modal-content{
-    width:800px;
+    width:max-content;
     height:max-content;
     background-color: white;
     position:relative;
@@ -19,14 +19,16 @@
     font-size: 20px;
     border-radius: 40px;
 }
+
 .modal-content input:not([type="button"]), .modal-content input:not([type="reset"]),
-.create-record input:not([value="addItem"]), .create-record input:not([type="reset"]){
+.create-record input:not([value="addItem"]), .create-record input:not([type="reset"]), .create-record select{ 
     background-color: #F1F0F0;
     border-style: none;
     border-radius: 40px;
     padding: .8em;
     margin-bottom: 1em;
     font-size: 20px;
+    margin-right: 0.5em;
 }
 
 .modal-content input[type="button"], .modal-content input[type="reset"],
