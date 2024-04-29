@@ -4,18 +4,16 @@
 <head>
     <title>User Account</title>
     <!-- <link rel="stylesheet" href="{% static 'stylesheet.css' %}"> -->
-    <link rel="stylesheet" href="{% static 'accordian.css' %}">
-    <link rel="stylesheet" href="{% static 'blueBoxTable.css' %}">
-    <link rel="stylesheet" href="{% static 'greyBoxTable.css' %}">
-    <link rel="stylesheet" href="{% static 'navbarFooter.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'accordian.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blueBoxTable.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'greyBoxTable.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'navbarFooter.css' %}">
     <script src="{% static 'accordianFunction.js' %}"></script>
     <script src="{% static 'popUpScript.js' %}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <style>
-
-        /* this is the pop up if u dont have to touch the javascript please try not to LOL */
 
         /* The Modal (background) */
         .modal {
@@ -31,8 +29,6 @@
             background-color: rgb(0,0,0); 
             background-color: rgba(0,0,0,0.4); 
         }
-
-        /* this is the content inside the pop up box */
 
         /* Modal Content */
         .modal-content {
@@ -52,8 +48,6 @@
             border-style: solid;
             border-radius: 25px;
         }
-
-        /* this is what makes the pop up 'slide in' */
 
         /* Add Animation */
         @-webkit-keyframes animatetop {
@@ -78,8 +72,6 @@
             margin: 15px auto;
             color: white;
         }
-
-        /* the pop up has an x in the corner that closes it */
 
         /* The Close Button */
         .close {
@@ -107,9 +99,13 @@
             <li class="title"><a href="">The Peepo's Nest</a></li>
         </ul>
         <ul class="user-info">
-            <li><a href="">Sign Out</a></li>
-            <li><a href="">User Name</a></li>
-            
+            <li>
+                <form id="logout-form" action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                </form>
+                <a href="#" onclick="document.getElementById('logout-form').submit();">Sign Out</a>
+            </li>
+            <li><a href="">{{ user.username }}</a></li>
         </ul>
     </div>
     <!-- Admin nav in case you want to add it in -->
@@ -136,26 +132,26 @@
 
     <!-- Username box: Details of user -->
     <div class="plainMainPanel">
-        <h2>Username</h2>
+        <h2>{{ user.username }}</h2>
         <div class="plainInnerPanel">
             <div class="userDetails">
                 <div>
                     <h3>First Name:</h3>
-                    <p></p>
+                    <p>{{ user.first_name }}</p>
                 </div>
                 <div>
                     <h3>Last Name:</h3>
-                    <p></p>
+                    <p>{{ user.last_name }}</p>
                 </div>
             </div>
             <div class="userDetails">
                 <div>
                     <h3>Account Type:</h3>
-                    <p></p>
+                    <p>{{ user.roleType }}</p>
                 </div>
                 <div>
                     <h3>Email:</h3>
-                    <p></p>
+                    <p>{{ user.email}}</p>
                 </div>
             </div>
                 <hr>
@@ -183,7 +179,7 @@
                     <h2>Current Reservations</h2>
                 </div>
                 <div class="deviceTotal">
-                    <p class="rounded">Devices Borrowed: </p>
+                    <p class="rounded">Devices Borrowed: {{ num_reservations }}</p>
                     <p class="rounded">Devices Overdue: </p>
                 </div>
                 <div>
@@ -203,14 +199,15 @@
                 </tr>
             </table>
             <hr>
+            {% for reservation in current_reservations %}
             <table class="accordion">
                 <tr class="accordion-item">
                     <td>
-                        <button>name</button>
-                        <button>type</button>
-                        <button>dd/mm/yyyy</button>
-                        <button>dd/mm/yyyy</button>
-                        <button>x</button>
+                        <button>{{ reservation.equipment.equipmentName }}</button>
+                        <button>{{ reservation.equipment.equipmentType }}</button>
+                        <button>{{ reservation.equipment.checkoutDate }}</button>
+                        <button>{{ reservation.equipment.expectedReturnDate }}</button>
+                        <button><!--{{ reservation.equipment.equipmentname }}--></button>
                     </td>
                 </tr>
                 <tr class="accordion-content">
@@ -219,21 +216,21 @@
                             <div class="rowOne">
                                 <div>
                                     <b><p>Device Name :</p></b>
-                                    <p class="contentRecord">Name</p>
+                                    <p class="contentRecord">{{ reservation.equipment.equipmentName }}</p>
                                 </div>
                                 <div>
                                     <b><p>Location :</p></b>
-                                    <p class="contentRecord">Location</p>
+                                    <p class="contentRecord">{{ reservation.equipment.location }}</p>
                                 </div>
                                 <div>
                                     <b><p>Status :</p></b>
-                                    <p class="contentRecord">Status</p>
+                                    <p class="contentRecord">{{ reservation.equipment.equipmentStatus }}</p>
                                 </div>
                             </div>
                             <div class="rowTwo">
                                 <div>
                                     <b><p class="contentLabel">Device Type :</p></b>
-                                    <p class="contentRecord">Type</p>
+                                    <p class="contentRecord">{{ reservation.equipment.equipmentType }}</p>
                                 </div>
                                 <div>
                                     <b><p>Quantity: </p></b>
@@ -243,9 +240,9 @@
                             <div class="rowThree">
                                 <div>
                                     <b><p>Borrow Date: </p></b>
-                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" required></p>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" value="{{ reservation.checkoutDate }}" required></p>
                                     <b><p>to</p></b>
-                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" required></p>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" value="{{ reservation.expectedReturnDate }}" required></p>
                                 </div>
                                 <div>
                                     <p><button id="extraBtn">Extra Info</button></p>
@@ -260,6 +257,7 @@
                     </td>
                 </tr>
             </table>
+            {% endfor %}
             <!-- pop up for 'extra info' -->
             <div id="extra" class="modal">
                 <!-- Modal content -->
@@ -401,8 +399,8 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Current Reservations</p>
-            <p>How do I check the details of reservations I currently have? <br> <!-- screenshot --> Click the device you have reserved.</p>
-            <p>How do I change details of my reservations? <br> Make your adjustments and click 'Save'. <br> <!-- screenshots --> A panel will pop up to confirm your choices, click 'Yes'. If you change your mind, click 'No'. <br> <!-- screenshots -->  If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
+            <p>How do I check the details of reservations I currently have? <br><br> <!-- screenshot --> Click the device you have reserved and then click 'Extra Info' for more.</p>
+            <p>How do I change details of my reservations? <br><br> 1. Make your adjustments and click 'Save'. <br><br> <!-- screenshots --> 2. If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
         </div>
     </div>
     <!-- pop up for faq reservation history -->
@@ -411,8 +409,8 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Reservation History</p>
-            <p>How do I check the details of previous reservations? <br> <!-- screenshot --> Click the device you have reserved.</p>
-            <p>How do I rebook my previous reservations? <br> Make your adjustments and click 'Rebook'. <br> <!-- screenshots --> A panel will pop up to confirm your choices, click 'Yes'. If you change your mind, click 'No'. <br> <!-- screenshots -->  If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
+            <p>How do I check the details of previous reservations? <br><br> <!-- screenshot --> Click the device you have reserved.</p>
+            <p>How do I rebook my previous reservations? <br><br> 1. Make your adjustments and click 'Rebook'. <br><br> <!-- screenshots --> 2. If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
         </div>
     </div>
 
