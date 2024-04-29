@@ -36,4 +36,12 @@ def updateEquipment(request):
     else:
         form = EquipmentItem(instance=equipmentItem)
     context = {"equipmentItem":equipmentItem, "form": form}
-    return render(request, 'equipment_management/inventorymanagement.html',context )
+    return render(request, 'equipment_management/inventorymanagement.html', context)
+
+
+def DeleteEquipmentItem(request):
+    equipmentItem = Equipment.objects.get(id=id)
+    if request.method =="POST":
+        equipmentItem.delete()
+        return redirect("inventorymanagement")
+    return render(request, 'equipment_management/inventorymanagement.html', {'equipmentItem': equipmentItem})
