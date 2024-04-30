@@ -39,7 +39,7 @@
 .deviceTotal p + p {
     margin-top: 1em;
 }
-.restrictResults, #filter-form {
+.restrictResults {
     display: flex;
     flex-direction: row;
     justify-content: space-between; 
@@ -71,10 +71,8 @@
     margin: 0;
     align-self: center;
 }
-.custom-select, .restrictResults label, .restrictResults [type="submit"],
- .restrictResults legend, .restrictResults input, .restrictResults select {
+.custom-select {
     border-radius: 25px;
-    border-style: none;
     color: black;
     padding: 10px;
     font-size: 20px;
@@ -86,30 +84,18 @@
     -webkit-appearance: none; 
     margin-right: 1em;
 }
-.restrictResults fieldset {
-    border-style: none;
-}
-.restrictResults fieldset input:not(:first-child){
-    margin-left: .5em;
-}
-.restrictResults label, .restrictResults legend{
-    margin-bottom: 1em;
-}
-.restrictResults input, .restrictResults select{
-    background-color: rgb(226, 226, 226);
-    border: 1px solid white;
-}
-#filter-form > div {
-    margin-right: 1em;
-    display: flex;
-    flex-direction: column;
-}
-/* Style the input fields */
-
-/* .restrictResults [type="submit"]{
+#search{
     margin: 0;
     margin-right: auto;
-} */
+}
+#search-bar{
+    color:white;
+    color:black;
+    border-radius: 25px;
+    padding: 10px;
+    padding-right: 10em;
+    width: 25em;
+}
 .InnerPanel{
     background-color: white;
     border-radius: 25px;

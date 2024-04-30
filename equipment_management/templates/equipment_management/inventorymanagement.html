@@ -19,17 +19,16 @@
             </ul>
             <ul class="user-info">
                 <li><a href="">Sign Out</a></li>
-                <li><a href="">User Name</a></li>
-                
+                <li><a href="{% url 'logout' %}">User Name</a></li>
             </ul>
         </div>
         <div class="admin-nav">
             <ul class="adminNav-links">
                 <li>Admin Panel</li>
-                <li><a href="">Report Generation</a></li>
-                <li><a href="">User Management</a></li>
-                <li><a href="">Reservation Management</a></li>
-                <li><a href="inventorymanagement.html">Inventory Management</a></li>
+                <li><a href="{% url 'reportmanagement' %}">Report Generation</a></li>
+                <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
+                <li><a href="{% url 'adminReservation' %}">Reservation Management</a></li>
+                <li><a href="">Inventory Management</a></li>
             </ul>
         </div>
         <div class="plainMainPanel">
@@ -39,25 +38,6 @@
                 <p>Check the Reservation Management page for more details</p></td>
             </div>
         </div>
-                    <!-- /*pop up for 'extra info' */ -->
-                <!-- <div id="extra" class="modal">
-                    /*Modal content*/
-                    <div class="modal-content">
-                        <span class="close">&times;</span>
-                        <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
-                        <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
-                        <br>
-                        User Access: 
-                        <br>
-                        Device Serial No.: 
-                        <br>
-                        Example:
-                        <br>
-                        Example:
-                        <br>
-                        Example: </p>
-                    </div>
-                </div> -->
         <div class="mainPanel">
             <div class="OuterBar">
                 <div class="boxHeader">
@@ -65,26 +45,24 @@
                     <button id="helpBtn"><b><p class="circleBtn">?</p></b></button>
                 </div>
                 <div class="restrictResults">
-                    <form action="" id="search">
-                        <input type="text" placeholder="Search for Equipment" name="search" id="search-bar">
+                    <form method="GET" action="{% url 'inventorymanagement' %}" id="search">
+                        {% csrf_token %}
+                        <div id="filter-form">
+                            {{ form.as_div }}
+                        </div>
+                        <input type="submit" value="Submit Search" class="custom-select">
+                        
                     </form>
-                    <form action="" method="post"> 
-                        <select id="sortBy" name="sortBy" class="custom-select">
-                            <option value="sort">Sort By &#9660</option>
-                            <option value="devType">Device Type</option>
-                            <option value="availability">Availability</option>
-                            <option value="location">Location</option>
-                            <option value="recentlyAdded">Recently Added</option>
-                            <option value="quantity">Quantity</option>
-                        </select>
-                    </form>
-                    <form action="" method="post">
-                        <select id="filterBy" name="filterBy" class="custom-select">
-                            <option value="filter">Filter By &#9660</option>
-                            <option value="inStock">In Stock</option>
-                            <option value="outStock">Out of Stock</option>
-                            <option value="devType">Device Type</option>
-                        </select>
+                    <form method="GET" action="{% url 'inventorymanagement' %}" id="search">
+                        {% csrf_token %}
+                            <select id="sort" name="sort-by">
+                                <option selected disabled>Sort By</option>
+                                <option>Device Name</option>
+                                <option>Device Type</option>
+                                <option>Availability</option>
+                                <option>Location</option>
+                            </select>
+                        <input type="submit" value="Submit Sort By" class="custom-select">
                     </form>
                     <button id="myRBtn"><b><p class="addBtn">&plus;</p></b></button>
                 </div>
@@ -104,35 +82,47 @@
                     <tr class="accordion-item">
                         <td><div class="cell-content">{{ equipment.equipmentName }}</div></td>
                         <td><div class="cell-content">{{ equipment.equipmentType }}</div></td>
-                        <td><div class="cell-content">{{ equipment.equipmentStatus }}</div></td>
-                        <td><div class="cell-content">{{ equipment.location }}</div></td>
+                        <td><div class="cell-content">{{ equipment.get_equipmentStatus_display }}</div></td>
+                        <td><div class="cell-content">{{ equipment.get_location_display }}</div></td>
                         <td><div class="cell-content">{{ equipment.quantity }}</div></td>
                     </tr>
                     <tr class="accordian-content" style="display: none;">
                         <td colspan="5">
-                            <form action="" autocomplete="off">
+                            <form method="post" action="{% url 'update_equipment' equipment.id %}" autocomplete="off">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="update">
                                 <div class="rowOne">
                                     <div>
                                         <b><p>Device Name :</p></b>
-                                        <p class="contentRecord">{{ equipment.equipmentName }}</p>
+                                        <input type="text" class="contentRecord" id="id_equipmentName" name="equipmentName" value="{{ equipment.equipmentName }}">
                                     </div>
                                     <div>
-                                        <b><p>Status :</p></b>
-                                        <p class="contentRecord">{{ equipment.equipmentStatus }}</p>
+                                        <label for="id_equipmentStatus"><b>Equipment Status:</b></label>
+                                        <select name="equipmentStatus" id="id_equipmentStatus" name="equipmentStatus" value="{{ equipment.equipmentStatus }}">
+                                            <option value="On_loan">On Loan</option>
+                                            <option value="Repairing">Repairing</option>
+                                            <option value="Available">Available</option>
+                                            <option value="Unavailable">Unavailable</option>
+                                        </select><br>
                                     </div>
                                     <div>
-                                        <b><p>Location :</p></b>
-                                        <p class="contentRecord">{{ equipment.location }}</p>
+                                        <label for="id_location"><b>Location:</b></label>
+                                        <select name="location" id="id_location" name="location" value="{{ equipment.location }}">
+                                            <option value="blue_cabinet">XRLab Blue Cabinet</option>
+                                            <option value="blue_cabinet_large">XRLab Blue Cabinet Large</option>
+                                            <option value="medium_wooden_cabinet">XRLab Medium Wooden Cabinet</option>
+                                            <option value="other">Other</option>
+                                        </select><br>
                                     </div>
                                 </div>
                                 <div class="rowTwo">
                                     <div>
                                         <b><p class="contentLabel">Device Type :</p></b>
-                                        <p class="contentRecord">{{ equipment.equipmentType }}</p>
+                                        <input type="text" class="contentRecord" id="equipmentType" name="equipmentType" value="{{ equipment.equipmentType }}">
                                     </div>
                                     <div>
                                         <b><p>Quantity: </p></b>
-                                        <!-- <input type="number" id="quantity" name="quantity" size="14" min="1" required contenteditable="true" class="contentRecord"> -->
+                                        <input type="number" id="quantity" name="quantity" size="14" min="1" required contenteditable="true" class="contentRecord" name="quantity" value="{{ equipment.quantity}}">
                                     </div>
                                     <div>
                                         <p><button class="extraBtn">Extra Info</button></p>
@@ -140,8 +130,32 @@
                                 </div>
                                 <div class="rowFour">
                                     <input type="submit" value="Save">
-                                    <button id="removeItem">Remove</button>
+                                    <button type="button">Remove</button>
                                     <button type="reset" class="cancelchanges">Cancel Changes</button>
+                                </div>
+                                <div class="bg-modal">
+                                    <div class="modal-content">
+                                        <div id="closeBtn" class="close">&times;</div>
+                                            <input type="hidden" name="id" value="{{ equipment.id }}">
+                                            <label for="locationAccess">Location Access : </label>
+                                            <input type="text" id="locationAccess"><br>
+                                            <label for="auditDate">Audit : </label>
+                                            <input type="text" id="auditDate" name="auditDate" value="{{ equipment.auditDate }}"><br>
+                                            <label for="userType">User Access :</label>
+                                            <input type="text" id="userType"><br>
+                                            <label for="serialNo">Device Serial No. : </label>
+                                            <input type="text" id="serialNo" name="serialNo" value="{{ equipment.serialNo }}"><br>
+                                            <label for="cpu">CPU : </label>
+                                            <input type="text" id="cpu"><br>
+                                            <label for="gpu">GPU : </label>
+                                            <input type="text" id="gpu"><br>
+                                            <label for="ram">RAM : </label>
+                                            <input type="text" id="ram"><br>
+                                            <label for="comments">Comments : </label>
+                                            <input type="text" id="comments" name="comments" value="{{ equipment.comments }}"><br>
+                                            <button type="submit" value="updateItem">Save</button>
+                                            <input type="reset" value="Reset">
+                                    </div>
                                 </div>
                             </form>
                         </td>
@@ -170,58 +184,61 @@
             </div>
         </div>
         <div class="bg-modal">
-            <div class="modal-content">
-                <div id="closeBtn" class="close">&times;</div>
-                <form>
-                    <label for="locationAccess">Location Access : </label>
-                    <input type="text" id="locationAccess"><br>
-                    <label for="audit">Audit : </label>
-                    <input type="text" id="audit"><br>
-                    <label for="userType">User Access :</label>
-                    <input type="text" id="userType"><br>
-                    <label for="serialNum">Device Serial No. : </label>
-                    <input type="text" id="serialNum"><br>
-                    <label for="cpu">CPU : </label>
-                    <input type="text" id="cpu"><br>
-                    <label for="gpu">GPU : </label>
-                    <input type="text" id="gpu"><br>
-                    <label for="ram">RAM : </label>
-                    <input type="text" id="ram"><br>
-                    <label for="comments">Comments : </label>
-                    <input type="text" id="comments" value="asdfghjklasdfghjksdfghjkl;asdfghjklsdxfcghgvbjnmfb"><br>
-                    <input type="button" value="Save">
-                    <input type="reset" value="Reset">
-                </form>
-            </div>
-        </div>
-        <div class="bg-modal">
             <div class="create-record">
                 <div id="closeBtn" class="close">&times;</div>
-                <form>
-                    <label for="devName">Device Name : </label>
-                    <input type="text" id="devName"><br>
-                    <label for="devType">Device Type : </label>
-                    <input type="text" id="devType"><br>
-                    <label for="buildingLocation">Location : </label>
-                    <input type="text" id="buildingLocation"><br>
-                    <label for="locationAccess">Location Access : </label>
-                    <input type="text" id="locationAccess"><br>
-                    <label for="audit">Audit : </label>
-                    <input type="text" id="audit"><br>
-                    <label for="userType">User Access :</label>
-                    <input type="text" id="userType"><br>
-                    <label for="serialNum">Device Serial No. : </label>
-                    <input type="text" id="serialNum"><br>
-                    <label for="cpu">CPU : </label>
-                    <input type="text" id="cpu"><br>
-                    <label for="gpu">GPU : </label>
-                    <input type="text" id="gpu"><br>
-                    <label for="ram">RAM : </label>
-                    <input type="text" id="ram"><br>
-                    <label for="comments">Comments : </label>
-                    <input type="text" id="comments" value="asdfghjklasdfghjksdfghjkl;asdfghjklsdxfcghgvbjnmfb"><br>
-                    <input type="button" value="Save">
-                    <input type="reset" value="Reset">
+                <form method="post" action="{% url 'create_equipment' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <div>
+                        <label for="id_equipmentName">Device Name:</label>
+                        <input type="text" id="id_equipmentName" name="equipmentName"><br>
+                        <label for="id_equipmentType">Device Type:</label>
+                    <input type="text" id="id_equipmentType" name="equipmentType"><br>
+                    </div>
+                    <div>
+                        <label for="id_location">Location:</label>
+                        <select name="location" id="id_location">
+                            <option value="blue_cabinet">XRLab Blue Cabinet</option>
+                            <option value="blue_cabinet_large">XRLab Blue Cabinet Large</option>
+                            <option value="medium_wooden_cabinet">XRLab Medium Wooden Cabinet</option>
+                            <option value="other">Other</option>
+                        </select><br>
+                        <label for="id_equipmentStatus">Equipment Status:</label>
+                        <select name="equipmentStatus" id="id_equipmentStatus">
+                            <option value="On_loan">On Loan</option>
+                            <option value="Repairing">Repairing</option>
+                            <option value="Available">Available</option>
+                            <option value="Unavailable">Unavailable</option>
+                        </select><br>
+                    </div>
+                    <div>
+                        <label for="id_quantity">Quantity:</label>
+                        <input type="number" id="id_quantity" name="quantity" min="1"><br>
+                        <label for="id_auditDate">Audit Date:</label>
+                        <input type="text" id="id_auditDate" name="auditDate"><br>
+                    </div>
+                    <div>
+                        <label for="id_accessLevel">Access Level:</label>
+                        <input type="text" id="id_accessLevel" name=">accessLevel"><br>
+                        <label for="id_serialNo">Device Serial No:</label>
+                        <input type="text" id="id_serialNo" name="serialNo"><br>
+                    </div>
+                    <div>
+                        <label for="id_cpu">CPU:</label>
+                        <input type="text" id="id_cpu" name="cpu"><br>
+                        <label for="id_gpu">GPU:</label>
+                        <input type="text" id="id_gpu" name="gpu"><br>
+                    </div>
+                   <div>
+                        <label for="id_ram">RAM:</label>
+                        <input type="text" id="id_ram" name="ram"><br>
+                        <label for="id_comments">Comments:</label>
+                        <input type="text" id="id_comments" name="comments"><br>
+                   </div>
+                   <div>
+                        <button type="submit" value="addItem">Save</button>
+                        <input type="reset" value="Reset">
+                   </div>
                 </form>
             </div>
         </div>
