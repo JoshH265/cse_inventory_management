@@ -6,8 +6,14 @@
     background-color: #D6D6D6;
 }
 
-.accordion-content {
+tr.accordion-content {
     background-color: #D6D6D6;
+    /* display:none; */
+}
+.accordion tr th,
+.accordion tr td {
+    width: auto;
+    overflow: hidden;
 }
 .accordion tr td {
     background-color: transparent;
@@ -18,57 +24,63 @@
 }
 .accordion-item td {
     display: flex;
-    justify-content: space-between;
-}
-.accordion-item button {
-    border-radius: 25px;
-    border-style: none;
-    padding: .5em;
-    flex: 1;
-    font-size: large; 
-}
-.accordion-content td {
-    width: 100%;
-}
+    align-items: center;
+} 
+
 form > div {
     display: flex;
     justify-content: space-between; /* Adjusts the children's spacing */
     align-items: center; /* Aligns children vertically in the center */
     flex-wrap: wrap;
-    margin: 0 1em;
+    margin: 0;
 }
 form > div .contentRecord{
     background-color: #F1F0F0;
     border-radius: 25px;
     padding: 1em;
-    margin: 0;
+    margin: 1em;
+}  
+.rowOne{
+    margin: 1em;
 }
 .rowOne > div, .rowTwo > div, .rowThree > div, .rowFour > div{
     display: flex;
     align-items: center;  
 }
-.rowOne p, .rowTwo p, .rowThree p, .rowFour p {
-    padding: 0 1em;
+
+.rowOne, .rowTwo, .rowThree, .rowFour {
+    display: flex;
+    justify-content: space-between;
 }
-.rowOne p:nth-child(even), .rowTwo p:nth-child(even), .rowThree p:nth-child(even){
+
+.rowOne p, .rowTwo p, .rowThree p, .rowFour p {
+    padding: 0 1em; /* Adjust padding as needed */
+    display: inline-block; 
+    width: auto;
+}
+
+.rowOne p:nth-child(even), .rowTwo p:nth-child(even), .rowThree p:nth-child(even) {
     margin: 0;
     background-color: white;
     border-radius: 40px;
 }
+
 .rowTwo > div p.contentRecord, .rowThree > div p.contentRecord {
     background-color: white;
     border-radius: 40px;
     padding: 10px; /* Adjust padding as needed */
     margin: 0; /* Remove default margin */
 }
+
 .rowTwo > div input, .rowThree > div input {
     border-radius: 40px;
-    padding: 10px; /* Adjust padding as needed */
+    padding: 15px; /* Adjust padding as needed */
     margin: 0; /* Remove default margin */
     text-align: center; /* Center the text within the input */
     width: 80%; /* Adjust width as needed */
 }
-.rowFour input, .rowFour button, #extraBtn, #extraBtnRH{
+
+.rowFour input, .rowFour button, .rowThree button {
     border-radius: 40px;
     border-style: none;
     text-decoration: underline;
@@ -78,7 +90,7 @@ form > div .contentRecord{
 .rowFour input, .rowFour button{
     background-color: #F1F0F0;
 }
-#extraBtn, #extraBtnRH{
+.rowThree button , .rowThree button{
     background-color: #488494;
     color: white;
 }
