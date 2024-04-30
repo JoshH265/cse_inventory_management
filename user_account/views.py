@@ -12,35 +12,38 @@ def profile(request):
     user = request.user  # Retrieve the logged-in user
     return render(request, 'user_account/userprofile.html', {'user': user})
 
-@login_required
-def update_reservation(request, reservation_id):
-    # Get the reservation object by its ID
-    reservation = get_object_or_404(ReservationList, id=reservation_id, user_id=request.user.id)
+def print_reservation(request):
+    user = request.user
+    userid = request.user.id
+    reservation = ReservationList.objects.filter(user_id=userid).values()
+    return render(request, 'user_account/userprofile.html', {'res': reservation})
+
+def update_reservation(request):
     
     if request.method == 'POST':
         # Update the reservation with data from the POST request
-        reservation.startingDate = request.POST.get('checkoutDate')
-        reservation.endDate = request.POST.get('expectedReturnDate')
-        reservation.quantity = request.POST.get('quantity')
-        reservation.save()  # Save the updated reservation
+        form = ReservationList(request.POST)
+        form.startdate = request.POST.get('checkoutDate')
+        form.enddate = request.POST.get('expectedReturnDate')
+        form.quantity = request.POST.get('quantity')
+        if form.is_valid():
+            form.save()  # Save the updated reservation
+        else:
+            print(form.errors)
     
-    return render(request, 'user_account/userprofile.html', {'reservation': reservation})
+    return render(request, 'user_account/userprofile.html', {'form': form})
 
-@login_required
-def delete_reservation(request, reservation_id):
-    # Get the reservation object by its ID
-    reservation = get_object_or_404(ReservationList, id=reservation_id, user_id=request.user.id)
-    
+def delete_reservation(request):
+    equipDelete = ReservationList.objects.get(equipment_id=equipment_id)
     if request.method == 'POST':
         # Delete the reservation
-        reservation.delete()
+        equipDelete.delete()
     
-    return render(request, 'delete_reservation.html', {'reservation': reservation})
+    return render(request, 'user_account/userprofile.html', {'equipDelete': equipDelete})
 
-@login_required
-def rebook_reservation(request, reservation_id):
+def rebook_reservation(request):
     # Get the reservation object by its ID
-    reservation = get_object_or_404(ReservationList, id=reservation_id, user_id=request.user.id)
+    reservation = get_object_or_404(ReservationList, user_id=request.user.id)
     
     if request.method == 'POST':
         # Update the reservation with data from the POST request

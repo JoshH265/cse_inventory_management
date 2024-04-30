@@ -129,7 +129,7 @@
             <li class="title"><a href="">The Peepo's Nest</a></li>
         </ul>
     </div> -->
-
+{{ userid }}
     <!-- Username box: Details of user -->
     <div class="plainMainPanel">
         <h2>{{ user.username }}</h2>
@@ -198,16 +198,16 @@
                     <th>Quantity</th>
                 </tr>
             </table>
-            <hr>
-            {% for reservation in reservations %}
+            <!-- <hr> -->
+            {% for res in reservation %}
             <table class="accordion">
                 <tr class="accordion-item">
                     <td>
-                        <button>{{ reservation.equipment_id.equipmentType }}</button>
-                        <button>{{ reservation.equipment_id.equipmentType }}</button>
-                        <button>{{ reservation.checkoutDate }}</button>
-                        <button>{{ reservation.expectedReturnDate }}</button>
-                        <button>{{ reservation.equipment_id.quantity }}</button>
+                        <button>{{ res.equipment_id.equipmentType }}</button>
+                        <button>{{ res.equipment_id.equipmentType }}</button>
+                        <button>{{ res.checkoutDate }}</button>
+                        <button>{{ res.expectedReturnDate }}</button>
+                        <button>{{ res.equipment_id.quantity }}</button>
                     </td>
                 </tr>
                 <tr class="accordion-content">
@@ -216,43 +216,45 @@
                             <div class="rowOne">
                                 <div>
                                     <b><p>Device Name :</p></b>
-                                    <p class="contentRecord">{{ reservation.equipment_id.equipmentType }}</p>
+                                    <p class="contentRecord">{{ res.equipment_id.equipmentType }}</p>
                                 </div>
                                 <div>
                                     <b><p>Location :</p></b>
-                                    <p class="contentRecord">{{ reservation.equipment_id.location }}</p>
+                                    <p class="contentRecord">{{ res.equipment_id.location }}</p>
                                 </div>
                                 <div>
                                     <b><p>Status :</p></b>
-                                    <p class="contentRecord">{{ reservation.approvalStatus }}</p>
+                                    <p class="contentRecord">{{ res.approvalStatus }}</p>
                                 </div>
                             </div>
                             <div class="rowTwo">
                                 <div>
                                     <b><p class="contentLabel">Device Type :</p></b>
-                                    <p class="contentRecord">{{ reservation.equipment_id.equipmentType }}</p>
+                                    <p class="contentRecord">{{ res.equipment_id.equipmentType }}</p>
                                 </div>
                                 <div>
                                     <b><p>Quantity: </p></b>
-                                    <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" value="{{ reservation.quantity }}" required></p>
+                                    <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" value="{{ res.quantity }}" required></p>
                                 </div>
                             </div>
                             <div class="rowThree">
                                 <div>
                                     <b><p>Borrow Date: </p></b>
-                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" value="{{ reservation.checkoutDate }}" required></p>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" value="{{ res.checkoutDate }}" required></p>
                                     <b><p>to</p></b>
-                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" value="{{ reservation.expectedReturnDate }}" required></p>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" value="{{ res.expectedReturnDate }}" required></p>
                                 </div>
                                 <div>
                                     <p><button class="extraBtn">Extra Info</button></p>
                                 </div>
                             </div>
                             <div class="rowFour">
-                                {% csrf_token %}
-                                <input type="submit" id="save" value="Save">
+                                <form action="{% url 'update_reservation' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" id="save" value="Save">
+                                </form>
                                 <button type="reset" id="cancelchanges" onclick="toggleAcc()">Cancel Changes</button>
-                                <form action="{% url 'delete_reservation' reservation.id %}" method="post">
+                                <form action="{% url 'delete_reservation' %}" method="post">
                                     {% csrf_token %}
                                     <button type="submit">Cancel Reservation</button>
                                 </form>
@@ -268,11 +270,11 @@
                     <span class="close">&times;</span>
                     <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
                     <p style="text-align: left;width: 100%;background-color: white;color:black">
-                    Audit: {{ reservation.equipment_id.auditDate }}
+                    Audit: {{ res.equipment_id.auditDate }}
                     <br>
-                    User Access Level: {{ reservation.equipment_id.accessLevel }}
+                    User Access Level: {{ res.equipment_id.accessLevel }}
                     <br>
-                    Device Serial No.: {{ reservation.equipment_id.serialNo }}
+                    Device Serial No.: {{ res.equipment_id.serialNo }}
                     </p>
                 </div>
             </div>
@@ -312,13 +314,13 @@
                     <th>Quantity</th>
                 </tr>
                 <!-- foor loop -->
-                {% for reservation in reservation %}
+                {% for res in reservation %}
                 <tr class="accordion-item">
-                    <button>{{ reservation.equipment_id.equipmentType }}</button>
-                    <button>{{ reservation.equipment_id.equipmentType }}</button>
-                    <button>{{ reservation.checkoutDate }}</button>
-                    <button>{{ reservation.expectedReturnDate }}</button>
-                    <button>{{ reservation.equipment_id.quantity }}</button>
+                    <button>{{ res.equipment_id.equipmentType }}</button>
+                    <button>{{ res.equipment_id.equipmentType }}</button>
+                    <button>{{ res.checkoutDate }}</button>
+                    <button>{{ res.expectedReturnDate }}</button>
+                    <button>{{ res.equipment_id.quantity }}</button>
                 </tr>
                 <tr class="accordion-content">
                     <td colspan="5">
@@ -326,33 +328,33 @@
                                 <div class="rowOne">
                                     <div>
                                         <b><p>Device Name :</p></b>
-                                        <p class="contentRecord">{{ reservation.equipment_id.equipmentType }}</p>
+                                        <p class="contentRecord">{{ res.equipment_id.equipmentType }}</p>
                                     </div>
                                     <div>
                                         <b><p>Location :</p></b>
-                                        <p class="contentRecord">{{ reservation.equipment_id.location }}</p>
+                                        <p class="contentRecord">{{ res.equipment_id.location }}</p>
                                     </div>
                                     <div>
                                         <b><p>Status :</p></b>
-                                        <p class="contentRecord">{{ reservation.approvalStatus }}</p>
+                                        <p class="contentRecord">{{ res.approvalStatus }}</p>
                                     </div>
                                 </div>
                                 <div class="rowTwo">
                                     <div>
                                         <b><p class="contentLabel">Device Type :</p></b>
-                                        <p class="contentRecord">{{ reservation.equipment_id.equipmentType }}</p>
+                                        <p class="contentRecord">{{ res.equipment_id.equipmentType }}</p>
                                     </div>
                                     <div>
                                         <b><p>Quantity: </p></b>
-                                        <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" value="{{ reservation.quantity }}" required></p>
+                                        <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" value="{{ res.quantity }}" required></p>
                                     </div>
                                 </div>
                                 <div class="rowThree">
                                     <div>
                                         <b><p>Borrow Date: </p></b>
-                                        <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" value="{{ reservation.checkoutDate }}" required></p>
+                                        <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" value="{{ res.checkoutDate }}" required></p>
                                         <b><p>to</p></b>
-                                        <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" value="{{ reservation.expectedReturnDate }}" required></p>
+                                        <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" value="{{ res.expectedReturnDate }}" required></p>
                                     </div>
                                     <div>
                                         <p><button class="extraBtn">Extra Info</button></p>
@@ -370,11 +372,11 @@
                                     <span class="close">&times;</span>
                                     <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
                                     <p style="text-align: left;width: 100%;background-color: white;color:black">
-                                    Audit: {{ reservation.auditDate }}
+                                    Audit: {{ res.auditDate }}
                                     <br>
-                                    User Access Level: {{ reservation.accessLevel }}
+                                    User Access Level: {{ res.accessLevel }}
                                     <br>
-                                    Device Serial No.: {{ reservation.serialNo }}
+                                    Device Serial No.: {{ res.serialNo }}
                                     </p>
                                 </div>
                             </div>

@@ -1,8 +1,7 @@
 from django.db import models
-from django.conf import settings
 
 class ReservationList(models.Model):
-
+    
     bookingDate = models.DateField()
     checkoutDate = models.DateField()
     expectedReturnDate = models.DateField()
