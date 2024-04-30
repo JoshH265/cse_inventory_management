@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db import connection
-from .models import ReservationList
+from .useraccount_models import ReservationList
 
 def user_account(request):
     reservation = ReservationList.objects.all()
