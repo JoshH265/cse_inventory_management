@@ -45,26 +45,24 @@
                     <button id="helpBtn"><b><p class="circleBtn">?</p></b></button>
                 </div>
                 <div class="restrictResults">
-                    <form action="" id="search">
-                        <input type="text" placeholder="Search for Equipment" name="search" id="search-bar">
+                    <form method="GET" action="{% url 'inventorymanagement' %}" id="search">
+                        {% csrf_token %}
+                        <div id="filter-form">
+                            {{ form.as_div }}
+                        </div>
+                        <input type="submit" value="Submit Search" class="custom-select">
+                        
                     </form>
-                    <form action="" method="post"> 
-                        <select id="sortBy" name="sortBy" class="custom-select">
-                            <option value="sort">Sort By &#9660</option>
-                            <option value="devType">Device Type</option>
-                            <option value="availability">Availability</option>
-                            <option value="location">Location</option>
-                            <option value="recentlyAdded">Recently Added</option>
-                            <option value="quantity">Quantity</option>
-                        </select>
-                    </form>
-                    <form action="" method="post">
-                        <select id="filterBy" name="filterBy" class="custom-select">
-                            <option value="filter">Filter By &#9660</option>
-                            <option value="inStock">In Stock</option>
-                            <option value="outStock">Out of Stock</option>
-                            <option value="devType">Device Type</option>
-                        </select>
+                    <form method="GET" action="{% url 'inventorymanagement' %}" id="search">
+                        {% csrf_token %}
+                            <select id="sort" name="sort-by">
+                                <option selected disabled>Sort By</option>
+                                <option>Device Name</option>
+                                <option>Device Type</option>
+                                <option>Availability</option>
+                                <option>Location</option>
+                            </select>
+                        <input type="submit" value="Submit Sort By" class="custom-select">
                     </form>
                     <button id="myRBtn"><b><p class="addBtn">&plus;</p></b></button>
                 </div>
@@ -84,15 +82,14 @@
                     <tr class="accordion-item">
                         <td><div class="cell-content">{{ equipment.equipmentName }}</div></td>
                         <td><div class="cell-content">{{ equipment.equipmentType }}</div></td>
-                        <td><div class="cell-content">{{ equipment.equipmentStatus }}</div></td>
-                        <td><div class="cell-content">{{ equipment.location }}</div></td>
+                        <td><div class="cell-content">{{ equipment.get_equipmentStatus_display }}</div></td>
+                        <td><div class="cell-content">{{ equipment.get_location_display }}</div></td>
                         <td><div class="cell-content">{{ equipment.quantity }}</div></td>
                     </tr>
                     <tr class="accordian-content" style="display: none;">
                         <td colspan="5">
                             <form method="post" action="{% url 'update_equipment' equipment.id %}" autocomplete="off">
                                 {% csrf_token %}
-                                {{ form.as_p }}
                                 <input type="hidden" name="action" value="update">
                                 <div class="rowOne">
                                     <div>

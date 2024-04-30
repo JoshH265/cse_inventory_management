@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "user_account",
     "user_management",
     "reservation_management",
+    "django_filters"
 ]
 
 AUTH_USER_MODEL = 'authentication_app.CustomUser'
