@@ -24,3 +24,5 @@ class Equipment(models.Model):
     accessLevel = models.CharField(max_length=100)
     serialNo = models.CharField(max_length=100)
     comments = models.TextField(max_length=250)
+    booking_count = models.PositiveIntegerField(default=0)
+

@@ -7,7 +7,8 @@ from io import BytesIO
 from datetime import timedelta
 from django.http import HttpResponse
 from .models import Report, Reservation, Equipment
-from django.utils import timezone#
+from django.utils import timezone
+from django.db.models import Count
 
 
 
@@ -33,7 +34,7 @@ def generate_report(request):
                 overdue_reservations = Reservation.objects.filter(expectedReturnDate__lt=today)
                 for reservation in overdue_reservations:
                     equipment = reservation.equipment
-                    p.drawString(100, y_position, f"Equipment ID: {equipment.id}, Name: {equipment.equipmentName}, Expected Return: {reservation.expectedReturnDate}")
+                    p.drawString(100, y_position, f"ID: {equipment.id}, Name: {equipment.equipmentName}, Expected Return: {reservation.expectedReturnDate}")
                     y_position -= 20
                     if y_position < 100:
                         p.showPage()
@@ -43,7 +44,7 @@ def generate_report(request):
                 one_year_ago = timezone.now().date() - timedelta(days=365)
                 overdue_audits = Equipment.objects.filter(auditDate__lt=one_year_ago)
                 for equipment in overdue_audits:
-                    p.drawString(100, y_position, f"Equipment ID: {equipment.id}, Name: {equipment.equipmentName}, Last Audit: {equipment.auditDate}")
+                    p.drawString(100, y_position, f"ID: {equipment.id}, Name: {equipment.equipmentName}, Last Audit: {equipment.auditDate}")
                     y_position -= 20
                     if y_position < 100:
                         p.showPage()
@@ -52,7 +53,18 @@ def generate_report(request):
             elif report_type == 'inventory_status':
                 all_equipment = Equipment.objects.all()
                 for equipment in all_equipment:
-                    p.drawString(100, y_position, f"Equipment ID: {equipment.id}, Name: {equipment.equipmentName}, Status: {equipment.equipmentStatus}")
+                    p.drawString(100, y_position, f"ID: {equipment.id}, Name: {equipment.equipmentName}, Status: {equipment.equipmentStatus}")
+                    y_position -= 20
+                    if y_position < 100:
+                        p.showPage()
+                        y_position = 800
+            elif report_type == 'equipment_usage':
+                equipment_usage = Reservation.objects.values('equipment').annotate(usage_count=Count('equipment'))
+                for item in equipment_usage:
+                    equipment_id = item['equipment']
+                    usage_count = item['usage_count']
+                    equipment = Equipment.objects.get(id=equipment_id)
+                    p.drawString(100, y_position, f"ID: {equipment.id}, Name: {equipment.equipmentName}, Usage Count: {usage_count}")
                     y_position -= 20
                     if y_position < 100:
                         p.showPage()
