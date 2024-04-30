@@ -7,6 +7,7 @@ from django.contrib import messages
 
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
 
 def home(request):
     return homepage(request)
@@ -37,9 +38,9 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
                 if user.roleType == 'admin':
-                    return redirect('admin-dashboard')
+                    return redirect('equipment-management')
                 else:
-                    return redirect('dashboard')
+                    return redirect('userprofile') #SET THE DASHBOARD TO HOMEPAGE INSTEAD
             else:
                 messages.info(request, 'Username OR Password is incorrect')
                 form = UserLogin()
@@ -48,9 +49,9 @@ def login(request):
 
 
 
-def logout(request):
+def user_logout(request):
     auth.logout(request)
-    return redirect('sign')
+    return redirect('login')
 
 def dashboard(request):
     pass
