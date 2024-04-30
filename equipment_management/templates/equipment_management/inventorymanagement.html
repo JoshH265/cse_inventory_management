@@ -90,18 +90,18 @@
                     </tr>
                     <tr class="accordian-content" style="display: none;">
                         <td colspan="5">
-                            <form method="post" action="{% url 'update_equipment' %}" autocomplete="off">
+                            <form method="post" action="{% url 'update_equipment' equipment.id %}" autocomplete="off">
                                 {% csrf_token %}
                                 {{ form.as_p }}
                                 <input type="hidden" name="action" value="update">
                                 <div class="rowOne">
                                     <div>
                                         <b><p>Device Name :</p></b>
-                                        <input type="text" class="contentRecord" id="equipmentName" value="{{ equipment.equipmentName }}">
+                                        <input type="text" class="contentRecord" id="id_equipmentName" name="equipmentName" value="{{ equipment.equipmentName }}">
                                     </div>
                                     <div>
                                         <label for="id_equipmentStatus"><b>Equipment Status:</b></label>
-                                        <select name="equipmentStatus" id="id_equipmentStatus" value="{{ equipment.equipmentStatus }}">
+                                        <select name="equipmentStatus" id="id_equipmentStatus" name="equipmentStatus" value="{{ equipment.equipmentStatus }}">
                                             <option value="On_loan">On Loan</option>
                                             <option value="Repairing">Repairing</option>
                                             <option value="Available">Available</option>
@@ -110,7 +110,7 @@
                                     </div>
                                     <div>
                                         <label for="id_location"><b>Location:</b></label>
-                                        <select name="location" id="id_location" value="{{ equipment.location }}">
+                                        <select name="location" id="id_location" name="location" value="{{ equipment.location }}">
                                             <option value="blue_cabinet">XRLab Blue Cabinet</option>
                                             <option value="blue_cabinet_large">XRLab Blue Cabinet Large</option>
                                             <option value="medium_wooden_cabinet">XRLab Medium Wooden Cabinet</option>
@@ -121,11 +121,11 @@
                                 <div class="rowTwo">
                                     <div>
                                         <b><p class="contentLabel">Device Type :</p></b>
-                                        <input type="text" class="contentRecord" id="equipmentType" value="{{ equipment.equipmentType }}">
+                                        <input type="text" class="contentRecord" id="equipmentType" name="equipmentType" value="{{ equipment.equipmentType }}">
                                     </div>
                                     <div>
                                         <b><p>Quantity: </p></b>
-                                        <input type="number" id="quantity" name="quantity" size="14" min="1" required contenteditable="true" class="contentRecord" value="{{ equipment.quantity}}">
+                                        <input type="number" id="quantity" name="quantity" size="14" min="1" required contenteditable="true" class="contentRecord" name="quantity" value="{{ equipment.quantity}}">
                                     </div>
                                     <div>
                                         <p><button class="extraBtn">Extra Info</button></p>
@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="rowFour">
                                     <input type="submit" value="Save">
-                                    <button id="removeItem">Remove</button>
+                                    <button type="button">Remove</button>
                                     <button type="reset" class="cancelchanges">Cancel Changes</button>
                                 </div>
                                 <div class="bg-modal">
@@ -143,11 +143,11 @@
                                             <label for="locationAccess">Location Access : </label>
                                             <input type="text" id="locationAccess"><br>
                                             <label for="auditDate">Audit : </label>
-                                            <input type="text" id="auditDate" value="{{ equipment.auditDate }}"><br>
+                                            <input type="text" id="auditDate" name="auditDate" value="{{ equipment.auditDate }}"><br>
                                             <label for="userType">User Access :</label>
                                             <input type="text" id="userType"><br>
                                             <label for="serialNo">Device Serial No. : </label>
-                                            <input type="text" id="serialNo" value="{{ equipment.serialNo }}"><br>
+                                            <input type="text" id="serialNo" name="serialNo" value="{{ equipment.serialNo }}"><br>
                                             <label for="cpu">CPU : </label>
                                             <input type="text" id="cpu"><br>
                                             <label for="gpu">GPU : </label>
@@ -155,7 +155,7 @@
                                             <label for="ram">RAM : </label>
                                             <input type="text" id="ram"><br>
                                             <label for="comments">Comments : </label>
-                                            <input type="text" id="comments" value="{{ equipment.comments }}"><br>
+                                            <input type="text" id="comments" name="comments" value="{{ equipment.comments }}"><br>
                                             <button type="submit" value="updateItem">Save</button>
                                             <input type="reset" value="Reset">
                                     </div>
