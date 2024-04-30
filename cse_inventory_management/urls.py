@@ -23,7 +23,10 @@ urlpatterns = [
     path('auth/', include('authentication_app.urls')),
     path('inventory/', include('equipment_management.urls')),
     path('report/', include('report_management.urls')),
+
     path('', include('home.urls')),
-    path('user_management', include('user_management.urls')),
-    path('reservation_management/', include('reservation_management.urls')),
+    path('', include('user_management.urls')),
+    path('', include('reservation_management.urls')),
+
+
 ]
