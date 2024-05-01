@@ -1,48 +1,3 @@
-/* this is what makes the pop up 'slide in' */
-/* 
-        /* Add Animation */
-        /* @-webkit-keyframes animatetop {
-            from {top:-300px; opacity:0} 
-            to {top:0; opacity:1}
-        }
-
-        @keyframes animatetop {
-            from {top:-300px; opacity:0}
-            to {top:0; opacity:1}
-        }  */
-
-        /* .modal-content p {
-            text-align: center;
-            font-weight: 500px;
-            font-size: large;
-            font-family: "Merriweather", serif;
-            background-color: #488494;
-            padding: 10px 30px;
-            border-radius: 25px;
-            width: fit-content;
-            margin: 15px auto;
-            color: white;
-        } */
-
-        /* the pop up has an x in the corner that closes it */
-
-        /* The Close Button */
-        /* .close {
-            color: #448093;
-            float: right;
-            position: relative;
-            left: 110px;
-            bottom: 10px;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover, .close:focus {
-            color: white;
-            text-decoration: none;
-            cursor: pointer;
-        } */
-
 .bg-modal{
     width: 100%;
     height: 100%;
@@ -52,10 +7,11 @@
     justify-content: center;
     align-items: center;
     top:0;
+    left:0;
     display: none;
 }
 .helpInfo, .create-record, .modal-content{
-    width:800px;
+    width:max-content;
     height:max-content;
     background-color: white;
     position:relative;
@@ -63,18 +19,20 @@
     font-size: 20px;
     border-radius: 40px;
 }
-.modal-content input:not([type="button"]), .modal-content input:not([type="reset"]),
-.create-record input:not([type="button"]), .create-record input:not([type="reset"]){
+
+.modal-content input:not(button), .modal-content input:not([type="reset"]),
+.create-record input:not([value="addItem"]), .create-record input:not([type="reset"]), .create-record select{ 
     background-color: #F1F0F0;
     border-style: none;
     border-radius: 40px;
     padding: .8em;
     margin-bottom: 1em;
     font-size: 20px;
+    margin-right: 0.5em;
 }
 
-.modal-content input[type="button"], .modal-content input[type="reset"],
-.create-record input[type="button"], .create-record input[type="reset"]{
+.modal-content button, .modal-content input[type="reset"],
+.create-record button, .create-record input[type="reset"]{
     background-color: #488494;
     color: white;
     border-radius: 40px;

@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "user_account",
     "user_management",
     "reservation_management",
+    "django_filters"
 ]
 
 AUTH_USER_MODEL = 'authentication_app.CustomUser'
@@ -131,6 +132,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'), # For the css in the main app dir
     # Other static directories...
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

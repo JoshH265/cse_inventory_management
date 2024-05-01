@@ -1,0 +1,83 @@
+.accordian .accordian-item:nth-child(odd) button {
+    background-color: #F1F0F0;
+}
+.accordian .accordian-item:nth-child(even) button{
+    background-color: #D6D6D6;
+}
+.accordian-item{
+    border-bottom: 2px solid black;
+}
+.accordian-content {
+    background-color: #D6D6D6;
+    display: none;
+}
+
+/* without makes the first th and td the width of the accordian panel before it colspans*/
+.accordian tr th,
+.accordian tr td {
+    width: auto;
+    overflow: hidden;
+}
+.accordion tr td {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    /* width: auto; */
+    text-align: left;
+    outline: none;
+}
+form > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    flex-wrap: wrap;
+    margin: 0;
+}
+form > div .contentRecord{
+    background-color: #F1F0F0;
+    border-radius: 25px;
+    padding: 1em;
+    margin: 1em;
+}
+.rowOne > div, .rowTwo > div, .rowThree > div, .rowFour > div{
+    display: flex;
+    align-items: center;
+}
+.rowOne p, .rowTwo p, .rowThree p, .rowFour p {
+    padding: 0 1em;
+}
+.rowOne p:nth-child(even), .rowTwo p:nth-child(even), .rowThree p:nth-child(even){
+    margin: 0;
+    background-color: white;
+    border-radius: 40px;
+}
+.rowTwo > div p.contentRecord, .rowThree > div p.contentRecord {
+    background-color: white;
+    border-radius: 40px;
+    padding: 15px;
+    margin: 0;
+}
+.rowTwo > div input, .rowThree > div input {
+    border-radius: 40px;
+    padding: 10px;
+    margin: 0; 
+    text-align: center; 
+    width: 80%; 
+}
+.rowFour input, .rowFour button, .extraBtn{
+    border-radius: 40px;
+    border-style: none;
+    text-decoration: underline;
+    padding: 1em;
+    font-size: large;
+}
+.rowFour input, .rowFour button{
+    background-color: #F1F0F0;
+}
+.extraBtn {
+    background-color: #488494;
+    color: white;
+}
+.rowOne{
+    margin: 1em;
+}

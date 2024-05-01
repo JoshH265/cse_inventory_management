@@ -11,11 +11,6 @@
     background-color: #D6D6D6;
     display: none;
 }
-.accordian {
-    /* max-height: calc(5 * (50px + 1em)); 
-    overflow-y: auto; */
-    /* overflow: hidden; */
-}
 
 /* without makes the first th and td the width of the accordian panel before it colspans*/
 .accordian tr th,
@@ -23,14 +18,6 @@
     width: auto;
     overflow: hidden;
 }
-/* .accordian tr:first-child th{
-    border-radius: 25px;
-    color: black;
-    padding: .5em;
-    font-size: 20px;
-    text-align: center;
-    background-color: #D6D6D6;
-} */
 .accordion tr td {
     background-color: transparent;
     border: none;
@@ -39,23 +26,12 @@
     text-align: left;
     outline: none;
 }
-/* .accordian-item td, .accordian-content td {
-    width: 100%;
-} */
-/* .accordian-item button {
-    border-radius: 25px;
-    border-style: none;
-    padding: .5em;
-    font-size: large; 
-    cursor: pointer;
-    width: 100%;
-} */
 form > div {
     display: flex;
-    justify-content: space-between; /* Adjusts the children's spacing */
-    align-items: center; /* Aligns children vertically in the center */
+    justify-content: space-between;
+    align-items: center; 
     flex-wrap: wrap;
-    margin: 0 1em;
+    margin: 0;
 }
 form > div .contentRecord{
     background-color: #F1F0F0;
@@ -67,26 +43,28 @@ form > div .contentRecord{
     display: flex;
     align-items: center;
 }
-.rowOne p, .rowTwo p, .rowThree p, .rowFour p {
+.rowOne p, .rowOne label, .rowTwo p, .rowThree p, .rowFour p {
     padding: 0 1em;
 }
 .rowOne p:nth-child(even), .rowTwo p:nth-child(even), .rowThree p:nth-child(even){
     margin: 0;
     background-color: white;
     border-radius: 40px;
+    border-style: none;
 }
-.rowTwo > div p.contentRecord, .rowThree > div p.contentRecord {
+.rowTwo > div p.contentRecord, .rowThree > div p.contentRecord{
     background-color: white;
     border-radius: 40px;
-    padding: 15px; /* Adjust padding as needed */
-    margin: 0; /* Remove default margin */
+    padding: 15px;
+    margin: 0;
 }
-.rowTwo > div input, .rowThree > div input {
+.rowOne > div select, .rowTwo > div input, .rowThree > div input {
+    border-style: none;
     border-radius: 40px;
-    padding: 10px; /* Adjust padding as needed */
-    margin: 0; /* Remove default margin */
-    text-align: center; /* Center the text within the input */
-    width: 80%; /* Adjust width as needed */
+    padding: 10px;
+    margin: 0; 
+    text-align: center; 
+    width: 80%; 
 }
 .rowFour input, .rowFour button, .extraBtn{
     border-radius: 40px;

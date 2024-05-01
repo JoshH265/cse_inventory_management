@@ -7,7 +7,7 @@ class Reservation(models.Model):
     bookingDate = models.DateTimeField()
     checkoutDate = models.DateTimeField()
     expectedReturnDate = models.DateTimeField()
-    approvalStatus = models.CharField(max_length=100) # PROBABLY CHANGE THE VALUE TO BOOLEAN
+    approvalStatus = models.CharField(max_length=100)
     isCancelled = models.BooleanField(default=False)
     quantity = models.IntegerField(default=False)
     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
