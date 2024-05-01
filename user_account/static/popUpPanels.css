@@ -1,9 +1,9 @@
 /* The Modal (background) */
-.modal {
+.modal, #myHelp {
     display: none; 
     position: fixed; 
     z-index: 1; 
-    padding-top: min(45%, 400px); 
+    padding-top: min(45%, 80px); 
     left: 0;
     top: 0;
     width: 100%; 

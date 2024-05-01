@@ -1,18 +1,24 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.db import connection
 from django.shortcuts import redirect
-from .useraccount_models import ReservationList
-
 from reservation_management.models import Reservation
-from equipment_management.models import Equipment
+from .forms import ReservationForm
 
 def user_account(request):
-    reservation = Reservation.objects.all()
+    user = request.user
+    userid = user.id
+    reservation = Reservation.objects.filter(user_id=userid, activeReservation=True)
+    resActive = Reservation.objects.filter(user_id=userid, activeReservation=False)
     print(len(reservation))
-    return render(request, 'user_account/userprofile.html', {'reservation': reservation})
+    return render(request, 'user_account/userprofile.html', {'reservation': reservation}, {'resActive': resActive})
 
-@login_required
+# def print_inactiveReservation(request):
+#     user = request.user
+#     userid = user.id
+#     resActive = Reservation.objects.filter(user_id=userid, activeReservation=False)
+#     print(len(resActive))
+#     return render(request, 'user_account/userprofile.html', {'resActive': resActive})
+
 def profile(request):
     user = request.user  # Retrieve the logged-in user
     return render(request, 'user_account/userprofile.html', {'user': user})
@@ -24,39 +30,33 @@ def print_reservation(request):
     print(res)
     return render(request, 'user_account/userprofile.html', {'res': res})
 
-def update_reservation(request):
-    
+def update_reservation(request, id):
+    reservation = Reservation.objects.get(id=id)
+    form = ReservationForm(instance=reservation)
+
     if request.method == 'POST':
-        # Update the reservation with data from the POST request
-        form = ReservationList(request.POST)
-        form.startdate = request.POST.get('checkoutDate')
-        form.enddate = request.POST.get('expectedReturnDate')
-        form.quantity = request.POST.get('quantity')
+        form = ReservationForm(request.POST, instance=reservation)
         if form.is_valid():
-            form.save()  # Save the updated reservation
-            return redirect("userprofile")
-        else:
-            print(form.errors)
+            form.save()
+            return redirect('userprofile')
     
     return render(request, 'user_account/userprofile.html', {'form': form})
 
-def delete_reservation(request, equipment_id):
-    # Retrieve the reservation to delete using the equipment_id
-    equipDelete = get_object_or_404(ReservationList, equipment_id=equipment_id)
+def delete_reservation(request, id):
+    # Retrieve the reservation object from the database
+    equipDelete = Reservation.objects.get(id=id)
     
     if request.method == 'POST':
-        # Delete the reservation
+        # If the request method is POST, delete the reservation
         equipDelete.delete()
-        print("Reservation deleted successfully")  # Debugging
+        # Redirect to the same page or wherever appropriate
         return redirect("userprofile")
-    else:
-        print("Request method is not POST")  # Debugging
-    # Return the response (redirect or render)
-    return render(request, 'user_account/userprofile.html', {'equipDelete': equipDelete})
+    
+    return render(request, 'user_account/delete_reservation.html', {'equipDelete': equipDelete})
 
 def rebook_reservation(request):
     # Get the reservation object by its ID
-    rebook = get_object_or_404(ReservationList, user_id=request.user.id)
+    rebook = get_object_or_404(Reservation, user_id=request.user.id)
     
     if request.method == 'POST':
         # Update the reservation with data from the POST request
