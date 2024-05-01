@@ -130,6 +130,8 @@
 .InnerPanel button {
     margin-right: 5px;
     margin-left: 5px;
+    border: none;
+    height: 40px;
 }
 .InnerPanel table:first-child tr th{
     border-radius: 25px;
@@ -139,6 +141,10 @@
     text-align: center;
     background-color: #D6D6D6;
     width: auto;
+}
+.InnerPanel table {
+    justify-content: space-between;
+    table-layout: fixed;
 }
 .InnerPanel hr {
     height: 1px;
@@ -155,9 +161,9 @@
 .rowOne .contentRecord, .rowTwo .contentRecord {
     font-size: 15px;
     line-height: 8px;
-    width: 55px;
+    width: min-content;
     text-align: center;
-    padding: 10px 25px;
+    padding: 10px 35px;
 }
 #quantityRecord, #quantity {
     padding: 5px 2.5px;
@@ -174,15 +180,19 @@
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
-#extraBtn, #extraBtnRH, .rowFour button, #save {
+.extraBtn, .extraBtnRH, .rowFour button, #save {
     padding: 8px;
     padding-left: 20px;
     padding-right: 20px;
     font-size: medium;
     margin-bottom: 0.5em;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .accordion-item button {
     font-size: medium;
+    border-radius: 40px;
+    width: 100%;
 }
 button {
     background-color: rgba(255, 255, 255, 0);

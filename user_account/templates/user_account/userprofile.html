@@ -4,20 +4,19 @@
 <head>
     <title>User Account</title>
     <!-- <link rel="stylesheet" href="{% static 'stylesheet.css' %}"> -->
-    <link rel="stylesheet" href="{% static 'accordian.css' %}">
-    <link rel="stylesheet" href="{% static 'blueBoxTable.css' %}">
-    <link rel="stylesheet" href="{% static 'greyBoxTable.css' %}">
-    <link rel="stylesheet" href="{% static 'navbarFooter.css' %}">
-    <script src="{% static 'accordianFunction.js' %}"></script>
-    <script src="{% static 'popUpScript.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'accordionstyle.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blueBoxes.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'greyBoxes.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bodynavbarFooter.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'popUpPanels.css' %}">
+    <script src="{% static 'accordionScript.js' %}"></script>
+    <script src="{% static 'popUpFunction.js' %}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
     <style>
 
-        /* this is the pop up if u dont have to touch the javascript please try not to LOL */
-
-        /* The Modal (background) */
+        /* The Modal (background)
         .modal {
             display: none; 
             position: fixed; 
@@ -32,9 +31,7 @@
             background-color: rgba(0,0,0,0.4); 
         }
 
-        /* this is the content inside the pop up box */
-
-        /* Modal Content */
+        // Modal Content
         .modal-content {
             position: relative;
             background-color: #fefefe;
@@ -53,9 +50,7 @@
             border-radius: 25px;
         }
 
-        /* this is what makes the pop up 'slide in' */
-
-        /* Add Animation */
+        // Add Animation
         @-webkit-keyframes animatetop {
             from {top:-300px; opacity:0} 
             to {top:0; opacity:1}
@@ -79,9 +74,7 @@
             color: white;
         }
 
-        /* the pop up has an x in the corner that closes it */
-
-        /* The Close Button */
+        // The Close Button
         .close {
             color: #448093;
             float: right;
@@ -96,7 +89,12 @@
             color: white;
             text-decoration: none;
             cursor: pointer;
+        } */
+
+        .expired {
+            background-color: red;
         }
+
 
     </style>
 </head>
@@ -107,9 +105,13 @@
             <li class="title"><a href="{% url 'home' %}">The Peepo's Nest</a></li>
         </ul>
         <ul class="user-info">
-            <li><a href="">Sign Out</a></li>
-            <li><a href="">User Name</a></li>
-            
+            <li>
+                <form id="logout-printreservation" action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                </form>
+                <a href="#" onclick="document.getElementById('logout-printreservation').submit();">Sign Out</a>
+            </li>
+            <li><a href="">{{ user.username }}</a></li>
         </ul>
     </div>
     <!-- Admin nav in case you want to add it in -->
@@ -136,26 +138,26 @@
 
     <!-- Username box: Details of user -->
     <div class="plainMainPanel">
-        <h2>Username</h2>
+        <h2>{{ user.username }}</h2>
         <div class="plainInnerPanel">
             <div class="userDetails">
                 <div>
                     <h3>First Name:</h3>
-                    <p></p>
+                    <p>{{ user.first_name }}</p>
                 </div>
                 <div>
                     <h3>Last Name:</h3>
-                    <p></p>
+                    <p>{{ user.last_name }}</p>
                 </div>
             </div>
             <div class="userDetails">
                 <div>
                     <h3>Account Type:</h3>
-                    <p></p>
+                    <p>{{ user.roleType }}</p>
                 </div>
                 <div>
                     <h3>Email:</h3>
-                    <p></p>
+                    <p>{{ user.email}}</p>
                 </div>
             </div>
                 <hr>
@@ -165,7 +167,7 @@
         </div>
     </div>
     <!-- Change Password Pop Up -->
-    <div id="myModal" class="modal">
+    <div id="password" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Contact your IT Department</p>
@@ -189,6 +191,15 @@
                 <div>
                     <button id="myRBtn"><b><p class="circleBtn">?</p></b></button>
                 </div>
+                <div id="myHelp" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Current Reservations</p>
+                        <p>How do I check the details of reservations I currently have? <br><br> <!-- screenshot --> Click the device you have reserved and then click 'Extra Info' for more.</p>
+                        <p>How do I change details of my reservations? <br><br> 1. Make your adjustments and click 'Save'. <br><br> <!-- screenshots --> 2. If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
+                    </div>
+                </div>
             </div>      
         </div>
         <div class="InnerPanel">
@@ -202,59 +213,66 @@
                     <th>Quantity</th>
                 </tr>
             </table>
-            <hr>
+            <!-- <hr> -->
+            {% for printreservation in reservation %}
             <table class="accordion">
                 <tr class="accordion-item">
-                    <td>
-                        <button>name</button>
-                        <button>type</button>
-                        <button>dd/mm/yyyy</button>
-                        <button>dd/mm/yyyy</button>
-                        <button>x</button>
-                    </td>
+                    <div>
+                        <td>
+                            <button>{{ printreservation.equipment.equipmentName }}</button>
+                            <button>{{ printreservation.equipment.equipmentType }}</button>
+                            <button>{{ printreservation.checkoutDate }}</button>
+                            <button>{{ printreservation.expectedReturnDate }}</button>
+                            <button>{{ printreservation.equipment.quantity }}</button>
+                        </td>
+                    </div>
                 </tr>
                 <tr class="accordion-content">
                     <td>
-                        <form action="/action_page.php" autocomplete="off">
+                        <form method="post" action="{% url 'update_reservation' printreservation.id %}" autocomplete="off">
+                            {% csrf_token %}
                             <div class="rowOne">
                                 <div>
                                     <b><p>Device Name :</p></b>
-                                    <p class="contentRecord">Name</p>
+                                    <p class="contentRecord">{{ printreservation.equipment.equipmentType }}</p>
                                 </div>
                                 <div>
                                     <b><p>Location :</p></b>
-                                    <p class="contentRecord">Location</p>
+                                    <p class="contentRecord">{{ printreservation.equipment.location }}</p>
                                 </div>
                                 <div>
                                     <b><p>Status :</p></b>
-                                    <p class="contentRecord">Status</p>
+                                    <p class="contentRecord">{{ printreservation.approvalStatus }}</p>
                                 </div>
                             </div>
                             <div class="rowTwo">
                                 <div>
                                     <b><p class="contentLabel">Device Type :</p></b>
-                                    <p class="contentRecord">Type</p>
+                                    <p class="contentRecord">{{ printreservation.equipment.equipmentType }}</p>
                                 </div>
                                 <div>
                                     <b><p>Quantity: </p></b>
-                                    <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" required></p>
+                                    <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" value="{{ printreservation.quantity }}" required></p>
                                 </div>
                             </div>
-                            <div class="rowThree">
+                            <div class="rowThree {% if printreservation.expectedReturnDate < now %}expired{% endif %}">
                                 <div>
                                     <b><p>Borrow Date: </p></b>
-                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" required></p>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="checkoutDate" value="{{ printreservation.checkoutDate|date:'Y-m-d' }}" required></p>
                                     <b><p>to</p></b>
-                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" required></p>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="expectedReturnDate" value="{{ printreservation.expectedReturnDate|date:'Y-m-d' }}" required></p>
                                 </div>
                                 <div>
-                                    <p><button id="extraBtn">Extra Info</button></p>
+                                    <p><button type="button" class="extraBtn" id="extraBtn">Extra Info</button></p>
                                 </div>
                             </div>
                             <div class="rowFour">
                                 <input type="submit" id="save" value="Save">
-                                <button type="reset" id="cancelchanges" onclick="toggleAcc()">Cancel Changes</button>
-                                <button id="cancelreservation">Cancel Reservation</button>
+                                <button type="button" id="cancelchanges" onclick="toggleAcc()">Cancel Changes</button>
+                                <form method="post" action="{% url 'delete_reservation' printreservation.equipment_id %}">
+                                    {% csrf_token %}
+                                    <button type="submit">Cancel Reservation</button>
+                                </form>
                             </div>
                         </form>
                     </td>
@@ -266,19 +284,16 @@
                 <div class="modal-content">
                     <span class="close">&times;</span>
                     <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
-                    <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
+                    <p style="text-align: left;width: 100%;background-color: white;color:black">
+                    Audit: {{ printreservation.equipment.auditDate }}
                     <br>
-                    User Access: 
+                    User Access Level: {{ printreservation.equipment.accessLevel }}
                     <br>
-                    Device Serial No.: 
-                    <br>
-                    Example:
-                    <br>
-                    Example:
-                    <br>
-                    Example: </p>
+                    Device Serial No.: {{ printreservation.equipment.serialNo }}
+                    </p>
                 </div>
             </div>
+            {% endfor %}
         </div>
         <br>
     </div>
@@ -314,105 +329,105 @@
                     <th>Quantity</th>
                 </tr>
             </table>
-            <hr>
+            <!-- <hr> -->
+            {% for inactive in resActive %}
             <table class="accordion">
                 <tr class="accordion-item">
-                    <td>
-                        <button>name</button>
-                        <button>type</button>
-                        <button>dd/mm/yyyy</button>
-                        <button>dd/mm/yyyy</button>
-                        <button>x</button>
-                    </td>
+                    <div>
+                        <td>
+                            <button>{{ inactive.equipment.equipmentName }}</button>
+                            <button>{{ inactive.equipment.equipmentType }}</button>
+                            <button>{{ inactive.checkoutDate }}</button>
+                            <button>{{ inactive.expectedReturnDate }}</button>
+                            <button>{{ inactive.equipment.quantity }}</button>
+                        </td>
+                    </div>
                 </tr>
                 <tr class="accordion-content">
                     <td>
-                        <div class="collapse" id="collapserow">
-                            <form action="/action_page.php" autocomplete="off">
-                                <div class="rowOne">
-                                    <div>
-                                        <b><p>Device Name :</p></b>
-                                        <p class="contentRecord">Name</p>
-                                    </div>
-                                    <div>
-                                        <b><p>Location :</p></b>
-                                        <p class="contentRecord">Location</p>
-                                    </div>
-                                    <div>
-                                        <b><p>Status :</p></b>
-                                        <p class="contentRecord">Status</p>
-                                    </div>
+                        <form method="post" action="{% url 'update_reservation' inactive.id %}" autocomplete="off">
+                            {% csrf_token %}
+                            <div class="rowOne">
+                                <div>
+                                    <b><p>Device Name :</p></b>
+                                    <p class="contentRecord">{{ inactive.equipment.equipmentType }}</p>
                                 </div>
-                                <div class="rowTwo">
-                                    <div>
-                                        <b><p class="contentLabel">Device Type :</p></b>
-                                        <p class="contentRecord">Type</p>
-                                    </div>
-                                    <div>
-                                        <b><p>Quantity: </p></b>
-                                        <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" required></p>
-                                    </div>
+                                <div>
+                                    <b><p>Location :</p></b>
+                                    <p class="contentRecord">{{ inactive.equipment.location }}</p>
                                 </div>
-                                <div class="rowThree">
-                                    <div>
-                                        <b><p>Borrow Date: </p></b>
-                                        <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" required></p>
-                                        <b><p>to</p></b>
-                                        <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" required></p>
-                                    </div>
-                                    <div>
-                                        <p><button id="extraBtnRH">Extra Info</button></p>
-                                    </div>
+                                <div>
+                                    <b><p>Status :</p></b>
+                                    <p class="contentRecord">{{ inactive.approvalStatus }}</p>
                                 </div>
-                                <div class="rowFour">
-                                    <input type="submit" id="save" value="Rebook">
-                                    <button type="reset" id="cancelchanges" onclick="toggleAcc()">Cancel Changes</button>
+                            </div>
+                            <div class="rowTwo">
+                                <div>
+                                    <b><p class="contentLabel">Device Type :</p></b>
+                                    <p class="contentRecord">{{ inactive.equipment.equipmentType }}</p>
                                 </div>
+                                <div>
+                                    <b><p>Quantity: </p></b>
+                                    <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" value="{{ inactive.quantity }}" required></p>
+                                </div>
+                            </div>
+                            <div class="rowThree {% if inactive.expectedReturnDate < now %}expired{% endif %}">
+                                <div>
+                                    <b><p>Borrow Date: </p></b>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="checkoutDate" value="{{ inactive.checkoutDate|date:'Y-m-d' }}" required></p>
+                                    <b><p>to</p></b>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="expectedReturnDate" value="{{ inactive.expectedReturnDate|date:'Y-m-d' }}" required></p>
+                                </div>
+                                <div>
+                                    <p><button type="button" class="extraBtn" id="extraBtn">Extra Info</button></p>
+                                </div>
+                            </div>
+                            <div class="rowFour">
+                                <input type="submit" id="save" value="Rebook">
                             </form>
+                                <button type="reset" id="cancelchanges" onclick="toggleAcc()">Cancel Changes</button>
+                            </div>
+                            <!-- pop up for 'extra info' -->
+                            <div id="extraRH" class="modal">
+                                <!-- Modal content -->
+                                <div class="modal-content">
+                                    <span class="close">&times;</span>
+                                    <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
+                                    <p style="text-align: left;width: 100%;background-color: white;color:black">
+                                    Audit: {{ inactive.auditDate }}
+                                    <br>
+                                    User Access Level: {{ inactive.accessLevel }}
+                                    <br>
+                                    Device Serial No.: {{ inactive.serialNo }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </td>
                 </tr>
+                {% endfor %}
             </table>
-            <!-- pop up for 'extra info' -->
-            <div id="extra2" class="modal">
-                <!-- Modal content -->
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Extra Info</p>
-                    <p style="text-align: left;width: 100%;background-color: white;color:black">Audit:
-                    <br>
-                    User Access: 
-                    <br>
-                    Device Serial No.: 
-                    <br>
-                    Example:
-                    <br>
-                    Example:
-                    <br>
-                    Example: </p>
-                </div>
-            </div>
         </div>
         <br>
     </div>
     <!-- pop up for faq current reservations -->
-    <div id="myHelp" class="modal">
-        <!-- Modal content -->
+    <!-- <div id="myHelp" class="modal">
+        // Modal content
         <div class="modal-content">
             <span class="close">&times;</span>
             <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Current Reservations</p>
-            <p>How do I check the details of reservations I currently have? <br> <!-- screenshot --> Click the device you have reserved.</p>
-            <p>How do I change details of my reservations? <br> Make your adjustments and click 'Save'. <br> <!-- screenshots --> A panel will pop up to confirm your choices, click 'Yes'. If you change your mind, click 'No'. <br> <!-- screenshots -->  If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
+            <p>How do I check the details of reservations I currently have? <br><br> Click the device you have reserved and then click 'Extra Info' for more.</p>
+            <p>How do I change details of my reservations? <br><br> 1. Make your adjustments and click 'Save'. <br><br> 2. If you want to check another reservation, click 'Cancel Changes'. </p>
         </div>
-    </div>
+    </div> -->
     <!-- pop up for faq reservation history -->
     <div id="helpRH" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
             <span class="close">&times;</span>
             <p class="popuptext" style="background-color: rgb(226, 226, 226);color:black;">Reservation History</p>
-            <p>How do I check the details of previous reservations? <br> <!-- screenshot --> Click the device you have reserved.</p>
-            <p>How do I rebook my previous reservations? <br> Make your adjustments and click 'Rebook'. <br> <!-- screenshots --> A panel will pop up to confirm your choices, click 'Yes'. If you change your mind, click 'No'. <br> <!-- screenshots -->  If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
+            <p>How do I check the details of previous reservations? <br><br> <!-- screenshot --> Click the device you have reserved.</p>
+            <p>How do I rebook my previous reservations? <br><br> 1. Make your adjustments and click 'Rebook'. <br><br> <!-- screenshots --> 2. If you want to check another reservation, click 'Cancel Changes'. <!-- screenshots --> </p>
         </div>
     </div>
 
@@ -429,87 +444,87 @@
         //change password
 
         // Get the modal
-        var modal = document.getElementById("myModal");
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
+            // var modal = document.getElementById("myModal");
+            // // Get the button that opens the modal
+            // var btn = document.getElementById("myBtn");
+            // // Get the <span> element that closes the modal
+            // var span = document.getElementsByClassName("close")[0];
+            
+            // // When the user clicks the button, open the modal 
+            // btn.onclick = function() {
+            //     modal.style.display = "block";
+            // }
+
         
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
+            // // When the user clicks on <span> (x), close the modal
+            // span.onclick = function() {
+            //     modal.style.display = "none";
+            // }
 
-       
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
+            // //extra info
+            // var extra = document.getElementById("extra");
+            // var btn1 = document.getElementById("extraBtn");
+            // var span1 = document.getElementsByClassName("close")[1];
 
-        //extra info
-        var extra = document.getElementById("extra");
-        var btn1 = document.getElementById("extraBtn");
-        var span1 = document.getElementsByClassName("close")[1];
+            // btn1.onclick = function() {
+            //     extra.style.display = "block";
+            // }
 
-        btn1.onclick = function() {
-            extra.style.display = "block";
-        }
+            // span1.onclick = function() {
+            //     extra.style.display = "none";
+            // }
 
-        span1.onclick = function() {
-            extra.style.display = "none";
-        }
+            // //extra info
+            // var extra = document.getElementById("extra2");
+            // var btn2 = document.getElementById("extraBtnRH");
+            // var span2 = document.getElementsByClassName("close")[2];
 
-        //extra info
-        var extra = document.getElementById("extra2");
-        var btn2 = document.getElementById("extraBtnRH");
-        var span2 = document.getElementsByClassName("close")[2];
+            // btn2.onclick = function() {
+            //     extra.style.display = "block";
+            // }
 
-        btn2.onclick = function() {
-            extra.style.display = "block";
-        }
+            // span2.onclick = function() {
+            //     extra.style.display = "none";
+            // }
 
-        span2.onclick = function() {
-            extra.style.display = "none";
-        }
+            // //help current reservation
+            // var help = document.getElementById("myHelp");
+            // var btn3 = document.getElementById("myRBtn");
+            // var span3 = document.getElementsByClassName("close")[3];
 
-        //help current reservation
-        var help = document.getElementById("myHelp");
-        var btn3 = document.getElementById("myRBtn");
-        var span3 = document.getElementsByClassName("close")[3];
+            // btn3.onclick = function() {
+            //     help.style.display = "block";
+            // }
 
-        btn3.onclick = function() {
-            help.style.display = "block";
-        }
+            // span3.onclick = function() {
+            //     help.style.display = "none";
+            // }
 
-        span3.onclick = function() {
-            help.style.display = "none";
-        }
+            // //reservation history help
+            // var helprh = document.getElementById("helpRH");
+            // var btn4 = document.getElementById("btnHelpRH");
+            // var span4 = document.getElementsByClassName("close")[4];
 
-        //reservation history help
-        var helprh = document.getElementById("helpRH");
-        var btn4 = document.getElementById("btnHelpRH");
-        var span4 = document.getElementsByClassName("close")[4];
+            // btn4.onclick = function() {
+            //     helprh.style.display = "block";
+            // }
 
-        btn4.onclick = function() {
-            helprh.style.display = "block";
-        }
+            // span4.onclick = function() {
+            //     helprh.style.display = "none";
+            // }
 
-        span4.onclick = function() {
-            helprh.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            } else if (event.target == help) {
-                help.style.display = "none";
-            } else if (event.target == extra) {
-                extra.style.display = "none";
-            } else if (event.target == helprh) {
-                helprh.style.display = "none";
-            }
-        }
+            // // When the user clicks anywhere outside of the modal, close it
+            // window.onclick = function(event) {
+            //     if (event.target == modal) {
+            //         modal.style.display = "none";
+            //     } else if (event.target == help) {
+            //         help.style.display = "none";
+            //     } else if (event.target == extra) {
+            //         extra.style.display = "none";
+            //     } else if (event.target == helprh) {
+            //         helprh.style.display = "none";
+            //     }
+            // }
 
         //this is making sure that the dates in the forms in the panels don't clash.
         //for example if i pick 22/04/2024 for my start date, i can't pick a date before that
@@ -517,12 +532,21 @@
         $(".startdate").on("change", function(){
             $(".enddate").attr("min", $(this).val());
         });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch the roleType from the user object in Django template context
+            const userRoleType = "{{ user.roleType }}";
+
+            // Check if the user has admin role
+            if (userRoleType === "admin") {
+                // If user is admin, show the admin nav bar
+                document.querySelector('.admin-nav').style.display = 'block';
+            } else {
+                // If user is not admin, hide the admin nav bar
+                document.querySelector('.admin-nav').style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
-
-
-<!--
-    user name -> actual name of user
-    sign out leads to login page
--->
