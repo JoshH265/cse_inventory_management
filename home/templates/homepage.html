@@ -1,212 +1,109 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Homepage</title>
-        <link rel="stylesheet" href="{% static 'navbarFooter.css' %}">
-        <link rel="stylesheet" href="{% static 'greyBoxTable.css' %}">
-        <link rel="stylesheet" href="{% static 'blueBoxTable.css' %}">
-        <link rel="stylesheet" href="{% static 'accordian.css' %}">
-        <link rel="stylesheet" href="{% static 'popUp.css' %}">
-        <script src="{% static 'accordianFunction.js' %}"></script>
-        <script src="{% static 'popUpScript.js' %}"></script>
-    </head>
-    <body>
-        <div class="navbar">
-            <ul>
-                <li class="title"><a href="">The Peepo's Nest</a></li>
-            </ul>
-            <ul class="user-info">
-                <li><a href="">Sign Out</a></li>
-                <li><a href="">User Name</a></li>
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="{% static 'navbarFooter.css' %}">
+    <link rel="stylesheet" href="{% static 'greyBoxTable.css' %}">
+    <link rel="stylesheet" href="{% static 'blueBoxTable.css' %}">
+    <link rel="stylesheet" href="{% static 'accordian.css' %}">
+    <link rel="stylesheet" href="{% static 'popUp.css' %}">
+    <script src="{% static 'accordianFunction.js' %}"></script>
+    <script src="{% static 'popUpScript.js' %}"></script>
+    <style>
+        .alert {
+            padding: 20px;
+            background-color: #f44336; /* Red */
+            color: white;
+            margin-bottom: 15px;
+            opacity: 1;
+            transition: opacity 0.6s; /* 600ms to fade out */
+        }
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <ul>
+        <li class="title"><a href="">The Peepo's Nest</a></li>
+    </ul>
+    <ul class="user-info">
+        <li><a href="{% url 'login' %}">Sign Out</a></li>
+        <li><a href="{% url 'userprofile' %}">User</a></li>
+        
+    </ul>
+</div>
+<div class="admin-nav">
+    <ul class="adminNav-links">
+        <li>Admin Panel</li>
+        <li><a href="{% url 'reportmanagement' %}">Report Generation</a></li>
+        <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
+        <li><a href="{% url 'adminReservation' %}">Reservation Management</a></li>
+        <li><a href="{% url 'inventorymanagement' %}">Inventory Management</a></li>
+    </ul>
+</div>
+<div class="plainMainPanel">
+    <h2>Alert</h2>
+    <div class="plainInnerPanel">
+        {% if current_alerts %}
+            {% for alert in current_alerts %}
+                <div class="alert">
+                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                    {{ alert.message }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>All systems are operating normally.</p>
+        {% endif %}
+        
+    </div>
+</div>
+<div class="mainPanel">
+    <div class="OuterBar">
+        <div class="boxHeader">
+            <h2>List of Equipment</h2>
+            <button id="helpBtn" class="circleBtn">?</button>
+        </div>
+        <div class="restrictResults">
+            <input type="text" placeholder="Search for Equipment" name="search" id="search-bar">
+            <select id="sortBy" name="sortBy" class="custom-select">
+                <option value="sort">Sort By &#9660;</option>
+                <option value="devType">Device Type</option>
+                <option value="devType">Availability</option>
+                <option value="devType">Location</option>
+            </select>
+            <select id="filterBy" name="filterBy" class="custom-select">
+                <option value="filter">Filter By &#9660;</option>
+                <option value="inStock">In Stock</option>
+                <option value="inStock">Out of Stock</option>
+                <option value="inStock">Device Type</option>
                 
-            </ul>
+                <!-- Additional options -->
+            </select>
+            <button id="addBtn" class="addBtn">&plus;</button>
         </div>
-        <div class="admin-nav">
-            <ul class="adminNav-links">
-                <li>Admin Panel</li>
-                <li><a href="">Report Generation</a></li>
-                <li><a href="">User Management</a></li>
-                <li><a href="">Reservation Management</a></li>
-                <li><a href="inventorymanagement.html">Inventory Management</a></li>
-            </ul>
-        </div>
-        <div class="plainMainPanel">
-            <h2>Alert</h2>
-            <div class="plainInnerPanel">
-                <p>There is currently x equipment being borrowed</p>
-                <p>Check the Reservation Management page for more details</p></td>
-            </div>
-        </div>
-        <div class="mainPanel">
-            <div class="OuterBar">
-                <div class="boxHeader">
-                    <h2>List of Equipment</h2>
-                    <button id="helpBtn"><b><p class="circleBtn">?</p></b></button>
-                </div>
-                <div class="restrictResults">
-                    <form action="" id="search">
-                        <input type="text" placeholder="Search for Equipment" name="search" id="search-bar">
-                    </form>
-                    <form action="" method="post"> 
-                        <select id="sortBy" name="sortBy" class="custom-select">
-                            <option value="sort">Sort By &#9660</option>
-                            <option value="devType">Device Type</option>
-                            <option value="availability">Availability</option>
-                            <option value="location">Location</option>
-                            <option value="recentlyAdded">Recently Added</option>
-                            <option value="quantity">Quantity</option>
-                        </select>
-                    </form>
-                    <form action="" method="post">
-                        <select id="filterBy" name="filterBy" class="custom-select">
-                            <option value="filter">Filter By &#9660</option>
-                            <option value="inStock">In Stock</option>
-                            <option value="outStock">Out of Stock</option>
-                            <option value="devType">Device Type</option>
-                        </select>
-                    </form>
-                    <button id="myRBtn"><b><p class="addBtn">&plus;</p></b></button>
-                </div>
-            </div>
-            <div class="InnerPanel">
-                <!-- headers of the table/lists -->
-                <table class="accordion">
-                    <tr>
-                        <th>Device Name</th>
-                        <th>Device Type</th>
-                        <th>Status</th>
-                        <th>Location</th>
-                        <th>Quantity</th>
-                    </tr>
-                    <!-- Repeat this block for each piece of equipment -->
-                    {% for equipment in equipments %}
-                    <tr class="accordion-item">
-                        <td><div class="cell-content">{{ equipment.equipmentName }}</div></td>
-                        <td><div class="cell-content">{{ equipment.equipmentType }}</div></td>
-                        <td><div class="cell-content">{{ equipment.equipmentStatus }}</div></td>
-                        <td><div class="cell-content">{{ equipment.location }}</div></td>
-                        <td><div class="cell-content">{{ equipment.quantity }}</div></td>
-                    </tr>
-                    <tr class="accordian-content" style="display: none;">
-                        <td colspan="5">
-                            <form method="post" autocomplete="off">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <input type="hidden" name="action" value="update">
-                                <div class="rowOne">
-                                    <div>
-                                        <b><p>Device Name :</p></b>
-                                        <input type="text" class="contentRecord" id="equipmentName" value="{{ equipment.equipmentName }}">
-                                    </div>
-                                    <div>
-                                        <b><p>Status :</p></b>
-                                        <input type="text" class="contentRecord" id="equipmentStatus" value="{{ equipment.equipmentStatus }}">
-                                    </div>
-                                    <div>
-                                        <b><p>Location :</p></b>
-                                        <input type="text" class="contentRecord" id="location" value="{{ equipment.location }}">
-                                    </div>
-                                </div>
-                                <div class="rowTwo">
-                                    <div>
-                                        <b><p class="contentLabel">Device Type :</p></b>
-                                        <input type="text" class="contentRecord" id="equipmentType" value="{{ equipment.equipmentType }}">
-                                    </div>
-                                    <div>
-                                        <b><p>Quantity: </p></b>
-                                        <input type="number" id="quantity" name="quantity" size="14" min="1" required contenteditable="true" class="contentRecord" value="{{ equipment.quantity}}">
-                                    </div>
-                                    <div>
-                                        <p><button class="extraBtn">Extra Info</button></p>
-                                    </div>
-                                </div>
-                                <div class="rowFour">
-                                    <input type="submit" value="Save">
-                                    <button id="removeItem">Remove</button>
-                                    <button type="reset" class="cancelchanges">Cancel Changes</button>
-                                </div>
-                                <div class="bg-modal">
-                                    <div class="modal-content">
-                                        <div id="closeBtn" class="close">&times;</div>
-                                            <input type="hidden" name="action" value="create">
-                                            <label for="locationAccess">Location Access : </label>
-                                            <input type="text" id="locationAccess"><br>
-                                            <label for="auditDate">Audit : </label>
-                                            <input type="text" id="auditDate" value="{{ equipment.auditDate }}"><br>
-                                            <label for="userType">User Access :</label>
-                                            <input type="text" id="userType"><br>
-                                            <label for="serialNo">Device Serial No. : </label>
-                                            <input type="text" id="serialNo" value="{{ equipment.serialNo }}"><br>
-                                            <label for="cpu">CPU : </label>
-                                            <input type="text" id="cpu"><br>
-                                            <label for="gpu">GPU : </label>
-                                            <input type="text" id="gpu"><br>
-                                            <label for="ram">RAM : </label>
-                                            <input type="text" id="ram"><br>
-                                            <label for="comments">Comments : </label>
-                                            <input type="text" id="comments" value="{{ equipment.comments }}"><br>
-                                            <input type="button" value="Save">
-                                            <input type="reset" value="Reset">
-                                    </div>
-                                </div>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-        <div class="bg-modal">
-            <div class="helpInfo">
-                <div id="closeBtn" class="close">&times;</div>
-                <div>
-                    <h3><span>List of Equipment</span></h3>
-                    <h4><span>How do I reserve an equipment item?</span></h4>
-                    <p>Find the piece of equipment you'd like to borrow by scrolling, searching or filtering through the list</p>
-                    <p> Click anywhere on the row of the equipment you want to borrow, 
-                        this will expand to show more of the items details.</p>
-                    <p> Next, fill in the quantity you'd like to borrow and the date start and end date you'd like to borrow for.</p>
-                    <p>Once all relevant fields are filled in, click confirm and await for your reservation to be approved. 
-                        <b>You can check your user profile to see the status of your reservation</b></p>
-                </div>
-            </div>
-        </div>
-        <div class="bg-modal">
-            <div class="create-record">
-                <div id="closeBtn" class="close">&times;</div>
-                <form>
-                    <label for="devName">Device Name : </label>
-                    <input type="text" id="devName"><br>
-                    <label for="devType">Device Type : </label>
-                    <input type="text" id="devType"><br>
-                    <label for="buildingLocation">Location : </label>
-                    <input type="text" id="buildingLocation"><br>
-                    <label for="locationAccess">Location Access : </label>
-                    <input type="text" id="locationAccess"><br>
-                    <label for="audit">Audit : </label>
-                    <input type="text" id="audit"><br>
-                    <label for="userType">User Access :</label>
-                    <input type="text" id="userType"><br>
-                    <label for="serialNum">Device Serial No. : </label>
-                    <input type="text" id="serialNum"><br>
-                    <label for="cpu">CPU : </label>
-                    <input type="text" id="cpu"><br>
-                    <label for="gpu">GPU : </label>
-                    <input type="text" id="gpu"><br>
-                    <label for="ram">RAM : </label>
-                    <input type="text" id="ram"><br>
-                    <label for="comments">Comments : </label>
-                    <input type="text" id="comments" value="asdfghjklasdfghjksdfghjkl;asdfghjklsdxfcghgvbjnmfb"><br>
-                    <input type="button" value="Save">
-                    <input type="reset" value="Reset">
-                </form>
-            </div>
-        </div>
-        <!-- footer -->
-        <div class="unibanner">
-            <img src="https://static.yuna.potential.ly/public/open/5e273a2a85dc09000100c61c/westminster-logo.png">
-        </div>
-    </body>
+    </div>
+    <div class="InnerPanel">
+        <!-- Table of equipment -->
+        <!-- Implementation depends on your specific use case -->
+    </div>
+</div>
+<!-- footer -->
+<div class="unibanner">
+    <img src="{% static 'university_logo.png' %}">
+</div>
+</body>
 </html>
