@@ -1,12 +1,11 @@
-# from django.db import models
-# from . models import Equipment
+from django.db import models
 
-# # Create your models here.
-# class equipmentHistory(models.Model):
-# # to track how many times X equipment has been used
-#     equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
-#     date = models.DateField()
-#     times_used = models.IntegerField()
-    
-#     def __str__(self):
-#         return self.equipment.name + ' used ' + self.times_used + ' times on ' + self.date
+class Equipment(models.Model):
+    name = models.CharField(max_length=100)
+    type = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return self.name

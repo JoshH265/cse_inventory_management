@@ -18,7 +18,7 @@
             color: white;
             margin-bottom: 15px;
             opacity: 1;
-            transition: opacity 0.6s; /* 600ms to fade out */
+            transition: opacity 0.6s; /
         }
         .closebtn {
             margin-left: 15px;
@@ -66,7 +66,7 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p>All systems are operating normally.</p>
+            <p>You currently have no equipment to return.</p>
         {% endif %}
         
     </div>
@@ -96,14 +96,41 @@
             <button id="addBtn" class="addBtn">&plus;</button>
         </div>
     </div>
-    <div class="InnerPanel">
-        <!-- Table of equipment -->
-        <!-- Implementation depends on your specific use case -->
+
+        <div class="InnerPanel">
+            <table class="equipment-table">
+                <thead>
+                    <tr>
+                        <th>Device Name</th>
+                        <th>Device Type</th>
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for equipment in equipments %}
+                    <tr>
+                        <td>{{ equipment.name }}</td>
+                        <td>{{ equipment.type }}</td>
+                        <td>{{ equipment.status }}</td>
+                        <td>{{ equipment.location }}</td>
+                        <td>{{ equipment.quantity }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5">No equipment found</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
     </div>
 </div>
 <!-- footer -->
 <div class="unibanner">
-    <img src="{% static 'university_logo.png' %}">
+    <img src="https://static.yuna.potential.ly/public/open/5e273a2a85dc09000100c61c/westminster-logo.png">
 </div>
 </body>
 </html>
