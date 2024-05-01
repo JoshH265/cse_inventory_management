@@ -3,16 +3,99 @@
 <html>
 <head>
     <title>User Account</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'accordianstyle.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'stylesheet.css' %}"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'accordionstyle.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'blueBoxes.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'greyBoxes.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'bodynavbarFooter.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'popUpPanels.css' %}">
     <script src="{% static 'accordianFunction.js' %}"></script>
     <!-- <script src="{% static 'popUpScript.js' %}"></script> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+
+        /* The Modal (background) */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            padding-top: min(45%, 400px); 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%;
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+        }
+
+        /* Modal Content */
+        .modal-content {
+            position: relative;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 16px 128px;
+            border: 1px solid #888;
+            width: 40%;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s;
+            border-color: rgb(226, 226, 226);
+            border-width: 5px;
+            border-style: solid;
+            border-radius: 25px;
+        }
+
+        /* Add Animation */
+        @-webkit-keyframes animatetop {
+            from {top:-300px; opacity:0} 
+            to {top:0; opacity:1}
+        }
+
+        @keyframes animatetop {
+            from {top:-300px; opacity:0}
+            to {top:0; opacity:1}
+        }
+
+        .modal-content p {
+            text-align: center;
+            font-weight: 500px;
+            font-size: large;
+            font-family: "Merriweather", serif;
+            background-color: #488494;
+            padding: 10px 30px;
+            border-radius: 25px;
+            width: fit-content;
+            margin: 15px auto;
+            color: white;
+        }
+
+        /* The Close Button */
+        .close {
+            color: #448093;
+            float: right;
+            position: relative;
+            left: 110px;
+            bottom: 10px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover, .close:focus {
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .expired {
+            background-color: red;
+        }
+
+
+    </style>
 </head>
 <body>
     <!-- Nav Bar -->
@@ -102,8 +185,7 @@
                 </div>
                 <div class="deviceTotal">
                     <p class="rounded">Devices Borrowed: </p>
-                    <br><br>
-                    <!-- <p class="rounded">Devices Overdue: </p> -->
+                    <p class="rounded">Devices Overdue: </p>
                 </div>
                 <div>
                     <button id="myRBtn"><b><p class="circleBtn">?</p></b></button>
@@ -125,25 +207,27 @@
             {% for res in reservation %}
             <table class="accordion">
                 <tr class="accordion-item">
-                    <td>
-                        <button>{{ res.equipment_id.equipmentType }}</button>
-                        <button>{{ res.equipment_id.equipmentType }}</button>
-                        <button>{{ res.checkoutDate }}</button>
-                        <button>{{ res.expectedReturnDate }}</button>
-                        <button>{{ res.equipment_id.quantity }}</button>
-                    </td>
+                    <div>
+                        <td>
+                            <button>{{ res.equipment.equipmentName }}</button>
+                            <button>{{ res.equipment.equipmentType }}</button>
+                            <button>{{ res.checkoutDate }}</button>
+                            <button>{{ res.expectedReturnDate }}</button>
+                            <button>{{ res.equipment.quantity }}</button>
+                        </td>
+                    </div>
                 </tr>
                 <tr class="accordion-content">
                     <td>
-                        <form action="{% url 'update_reservation' reservation.id %}" autocomplete="off">
+                        <form method="post" action="{% url 'update_reservation' res.equipment_id %}" autocomplete="off">
                             <div class="rowOne">
                                 <div>
                                     <b><p>Device Name :</p></b>
-                                    <p class="contentRecord">{{ res.equipment_id.equipmentType }}</p>
+                                    <p class="contentRecord">{{ res.equipment.equipmentType }}</p>
                                 </div>
                                 <div>
                                     <b><p>Location :</p></b>
-                                    <p class="contentRecord">{{ res.equipment_id.location }}</p>
+                                    <p class="contentRecord">{{ res.equipment.location }}</p>
                                 </div>
                                 <div>
                                     <b><p>Status :</p></b>
@@ -153,36 +237,33 @@
                             <div class="rowTwo">
                                 <div>
                                     <b><p class="contentLabel">Device Type :</p></b>
-                                    <p class="contentRecord">{{ res.equipment_id.equipmentType }}</p>
+                                    <p class="contentRecord">{{ res.equipment.equipmentType }}</p>
                                 </div>
                                 <div>
                                     <b><p>Quantity: </p></b>
                                     <p contenteditable="true" class="contentRecord" id="quantityRecord"><input type="number" id="quantity" name="quantity" size="14" min="1" value="{{ res.quantity }}" required></p>
                                 </div>
                             </div>
-                            <div class="rowThree">
+                            <div class="rowThree {% if res.expectedReturnDate < now %}expired{% endif %}">
                                 <div>
                                     <b><p>Borrow Date: </p></b>
-                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" value="{{ res.checkoutDate }}" required></p>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="startdate" name="startdate" value="{{ res.checkoutDate|date }}" required></p>
                                     <b><p>to</p></b>
-                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" value="{{ res.expectedReturnDate }}" required></p>
+                                    <p class="contentRecord"><input type="date" id="datepicker" class="enddate" name="enddate" value="{{ res.expectedReturnDate|date }}" required></p>
                                 </div>
                                 <div>
-                                    <p><button class="extraBtn">Extra Info</button></p>
+                                    <p><button type="button" class="extraBtn">Extra Info</button></p>
                                 </div>
                             </div>
                             <div class="rowFour">
-                                <form action="{% url 'update_reservation' %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="submit" id="save" value="Save">
-                                </form>
+                                <input type="submit" id="save" value="Save">
                                 <button type="reset" id="cancelchanges" onclick="toggleAcc()">Cancel Changes</button>
-                                <form action="{% url 'delete_reservation' %}" method="post">
+                            </form>
+                                <form method="post" action="{% url 'delete_reservation' res.equipment_id %}" method="post">
                                     {% csrf_token %}
                                     <button type="submit">Cancel Reservation</button>
                                 </form>
                             </div>
-                        </form>
                     </td>
                 </tr>
             </table>
@@ -214,11 +295,11 @@
                         <h2>Reservation History</h2>
                     </div>
                     <br>
-                    <!-- <div class="searchBar">
+                    <div class="searchBar">
                         <form action="/action_page.php" style="color:white">
                             <input type="search" placeholder="Search for equipment" name="search" style="color:black;border-radius: 25px;padding: 6px;padding-right: 150px;">
                         </form>
-                    </div> -->
+                    </div>
                 </div>
                 <div>
                     <button id="btnHelpRH"><p class="circleBtn">?</p></button>
@@ -247,7 +328,7 @@
                 </tr>
                 <tr class="accordion-content">
                     <td colspan="5">
-                        <form action="{% url 'update_reservation' reservation.id %}" autocomplete="off">
+                        <form action="" autocomplete="off">
                                 <div class="rowOne">
                                     <div>
                                         <b><p>Device Name :</p></b>
@@ -432,6 +513,21 @@
         //start and end date
         $(".startdate").on("change", function(){
             $(".enddate").attr("min", $(this).val());
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch the roleType from the user object in Django template context
+            const userRoleType = "{{ user.roleType }}";
+
+            // Check if the user has admin role
+            if (userRoleType === "admin") {
+                // If user is admin, show the admin nav bar
+                document.querySelector('.admin-nav').style.display = 'block';
+            } else {
+                // If user is not admin, hide the admin nav bar
+                document.querySelector('.admin-nav').style.display = 'none';
+            }
         });
     </script>
 </body>

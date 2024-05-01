@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from equipment_management.models import Equipment
 
 class ReservationList(models.Model):
     
@@ -7,5 +9,5 @@ class ReservationList(models.Model):
     expectedReturnDate = models.DateField()
     approvalStatus = models.CharField(max_length=100)
     isCancelled = models.BooleanField(default=False)
-    equipment_id = models.BigIntegerField()
-    user_id = models.BigIntegerField()
+    equipment = models.ForeignKey(Equipment, on_delete=models.CASCADE)
+    userID = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

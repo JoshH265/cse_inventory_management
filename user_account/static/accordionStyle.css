@@ -8,12 +8,12 @@
 
 tr.accordion-content {
     background-color: #D6D6D6;
-    /* display:none; */
+    display:none;
 }
-.accordion tr th,
 .accordion tr td {
     width: auto;
     overflow: hidden;
+    justify-content: space-between;
 }
 .accordion tr td {
     background-color: transparent;
@@ -25,6 +25,7 @@ tr.accordion-content {
 .accordion-item td {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 } 
 
 form > div {
@@ -93,6 +94,8 @@ form > div .contentRecord{
 .rowThree button , .rowThree button{
     background-color: #488494;
     color: white;
+    height: 35px;
+    line-height: 0;
 }
 #datepicker {
     width: fit-content;
