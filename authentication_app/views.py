@@ -38,9 +38,9 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
                 if user.roleType == 'admin':
-                    return redirect('equipment-management')
+                    return redirect('inventorymanagement')
                 else:
-                    return redirect('userprofile') #SET THE DASHBOARD TO HOMEPAGE INSTEAD
+                    return redirect('userprofile') 
             else:
                 messages.info(request, 'Username OR Password is incorrect')
                 form = UserLogin()
