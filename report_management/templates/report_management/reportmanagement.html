@@ -24,17 +24,29 @@
                 border-radius: 40px;
             }
         </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Fetch the roleType from the user
+                const userRoleType = "{{ user.roleType }}";
+
+                // Check if the user does not have admin role
+                if (userRoleType !== "admin") {
+                    // Redirect the user to the homepage
+                    window.location.href = "{% url 'home' %}";
+                }
+            });
+        </script>
     </head>
     <body>
         <div class="navbar">
             <ul>
-                <li class="title"><a href="">The Peepo's Nest</a></li>
+                <li class="title"><a href="{% url 'home' %}">The Peepo's Nest</a></li>
             </ul>
             <ul class="user-info">
                 <li>
                     <a href="{% url 'logout' %}">Sign Out</a>
                 </li>
-                <li><a href="">{{ user.username }}</a></li>
+                <li><a href="{% url 'userprofile' %}">{{ user.username }}</a></li>
             </ul>
         </div>
         <div class="admin-nav">
@@ -42,7 +54,7 @@
                 <li>Admin Panel</li>
                 <li  class="active">Report Generation</li>
                 <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
-                <li><a href="{% url 'adminReservation' %}">Reservation Management</a></li>
+                <li><a href="{% url 'reservation_management' %}">Reservation Management</a></li>
                 <li><a href="{% url 'inventorymanagement' %}">Inventory Management</a></li>
             </ul>
         </div>

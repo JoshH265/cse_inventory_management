@@ -15,6 +15,7 @@ class Equipment(models.Model):
         ('medium_wooden_cabinet', 'XRLab Medium Wooden Cabinet'),
         ('other', 'Other'),
     ]
+    
     equipmentName = models.CharField(max_length=100)
     equipmentStatus = models.CharField(max_length=100, choices=Status_Choices, default='Available')
     equipmentType = models.CharField(max_length=100)
@@ -24,5 +25,4 @@ class Equipment(models.Model):
     accessLevel = models.CharField(max_length=100, null=True, blank=True)
     serialNo = models.CharField(max_length=100)
     comments = models.TextField(max_length=250, null=True, blank=True)
-    booking_count = models.PositiveIntegerField(default=0)
-
+    booking_count = models.PositiveIntegerField (default=0, null=True, blank=True)

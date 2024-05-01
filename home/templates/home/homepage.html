@@ -15,21 +15,38 @@
     <body>
         <div class="navbar">
             <ul>
-                <li class="title"><a href="">The Peepo's Nest</a></li>
+                <li class="title"><a href="{% url 'home' %}">The Peepo's Nest</a></li>
             </ul>
             <ul class="user-info">
-                <li><a href="">Sign Out</a></li>
-                <li><a href="">User Name</a></li>
+                <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                <li><a href="{% url 'userprofile' %}">{{ user.username }}</a></li>
                 
             </ul>
         </div>
+        <!-- Include this script in your template -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Fetch the roleType from the user
+                const userRoleType = "{{ user.roleType }}";
+
+                // Check if the user has admin role
+                if (userRoleType === "admin") {
+                    // If user is admin, show the admin nav bar
+                    document.querySelector('.admin-nav').style.display = 'block';
+                } else {
+                    // If user is not admin, hide the admin nav bar
+                    document.querySelector('.admin-nav').style.display = 'none';
+                }
+            });
+        </script>
+
         <div class="admin-nav">
             <ul class="adminNav-links">
                 <li>Admin Panel</li>
-                <li><a href="">Report Generation</a></li>
-                <li><a href="">User Management</a></li>
-                <li><a href="">Reservation Management</a></li>
-                <li><a href="inventorymanagement.html">Inventory Management</a></li>
+                <li><a href="{% url 'reportmanagement' %}">Report Generation</a></li>
+                <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
+                <li><a href="{% url 'reservation_management' %}">Reservation Management</a></li>
+                <li><a href="{% url 'inventorymanagement' %}">Inventory Management</a></li>
             </ul>
         </div>
         <div class="plainMainPanel">

@@ -11,15 +11,37 @@
         <link rel="stylesheet" href="{% static 'popUp.css' %}">
         <script src="{% static 'accordianFunction.js' %}"></script>
         <script src="{% static 'popUpScript.js' %}"></script>
+        <style>
+            .admin-nav .adminNav-links li.active {
+                padding: .5em;
+                margin: -.5em;
+                color: black;
+                background-color: white;
+                border-radius: 40px;
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Fetch the roleType from the user object in Django template context
+                const userRoleType = "{{ user.roleType }}";
+
+                // Check if the user does not have admin role and is trying to access an admin page
+                if (userRoleType !== "admin") {
+                    // Redirect the user to the homepage
+                    window.location.href = "{% url 'home' %}";
+                }
+            });
+        </script>
     </head>
     <body>
+
         <div class="navbar">
             <ul>
-                <li class="title"><a href="">The Peepo's Nest</a></li>
+                <li class="title"><a href="{% url 'home' %}">The Peepo's Nest</a></li>
             </ul>
             <ul class="user-info">
-                <li><a href="">Sign Out</a></li>
-                <li><a href="{% url 'logout' %}">User Name</a></li>
+                <li><a href="{% url 'logout' %}">Sign Out</a></li>
+                <li><a href="{% url 'userprofile' %}">{{ user.username }}</a></li>
             </ul>
         </div>
         <div class="admin-nav">
@@ -27,8 +49,8 @@
                 <li>Admin Panel</li>
                 <li><a href="{% url 'reportmanagement' %}">Report Generation</a></li>
                 <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
-                <li><a href="{% url 'adminReservation' %}">Reservation Management</a></li>
-                <li><a href="">Inventory Management</a></li>
+                <li><a href="{% url 'reservation_management' %}">Reservation Management</a></li>
+                <li class="active">Inventory Management</li>
             </ul>
         </div>
         <div class="plainMainPanel">
