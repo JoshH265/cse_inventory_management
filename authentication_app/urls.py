@@ -1,13 +1,18 @@
 from django.urls import path
 from . import views
+from home.views import homepage
+from equipment_management.views import equipPage
+from user_account.views import user_account
+
 
 urlpatterns = [
     
-    path('', views.home, name=""),
+    path('', homepage, name=""),
     path('sign-up', views.sign_up, name="sign-up"),
     path('login', views.login, name="login"),
-    path('dashboard', views.dashboard, name="dashboard"),
-    path('logout', views.logout, name="logout"),
+    path('logout', views.user_logout, name="logout"),
+    path ('inventorymanagement', equipPage, name='inventorymanagement'),
+    path('userprofile', user_account, name="userprofile"),
 ]
 
 

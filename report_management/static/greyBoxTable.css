@@ -39,9 +39,9 @@
     align-items: center;
 }
 .userDetails > div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: flex; /* Use flexbox */
+    flex-direction: row; /* Arrange items horizontally */
+    align-items: center; /* Align items vertically */
     padding-right: 1em;
 }
 .userDetails > div h3{

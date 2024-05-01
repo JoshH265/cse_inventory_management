@@ -16,10 +16,10 @@
 }
 .boxHeader {
     display: flex;
-    flex-direction: row; 
-    align-items: flex-start;
-    justify-content: space-between; 
-    height: 100%; 
+    flex-direction: row; /* Change flex direction to column */
+    align-items: flex-start; /* Align items to the start of the column */
+    justify-content: space-between; /* Space between items */
+    height: 100%; /* Ensure the header takes up full height */
     padding-bottom: 1em;
 }
 
@@ -37,12 +37,12 @@
     margin: 0;
 }
 .deviceTotal p + p {
-    margin-top: 1em;
+    margin-top: 1em; /* Adjust the value as needed */
 }
-.restrictResults, #filter-form {
+.restrictResults {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; 
+    justify-content: space-between; /* Align items to the left and right edges */
     align-items:center;
     flex-wrap: wrap;
 }
@@ -68,13 +68,11 @@
     border: 2px solid rgb(255, 255, 255);
     border-radius: 50%;  
     cursor: help; 
-    margin: 0;
+    margin: 0; /* Reset margin to remove any default spacing */
     align-self: center;
 }
-.custom-select, .restrictResults label, .restrictResults [type="submit"],
- .restrictResults legend, .restrictResults input, .restrictResults select {
+.custom-select {
     border-radius: 25px;
-    border-style: none;
     color: black;
     padding: 10px;
     font-size: 20px;
@@ -86,30 +84,18 @@
     -webkit-appearance: none; 
     margin-right: 1em;
 }
-.restrictResults fieldset {
-    border-style: none;
-}
-.restrictResults fieldset input:not(:first-child){
-    margin-left: .5em;
-}
-.restrictResults label, .restrictResults legend{
-    margin-bottom: 1em;
-}
-.restrictResults input, .restrictResults select{
-    background-color: rgb(226, 226, 226);
-    border: 1px solid white;
-}
-#filter-form > div {
-    margin-right: 1em;
-    display: flex;
-    flex-direction: column;
-}
-/* Style the input fields */
-
-/* .restrictResults [type="submit"]{
+#search{
     margin: 0;
     margin-right: auto;
-} */
+}
+#search-bar{
+    color:white;
+    color:black;
+    border-radius: 25px;
+    padding: 10px;
+    padding-right: 10em;
+    width: 25em;
+}
 .InnerPanel{
     background-color: white;
     border-radius: 25px;
@@ -117,6 +103,7 @@
 .InnerPanel table{
     width: 100%;
     padding: .2em .2em;
+    overflow: hidden;
 }
 .InnerPanel table:first-child tr th{
     border-radius: 25px;
@@ -138,8 +125,4 @@
     font-size: 20px;
     text-align: center;
 }
-.scroll{
-    width: 100%;
-    height: 500px;
-    overflow-y: auto;
-}
+
