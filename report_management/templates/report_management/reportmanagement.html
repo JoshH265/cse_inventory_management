@@ -1,0 +1,142 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Inventory Management</title>
+        <!-- NAV BAR AND ACCORDIAN CSS/JS -->
+        <link rel="stylesheet" href="{% static 'navbarFooter.css' %}">
+        <link rel="stylesheet" href="{% static 'greyBoxTable.css' %}">
+        <link rel="stylesheet" href="{% static 'blueBoxTable.css' %}">
+        <link rel="stylesheet" href="{% static 'accordian.css' %}">
+        <link rel="stylesheet" href="{% static 'popUp.css' %}">
+        <!-- <script src="{% static 'accordianFunction.js' %}"></script> -->
+        <!-- <script src="{% static 'popUpScript.js' %}"></script> -->
+
+        <!-- Personal Page CSS and JS -->
+        <link rel="stylesheet" href="{% static 'reportgen.css' %}">
+        <style>
+            .admin-nav .adminNav-links li.active {
+                padding: .5em;
+                margin: -.5em;
+                color: black;
+                background-color: white;
+                border-radius: 40px;
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Fetch the roleType from the user
+                const userRoleType = "{{ user.roleType }}";
+
+                // Check if the user does not have admin role
+                if (userRoleType !== "admin") {
+                    // Redirect the user to the homepage
+                    window.location.href = "{% url 'home' %}";
+                }
+            });
+        </script>
+    </head>
+    <body>
+        <div class="navbar">
+            <ul>
+                <li class="title"><a href="{% url 'home' %}">The Peepo's Nest</a></li>
+            </ul>
+            <ul class="user-info">
+                <li>
+                    <a href="{% url 'logout' %}">Sign Out</a>
+                </li>
+                <li><a href="{% url 'userprofile' %}">{{ user.username }}</a></li>
+            </ul>
+        </div>
+        <div class="admin-nav">
+            <ul class="adminNav-links">
+                <li>Admin Panel</li>
+                <li  class="active">Report Generation</li>
+                <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
+                <li><a href="{% url 'reservation_management' %}">Reservation Management</a></li>
+                <li><a href="{% url 'inventorymanagement' %}">Inventory Management</a></li>
+            </ul>
+        </div>
+        <div class="plainMainPanel">
+            <div class="report-generation-container">
+                <h1>Generate Report</h1>
+                <form action="{% url 'generate_report' %}" method="post" class="report-form">
+                    {% csrf_token %}
+                    <div class="report-fields">
+                        <div class="report-type-selector">
+                            <label for="reportType">Report Type:</label>
+                            <select name="report_type" id="reportType">
+                                <option value="inventory_status">Inventory Status</option>
+                                <option value="overdue_equipment">Overdue Equipment</option>
+                                <option value="equipment_usage">Equipment Usage History</option>
+                                <option value="audit_status">Audit Report</option>
+                            </select>
+                        </div>
+                        <div class="date-selectors">
+                            <div class="report-date-selector">
+                                <label for="startDate">Start Date:</label>
+                                <input type="date" name="start_date" id="startDate">
+                            </div>
+                            <div class="report-date-selector">
+                                <label for="endDate">End Date:</label>
+                                <input type="date" name="end_date" id="endDate">
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="report-button-container">
+                        <button type="submit" class="report-button">Generate report</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <br>
+        <br>
+        <div class="mainPanel">
+            <div class="OuterBar">
+                <div class="boxHeader">
+                    <div>
+                        <h2>Report History</h2>
+                    </div>
+                    <div class="deviceTotal">
+                        <p class="rounded">filter buttons </p>
+                        <p class="rounded"></p>
+                    </div>
+                    <div>
+                        <button id="myRBtn"><b><p class="circleBtn">?</p></b></button>
+                    </div>
+                </div>      
+            </div>
+            <div class="InnerPanel">
+                <!-- headers of the table/lists -->
+                <table class="accordion">
+                    <tr>
+                        <th>Report Name</th>
+                        <th>Report Type</th>
+                        <th>Report Date</th>
+                        <th>PDF</th>
+                    </tr>
+                    <!-- Repeat this block for each piece of equipment -->
+                    {% for report in reports %}
+                    <tr class="accordion-item">
+                        <td><div class="cell-content">{{ report.name }}</div></td>
+                        <td><div class="cell-content">{{ report.report_type }}</div></td>
+                        <td><div class="cell-content">{{ report.date_created }}</div></td>
+                        <td><div class="cell-content"><a href="/report{{ report.pdf.url }}" download="{{ report.pdf.name }}">Download</a></div></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <br>
+        </div>
+        
+        </div>
+        </div>
+        <!-- footer -->
+        <div class="unibanner">
+            <img src="https://static.yuna.potential.ly/public/open/5e273a2a85dc09000100c61c/westminster-logo.png">
+        </div>
+    </body>
+</html>
