@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    
     <style>
 
         /* The Modal (background)
@@ -97,6 +98,21 @@
 
 
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Fetch the roleType from the user
+            const userRoleType = "{{ user.roleType }}";
+
+            // Check if the user has admin role
+            if (userRoleType === "admin") {
+                // If user is admin, show the admin nav bar
+                document.querySelector('.admin-nav').style.display = 'block';
+            } else {
+                // If user is not admin, hide the admin nav bar
+                document.querySelector('.admin-nav').style.display = 'none';
+            }
+        });
+    </script>
 </head>
 <body>
     <!-- Nav Bar -->
@@ -115,15 +131,15 @@
         </ul>
     </div>
     <!-- Admin nav in case you want to add it in -->
-    <!-- <div class="admin-nav">
+    <div class="admin-nav">
         <ul class="adminNav-links">
             <li>Admin Panel</li>
-            <li><a href="">Report Generation</a></li>
-            <li><a href="">User Management</a></li>
-            <li><a href="">Reservation Management</a></li>
-            <li><a href="inventorymanagement.html">Inventory Management</a></li>
+            <li><a href="{% url 'reportmanagement' %}">Report Generation</a></li>
+            <li><a href="/admin/authentication_app/customuser/">User Management</a></li>
+            <li><a href="{% url 'reservation_management' %}">Reservation Management</a></li>
+            <li><a href="{% url 'inventorymanagement' %}">Inventory Management</a></li>
         </ul>
-    </div> -->
+    </div>
     
     <!-- Rabsa's Code -->
     <!-- <div class="navbar">

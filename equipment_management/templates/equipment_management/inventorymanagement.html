@@ -210,7 +210,7 @@
                 <div id="closeBtn" class="close">&times;</div>
                 <form method="post" action="{% url 'create_equipment' %}">
                     {% csrf_token %}
-                    {{ form.as_p }}
+                    <!-- {{ form.as_p }} -->
                     <div>
                         <label for="id_equipmentName">Device Name:</label>
                         <input type="text" id="id_equipmentName" name="equipmentName"><br>

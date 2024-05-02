@@ -8,7 +8,7 @@ def adminManagement(request):
     # get the objects from the reservations db
     reservations = Reservation.objects.select_related('equipment', 'user').all()
     # filter out the approved equipments 
-    approved_reservations = Reservation.objects.select_related('equipment', 'user').filter(approvalStatus = 'Approved')
+    approved_reservations = Reservation.objects.select_related('equipment', 'user').filter(approvalStatus = 'True')
 
     # Search query and sort query
     search_query = request.GET.get('q', '')
