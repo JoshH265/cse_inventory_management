@@ -3,14 +3,20 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from reservation_management.models import Reservation
 from .forms import ReservationForm
+from django.http import HttpResponse
+from django.template import loader
 
 def user_account(request):
     user = request.user
     userid = user.id
     reservation = Reservation.objects.filter(user_id=userid, activeReservation=True)
     resActive = Reservation.objects.filter(user_id=userid, activeReservation=False)
-    print(len(reservation))
-    return render(request, 'user_account/userprofile.html', {'reservation': reservation}, {'resActive': resActive})
+
+    # return render(request, 'user_account/userprofile.html', {'reservation': reservation}, {'resActive': resActive})
+    userprofile = loader.get_template('user_account/userprofile.html')
+    context = {'reservation': reservation, 'resActive': resActive}
+    return HttpResponse(userprofile.render(context, request))
+
 
 # def print_inactiveReservation(request):
 #     user = request.user
@@ -29,6 +35,9 @@ def print_reservation(request):
     res = Reservation.objects.filter(user_id=userid).values()
     print(res)
     return render(request, 'user_account/userprofile.html', {'res': res})
+    # context = {'reservation': reservation, 'resActive': resActive}
+    #userprofile = loader.get_template('user_account/userprofile.html')
+    #return HttpResponse(userprofile.render({'res': res}, request))
 
 def update_reservation(request, id):
     reservation = Reservation.objects.get(id=id)
@@ -41,6 +50,8 @@ def update_reservation(request, id):
             return redirect('userprofile')
     
     return render(request, 'user_account/userprofile.html', {'form': form})
+    #userprofile = loader.get_template('user_account/userprofile.html')
+    #return HttpResponse(userprofile.render( {'form': form}, request))
 
 def delete_reservation(request, id):
     # Retrieve the reservation object from the database
@@ -50,9 +61,11 @@ def delete_reservation(request, id):
         # If the request method is POST, delete the reservation
         equipDelete.delete()
         # Redirect to the same page or wherever appropriate
-        return redirect("userprofile")
+        return redirect('userprofile.html')
     
-    return render(request, 'user_account/delete_reservation.html', {'equipDelete': equipDelete})
+    # return render(request, 'user_account/delete_reservation.html', {'equipDelete': equipDelete})
+    userprofile = loader.get_template('user_account/userprofile.html')
+    return HttpResponse(userprofile.render( {'equipDelete': equipDelete}, request))
 
 def rebook_reservation(request):
     # Get the reservation object by its ID
@@ -65,4 +78,6 @@ def rebook_reservation(request):
         rebook.quantity = request.POST.get('quantity')
         rebook.save()  # Save the updated reservation
     
-    return render(request, 'user_account/userprofile.html', {'rebook': rebook})
+    # return render(request, 'user_account/userprofile.html', {'rebook': rebook})
+    userprofile = loader.get_template('user_account/userprofile.html')
+    return HttpResponse(userprofile.render({'rebook': rebook}, request))

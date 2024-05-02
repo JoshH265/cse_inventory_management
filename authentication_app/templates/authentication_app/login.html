@@ -32,12 +32,12 @@
             <form method="POST" autocomplete="off">
                 {% csrf_token %}
                 {{ login_form.as_p }}
-                <input type="submit" value="SignIn" class="button">
+                <input type="submit" value="Sign In" class="button">
             </form>
             <a href=""><p style="padding-left:35px;font-weight:200">Forgot Password</p></a>
             <hr style="width:50%;text-align:left;margin-left:35px;background-color: rgb(226, 226, 226);">
-            <p>Already have an account?</p>
-            <a href="{% url 'login' %}"><p>Sign in</p></a>
+            <p>Dont have an account?</p>
+            <a href="{% url 'sign-up' %}"><p>Sign up</p></a>
         </div>
     </div>
     {% include 'authentication_app/footer.html' %}

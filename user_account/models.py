@@ -5,7 +5,7 @@ from equipment_management.models import Equipment
 class ReservationList(models.Model):
     
     id = models.BigIntegerField(default=0, primary_key=True)
-    bookingDate = models.DateField()
+    bookingDate = models.DateField(blank=True, null=True)
     checkoutDate = models.DateField()
     expectedReturnDate = models.DateField()
     approvalStatus = models.CharField(max_length=100)

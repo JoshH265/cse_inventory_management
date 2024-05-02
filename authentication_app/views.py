@@ -38,9 +38,9 @@ def login(request):
             if user is not None:
                 auth.login(request, user)
                 if user.roleType == 'admin':
-                    return redirect('inventorymanagement')
+                    return redirect('/inventory/inventorymanagement')
                 else:
-                    return redirect('userprofile') 
+                    return redirect('/user/userprofile') 
             else:
                 messages.info(request, 'Username OR Password is incorrect')
                 form = UserLogin()
